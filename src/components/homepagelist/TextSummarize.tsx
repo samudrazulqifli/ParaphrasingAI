@@ -3,45 +3,49 @@ import imgLogo from "../../assets/images/stack-blue.png"
 const TextSummarize = () => {
   return (
     <>
-      <div className="bg-white h-[192px] w-[327px] rounded-xl absolute left-10 top-12 p-4">
-        <div className="flex justify-between">
-          <div className="text-black text-[12px] font-semibold">Your Idea</div>
-          <div className="flex items-center gap-1">
-            <div className="text-black text-[12px] font-semibold">idea2</div>
-            <div className="w-[29px] h-[9px] bg-[#E9E9E9] rounded-2xl"></div>
-            <div className="w-[29px] h-[9px] bg-[#E9E9E9] rounded-2xl"></div>
+      <div className="bg-white md:h-[192px] h-[47.91px] md:w-[327px] w-[81.59px] md:rounded-xl rounded-sm absolute md:left-10 md:top-12 top-2 left-2 md:p-4 p-1 text-black">
+        <div className="flex justify-between md:text-[12px] text-[2.99px] font-semibold">
+          <div className="">Your Text</div>
+          <div className="flex items-center md:gap-1 gap-[1.5px]">
+            <div className="underline md:underline-offset-2 decoration-[#047AC0] md:decoration-[3px] decoration-[0.75px]">
+              idea 2
+            </div>
+            <div className="md:w-[29px] w-[7.21px] md:h-[9px] h-[2.24px] bg-[#E9E9E9] rounded-2xl"></div>
+            <div className="md:w-[29px] w-[7.21px] md:h-[9px] h-[2.24px] bg-[#E9E9E9] rounded-2xl"></div>
           </div>
         </div>
-        <div className="border border-black rounded-lg w-[296px] h-[140px] mt-1 pt-4 flex flex-col">
-          <div className="mx-auto flex flex-col gap-3 pt-1">
-            <div className="w-[252px] h-[9px] bg-[#E9E9E9] rounded-2xl"></div>
-            <div className="w-[252px] h-[9px] bg-[#E9E9E9] rounded-2xl"></div>
-            <div className="w-[252px] h-[9px] bg-[#E9E9E9] rounded-2xl"></div>
-            <div className="w-[252px] h-[9px] bg-[#E9E9E9] rounded-2xl"></div>
-            <div className="w-[115px] h-[9px] bg-[#E9E9E9] rounded-2xl"></div>
+        <div className="md:border border-[0.25px] border-black md:rounded-lg rounded-sm md:w-[296px] w-[73.86px] md:h-[140px] h-[34.93px] md:mt-1 mt-[1px] md:pt-4 flex flex-col">
+          <div className="mx-auto flex flex-col md:gap-3 gap-[2px] pt-1">
+            <div className="md:w-[252px] w-[62.88px] md:h-[9px] h-[2px] bg-[#E9E9E9] rounded-2xl"></div>
+            <div className="md:w-[252px] w-[62.88px] md:h-[9px] h-[2px] bg-[#E9E9E9] rounded-2xl"></div>
+            <div className="md:w-[252px] w-[62.88px] md:h-[9px] h-[2px] bg-[#E9E9E9] rounded-2xl"></div>
+            <div className="md:w-[252px] w-[62.88px] md:h-[9px] h-[2px] bg-[#E9E9E9] rounded-2xl"></div>
+            <div className="md:w-[115px] w-[28px] md:h-[9px] h-[2px] bg-[#E9E9E9] rounded-2xl"></div>
           </div>
         </div>
       </div>
-      <div className="bg-white h-[271px] w-[327px] rounded-xl absolute right-12 bottom-12 p-4">
+      <div className="bg-white md:h-[271px] h-[67.62px] md:w-[327px] w-[81.59px] md:rounded-xl rounded-sm absolute md:right-12 md:bottom-12 right-3 bottom-3 md:p-4 p-1 md:text-[12px] text-[2.99px] font-semibold">
         <div className="flex justify-between">
-          <div className="text-black text-[12px] font-semibold">Text Idea</div>
-          <div className="flex items-center gap-1">
-            <div className="text-black text-[12px] font-semibold">idea1</div>
-            <div className="w-[29px] h-[9px] bg-[#E9E9E9] rounded-2xl"></div>
-            <div className="w-[29px] h-[9px] bg-[#E9E9E9] rounded-2xl"></div>
+          <div className="">Text Idea</div>
+          <div className="flex items-center md:gap-1 gap-[1.5px]">
+            <div className="underline md:underline-offset-2 decoration-[#047AC0] md:decoration-[3px] decoration-[0.75px]">
+              idea1
+            </div>
+            <div className="md:w-[29px] w-[7.21px] md:h-[9px] h-[2.24px] bg-[#E9E9E9] rounded-2xl"></div>
+            <div className="md:w-[29px] w-[7.21px] md:h-[9px] h-[2.24px] bg-[#E9E9E9] rounded-2xl"></div>
           </div>
         </div>
-        <div className="border border-black rounded-lg w-[296px] h-[169px] mt-1 pt-4 flex flex-col">
-          <div className="mx-auto flex flex-col gap-3 pt-1">
-            <div className="w-[252px] h-[9px] bg-[#E9E9E9] rounded-2xl"></div>
-            <div className="w-[252px] h-[9px] bg-[#E9E9E9] rounded-2xl"></div>
-            <div className="w-[252px] h-[9px] bg-[#E9E9E9] rounded-2xl"></div>
-            <div className="w-[252px] h-[9px] bg-[#E9E9E9] rounded-2xl"></div>
-            <div className="w-[115px] h-[9px] bg-[#E9E9E9] rounded-2xl"></div>
+        <div className="md:border border-[0.25px] border-black md:rounded-lg rounded-sm md:w-[296px] w-[73.86px] md:h-[169px] h-[42.17px] mt-1 md:mt-1 mt-[1px] flex flex-col">
+          <div className="mx-auto flex flex-col md:gap-3 gap-[2px] pt-1">
+            <div className="md:w-[252px] w-[62.88px] md:h-[9px] h-[2px] bg-[#E9E9E9] rounded-2xl"></div>
+            <div className="md:w-[252px] w-[62.88px] md:h-[9px] h-[2px] bg-[#E9E9E9] rounded-2xl"></div>
+            <div className="md:w-[252px] w-[62.88px] md:h-[9px] h-[2px] bg-[#E9E9E9] rounded-2xl"></div>
+            <div className="md:w-[252px] w-[62.88px] md:h-[9px] h-[2px] bg-[#E9E9E9] rounded-2xl"></div>
+            <div className="md:w-[115px] w-[28px] md:h-[9px] h-[2px] bg-[#E9E9E9] rounded-2xl"></div>
           </div>
         </div>
-        <div className="w-[277px] h-[33px] border border-[#047AC0] rounded mx-auto grid content-center mt-3">
-          <img className="h-[17px] w-[17px] mx-auto" src={imgLogo} alt="" />
+        <div className="md:w-[277px] w-[69.12px] md:h-[33px] h-[8.23px] border border-[#047AC0] md:rounded rounded-sm mx-auto grid content-center md:mt-3 mt-[2px]">
+          <img className="md:h-[17px] h-[4.18px] md:w-[17px] w-[4.18px] mx-auto" src={imgLogo} alt="" />
         </div>
       </div>
     </>
