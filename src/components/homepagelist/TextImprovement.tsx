@@ -35,7 +35,7 @@ const TextImprovement = () => {
             <div className="md:w-[29px] w-[7.21px] md:h-[9px] h-[2.24px] bg-[#E9E9E9] rounded-2xl"></div>
           </div>
         </div>
-        <div className="md:border border-[0.25px] border-black md:rounded-lg rounded-sm md:w-[296px] w-[73.86px] md:h-[169px] h-[42.17px] mt-1 md:mt-1 mt-[1px] flex flex-col">
+        <div className="md:border border-[0.25px] border-black md:rounded-lg rounded-sm md:w-[296px] w-[73.86px] md:h-[169px] h-[42.17px] md:mt-1 mt-[1px] flex flex-col">
           <div className="mx-auto flex flex-col md:gap-3 gap-[2px] pt-1">
             <div className="md:w-[252px] w-[62.88px] md:h-[9px] h-[2px] bg-[#E9E9E9] rounded-2xl"></div>
             <div className="md:w-[252px] w-[62.88px] md:h-[9px] h-[2px] bg-[#E9E9E9] rounded-2xl"></div>
