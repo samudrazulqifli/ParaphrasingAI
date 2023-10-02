@@ -5,13 +5,10 @@ import Header from "./components/Header";
 function App() {
   return (
     <>
-      <section>
-        <div>
+        <div className="w-full mb-2">
           <Header></Header>
+          <Footer></Footer>
         </div>
-        <div>ISI</div>
-        <div><Footer></Footer></div>
-      </section>
     </>
   );
 }
