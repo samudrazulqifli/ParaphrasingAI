@@ -36,7 +36,7 @@ const Homepage = () => {
 
   return (
     <>
-      <div className="w-full bg-white pb-5">
+      <div className="w-full bg-white md:mt-20 mt-6 md:mb-16 mb-5">
         <div className="md:text-[50px] text-[12px] text-[#404040] text-center font-bold md:mb-11 mb-3">
           Accessible practical content marketing expertise
           <br />
