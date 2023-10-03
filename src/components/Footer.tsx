@@ -4,7 +4,7 @@ const Footer = () => {
     <>
     <div>
 
-      <div className="footer-font bg-footer_bg bg-cover h-[118.13px] md:h-[200px] lg:h-[378px]">
+      <div className="font-montserrat bg-footer_bg bg-cover h-[118.13px] md:h-[200px] lg:h-[378px]">
         <div className="mx-auto flex justify-between gap-3 w-full lg:h-[330px] md:h-[165px]">
           <div className="w-[150px] lg:w-[350px] mr-auto">
             <div className="my-3 mx-3 lg:my-8 lg:mx-8">
