@@ -2,7 +2,7 @@ import NavbarMenu from "./Navbar";
 
 const Header = () => {
   return (
-    <section className="bg-gradient-to-r from-[#5B68DF] to-[#00FFD1] w-full h-[189px] md:h-[396px] lg:h-[682px]">
+    <section className="bg-header_bg bg-cover w-full h-[189px] md:h-[396px] lg:h-[682px]">
       <div className="relative">
         <NavbarMenu></NavbarMenu>
       </div>
