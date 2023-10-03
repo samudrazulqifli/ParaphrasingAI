@@ -5,7 +5,7 @@ export default {
     extend: {
       backgroundImage : {
         'footer_bg' : "url('/src/assets/images/OC 03.svg')",
-        'header_bg' : "url('/src/assets/images/header.svg')",
+        'header_bg' : "url('/src/assets/images/header.png')",
       },
       fontFamily : {
         'poppins' : ['Poppins', 'sans-serif'],
