@@ -10,11 +10,11 @@ const CardListHomePage: React.FC<Props> = (props: any) => {
   return (
     <>
       <div className="grid place-items-center">
-        <div className="md:text-[50px] text-[12.48px] font-semibold md:my-10 my-3">
+        <div className="md:text-[50px] text-[12.48px] text-[#404040] font-semibold md:my-10 my-3">
           {title}
         </div>
         <div className="md:w-[1203px] w-[300px] md:h-[464px] h-[115.78px] bg-[#047AC0] rounded-tr-lg rounded-br-lg flex">
-          <div className="md:min-w-[521px] min-w-[130px] md:h-[464px] h-[115.78px] bg-[#F4F4F4] rounded-tr-lg rounded-br-lg relative">
+          <div className="md:min-w-[521px] text-[#4E4E4E] min-w-[130px] md:h-[464px] h-[115.78px] bg-[#F4F4F4] rounded-tr-lg rounded-br-lg relative">
             {childComp}
           </div>
           <div className="md:ml-[35px] ml-2 md:mb-12 mb-2 mr-[35px] flex flex-col justify-end md:gap-7 gap-2">
