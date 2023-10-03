@@ -1,8 +1,10 @@
 import logo from "../images/documentorai-05 3.svg";
+import background from "../assets/OC 03.svg"
 const Footer = () => {
+  console.log(background)
   return (
     <>
-      <div className="footer-font bg-gradient-to-r from-[#047AC0]  to-[#00FFD1] w-full h-[118.13px] md:h-[200px] lg:h-[378px]">
+      <div className={`footer-font bg-[url('${background}')] w-full h-[118.13px] md:h-[200px] lg:h-[378px]`}>
         <div className="mx-auto flex justify-between gap-3 w-full lg:h-[330px] md:h-[165px]">
           <div className="w-[150px] lg:w-[350px] mr-auto">
             <div className="my-3 mx-3 lg:my-8 lg:mx-8">
@@ -40,6 +42,7 @@ const Footer = () => {
               <a href="/" className="text-white text-[4.69px]  md:text-[10.7px] lg:text-[15px] font-medium">2021-2023 DocumentorAI . All rights reserved.</a>
         </div>
       </div>
+      <img src={background} alt="" className="w-full" />
     </>
   );
 };
