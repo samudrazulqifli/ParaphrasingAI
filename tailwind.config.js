@@ -2,7 +2,16 @@
 export default {
   content: ['./src/**/*.{js,jsx,ts,tsx}',],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage : {
+        'footer_bg' : "url('/src/assets/images/OC 03.svg')",
+        'header_bg' : "url('/src/assets/images/header.svg')",
+      },
+      fontFamily : {
+        'poppins' : ['Poppins', 'sans-serif'],
+        'montserrat': ['Montserrat', 'sans-serif']
+      }
+    },
   },
   plugins: [require("daisyui")],
 }
