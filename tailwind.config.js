@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       backgroundImage : {
-        'footer_bg' : "url('/src/assets/images/OC 03.svg')",
+        'footer_bg' : "url('/src/assets/images/footer.png')",
         'header_bg' : "url('/src/assets/images/header.png')",
       },
       fontFamily : {
