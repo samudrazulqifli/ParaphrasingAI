@@ -5,6 +5,8 @@ import ChatPdf from "../components/homepagelist/ChatPdf";
 import TextSummarize from "../components/homepagelist/TextSummarize";
 import TextImprovement from "../components/homepagelist/TextImprovement";
 import CardListHomePage from "../components/CardListHomePage";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 const Homepage = () => {
   const itemContent: DataHomePageProps[] = [
@@ -36,6 +38,7 @@ const Homepage = () => {
 
   return (
     <>
+    <Header></Header>
       <div className="w-full bg-white md:mt-20 mt-6 md:mb-16 mb-5">
         <div className="md:text-[50px] text-[12px] text-[#404040] text-center font-bold md:mb-11 mb-3">
           Accessible practical content marketing expertise
@@ -62,6 +65,7 @@ const Homepage = () => {
         <CardListHomePage {...itemContent[2]} childComp={<TextSummarize />} />
         <CardListHomePage {...itemContent[3]} childComp={<TextImprovement />} />
       </div>
+      <Footer></Footer>
     </>
   );
 };
