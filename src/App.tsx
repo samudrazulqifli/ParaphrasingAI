@@ -9,9 +9,9 @@ function App() {
   return (
     <div className="w-full">
       {/* <Header></Header>
-      <Homepage />
+      // <Homepage />
        <Footer></Footer> */}
-      <ChatPage />
+      <Homepage />
     </div>
   );
 }

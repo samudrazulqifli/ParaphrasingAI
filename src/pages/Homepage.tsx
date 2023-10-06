@@ -5,6 +5,7 @@ import ChatPdf from "../components/homepagelist/ChatPdf";
 import TextSummarize from "../components/homepagelist/TextSummarize";
 import TextImprovement from "../components/homepagelist/TextImprovement";
 import CardListHomePage from "../components/CardListHomePage";
+import Modal from "../components/Modal";
 
 const Homepage = () => {
   const itemContent: DataHomePageProps[] = [
@@ -56,7 +57,7 @@ const Homepage = () => {
           </div>
           <GetStarted />
         </div>
-
+        <Modal />
         <CardListHomePage {...itemContent[0]} childComp={<TextParaphrase />} />
         <CardListHomePage {...itemContent[1]} childComp={<ChatPdf />} />
         <CardListHomePage {...itemContent[2]} childComp={<TextSummarize />} />
