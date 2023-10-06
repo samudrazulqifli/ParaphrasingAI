@@ -10,10 +10,10 @@ const MainPage = () => {
     <>
     <Routes>
         <Route path='/' element={<Homepage></Homepage>}></Route>
-        <Route path='chat_pdf' element={<ChatPdf></ChatPdf>}></Route>
-        <Route path='text_summarize' element={<TextSummarize></TextSummarize>}></Route>
-        <Route path='text_improvement' element={<TextImprovement></TextImprovement>}></Route>
-        <Route path='text_parapharse' element={<TextParapharse></TextParapharse>}></Route>
+        <Route path='chatPdf' element={<ChatPdf></ChatPdf>}></Route>
+        <Route path='textSummarize' element={<TextSummarize></TextSummarize>}></Route>
+        <Route path='textImprovement' element={<TextImprovement></TextImprovement>}></Route>
+        <Route path='textParapharse' element={<TextParapharse></TextParapharse>}></Route>
     </Routes>
     </>
   )
