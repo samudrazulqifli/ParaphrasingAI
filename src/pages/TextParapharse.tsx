@@ -19,7 +19,7 @@ const TextParapharse = () => {
       title1: "Text Improvement",
       title2: "Free Improvement Generator",
       description:
-        " Rephrase the following text using our AI paragraph rewriting tool for instant improvements in your content's clarity and the generation of unique, plagiarism-free text.",
+        "Rephrase the following text using our AI paragraph rewriting tool for instant\nimprovements in your content's clarity and the generation of unique,\nplagiarism-free text.",
     },
   ];
   return (

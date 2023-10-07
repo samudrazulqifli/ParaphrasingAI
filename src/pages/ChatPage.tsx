@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import imgSend from "../assets/images/btn_send.png";
 import { Document, Page, pdfjs } from "react-pdf";
 import imageReload from "../assets/images/reload_page.png";
@@ -14,12 +14,18 @@ const ChatPage = () => {
   const [numPages, setNumPages] = useState<number>(0);
   const [zoom, setZoom] = useState<number>(1);
   const [file, setFile] = useState<File | undefined>();
+  const ref = useRef<HTMLInputElement | null>(null);
 
-  const handleDragOver = (event: DragEvent) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    ref.current?.click();
+  };
+
+  const handleDragOver = (event: React.DragEvent<HTMLDivElement>): void => {
     event.preventDefault();
   };
 
-  const handleDrop = (event: DragEvent) => {
+  const handleDrop = (event: React.DragEvent<HTMLDivElement>): void => {
     event.preventDefault();
     if (event.dataTransfer != undefined) {
       setFile(event.dataTransfer.files[0]);
@@ -56,8 +62,10 @@ const ChatPage = () => {
       <div className="absolute top-[582px] w-full">
         <div className="relative">
           <div
-            onDragOver={handleDragOver}
-            onDrop={handleDrop}
+            onDragOver={(e: React.DragEvent<HTMLDivElement>) =>
+              handleDragOver(e)
+            }
+            onDrop={(e: React.DragEvent<HTMLDivElement>) => handleDrop(e)}
             className="h-[936px] w-[895px] bg-white mx-auto rounded-[20px] shadow-md"
           >
             <div className="grid grid-cols-2 justify-items-stretch divide-x-[2px] divide-[#D9D9D9]">
@@ -65,7 +73,7 @@ const ChatPage = () => {
                 <div className="flex items-center justify-between mt-[37px] mb-[15px]">
                   <div className="flex items-center gap-2">
                     <div className="h-[15px] w-[16px] bg-black rounded-[2px] border-[1px] border-[#838383]"></div>
-                    <div className="text-[14px] font-semibold text-black">
+                    <div className="text-[14px] truncate ... w-[200px] font-semibold text-black">
                       {file?.name?.toString()}
                     </div>
                   </div>
@@ -160,10 +168,24 @@ const ChatPage = () => {
             <div className="flex justify-between mx-[52px]">
               <button
                 type="button"
+                onClick={handleClick}
                 className="text-[#047AC0] p-0 text-[12px] font-medium inset-y-0 right-0 border-none focus:outline-none"
               >
                 Browse my Computer
               </button>
+              <input
+                className="hidden"
+                ref={ref}
+                type="file"
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                  if (
+                    event.target.files != null &&
+                    event.target.files[0] != null
+                  ) {
+                    setFile(event.target.files[0]);
+                  }
+                }}
+              />
               <button
                 type="button"
                 className="text-[#047AC0] p-0 text-[12px] font-medium inset-y-0 right-0 border-none focus:outline-none"
@@ -171,11 +193,6 @@ const ChatPage = () => {
                 From URL
               </button>
             </div>
-            {/* <FileUploader
-              handleChange={handleChange}
-              name="file"
-              types={fileTypes}
-            /> */}
           </div>
         </div>
       </div>

@@ -9,7 +9,7 @@ const TextImprovement = () => {
       title1: "Text Improvement",
       title2: "Free Summary Generator",
       description:
-        "Simplify your content writing with our text summary generator. Transform your paragraphs, articles, and other long text into digestible and engaging copy in one click.",
+        "Simplify your content writing with our text summary generator.\nTransform your paragraphs, articles, and other long text into digestible\nand engaging copy in one click.",
     },
   ];
   return (
