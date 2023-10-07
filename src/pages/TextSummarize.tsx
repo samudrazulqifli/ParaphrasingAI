@@ -1,6 +1,9 @@
 import Footer from "../components/Footer";
 import HeaderText from "../components/HeaderText";
 import Iklan from "../components/Iklan";
+import IdentifyTheMainPoint from "../components/textsummarization/IdentifyTheMainPoint";
+import ProduceHigher from "../components/textsummarization/ProduceHigher";
+import RevampLengthly from "../components/textsummarization/RevampLengthly";
 import { DataHeaderTextProps } from "../interface/DataHeaderText";
 
 const TextSummarize = () => {
@@ -20,10 +23,13 @@ const TextSummarize = () => {
         description={itemContent[0].description}
       ></HeaderText>
       <div>Text Summarize</div>
-      <Iklan />
+      {/* <Iklan /> */}
+      <RevampLengthly />
+      <IdentifyTheMainPoint />
+      <ProduceHigher />
       <Footer></Footer>
     </>
   );
-}
+};
 
-export default TextSummarize
+export default TextSummarize;
