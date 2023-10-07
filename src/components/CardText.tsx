@@ -10,13 +10,13 @@ const CardText : React.FC<Props>  = (props : any) => {
   const [count, setCount] = useState(0);
   const [result, setResult] = useState(0);
 
-  const wordChange = (e: { target: { value: string | number[] } }) => {
-    console.log(e);
-    setCount(e.target.value.length);
+  const wordChange = (e: { target: { value: string } }) => {
+    const words =e.target.value.split(' ').length;
+    setCount(words)
   };
-  const resultChange = (e: { target: { value: string | number[] } }) => {
-    console.log(e);
-    setResult(e.target.value.length);
+  const resultChange = (e: { target: { value: string } }) => {
+    const words =e.target.value.split(' ').length;
+    setResult(words)
   };
   return (
     <>
