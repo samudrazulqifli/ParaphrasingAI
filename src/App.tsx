@@ -12,7 +12,7 @@ function App() {
       {/* <Header></Header>
       // <Homepage />
        <Footer></Footer> */}
-      <LoginPage />
+      <ChatPage />
     </div>
   );
 }

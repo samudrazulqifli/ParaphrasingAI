@@ -4,6 +4,7 @@ import { Document, Page, pdfjs } from "react-pdf";
 import imageReload from "../assets/images/reload_page.png";
 import imagePrev from "../assets/images/prev_page.png";
 import imgUpPdf from "../assets/images/upload_pdf.png";
+import Iklan from "../components/Iklan";
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   "pdfjs-dist/build/pdf.worker.min.js",
@@ -42,7 +43,8 @@ const ChatPage = () => {
 
   return (
     <>
-      <div className="w-full bg-orange-400 py-10">
+      <div className="w-full relative bg-orange-400 py-10">
+        <Iklan />
         <div className="h-[936px] w-[895px] bg-white mx-auto rounded-[20px]">
           <div className="grid grid-cols-2 justify-items-stretch divide-x-[2px] divide-[#D9D9D9]">
             <div className="justify-self-end pr-[12px]">
