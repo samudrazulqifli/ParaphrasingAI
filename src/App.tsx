@@ -1,6 +1,7 @@
 import "./App.css";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
+import Pdf from "./components/Pdf";
 import ChatPage from "./pages/ChatPage";
 // import "./App.css";
 import Homepage from "./pages/Homepage";
@@ -13,6 +14,7 @@ function App() {
       // <Homepage />
        <Footer></Footer> */}
       <ChatPage />
+      {/* <Pdf /> */}
     </div>
   );
 }

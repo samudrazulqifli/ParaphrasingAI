@@ -5,6 +5,7 @@ import imageReload from "../assets/images/reload_page.png";
 import imagePrev from "../assets/images/prev_page.png";
 import imgUpPdf from "../assets/images/upload_pdf.png";
 import Iklan from "../components/Iklan";
+import { FileUploader } from "react-drag-drop-files";
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   "pdfjs-dist/build/pdf.worker.min.js",
@@ -13,31 +14,37 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 
 const ChatPage = () => {
   const [numPages, setNumPages] = useState<number>(0);
-  const [pageNumber, setPageNumber] = useState<number>(1);
+  const [zoom, setZoom] = useState<number>(1);
+  const [file, setFile] = useState<File>();
+
+  const handleChange = (file: File) => {
+    setFile(file);
+  };
+
+  const fileTypes = ["PDF"];
 
   const onDocumentLoadSuccess = ({ numPages }: { numPages: number }): void => {
     setNumPages(numPages);
-    setPageNumber(1);
   };
 
   const reload = () => {
     setNumPages(numPages);
-    setPageNumber(1);
+    setZoom(1);
   };
 
-  const changePage = (offSet: number) => {
-    setPageNumber((prevPageNumber) => prevPageNumber + offSet);
+  const zoomControl = (offSet: number) => {
+    setZoom((prevZoom) => prevZoom + offSet);
   };
 
-  const changePageBack = () => {
-    if (pageNumber > 1) {
-      changePage(-1);
+  const zoomOut = () => {
+    if (zoom > 1) {
+      zoomControl(-0.1);
     }
   };
 
-  const changePageNext = () => {
-    if (pageNumber < numPages) {
-      changePage(+1);
+  const zoomIn = () => {
+    if (zoom < numPages) {
+      zoomControl(+0.1);
     }
   };
 
@@ -58,7 +65,7 @@ const ChatPage = () => {
                 <div className="flex items-center gap-2">
                   <button
                     className="inset-y-0 right-0 border-none focus:outline-none p-0"
-                    onClick={() => changePageBack()}
+                    onClick={() => zoomOut()}
                     type="button"
                   >
                     <img src={imagePrev} alt="" className="w-[11px]" />
@@ -76,14 +83,14 @@ const ChatPage = () => {
                   </button>
                   <button
                     className="inset-y-0 right-0 border-none focus:outline-none p-0"
-                    onClick={() => changePageNext()}
+                    onClick={() => zoomIn()}
                     type="button"
                   >
                     <img src={imagePrev} alt="" className="w-[11px]" />
                   </button>
                   <div className="h-[18px] w-[32px] bg-[#ECECEC] rounded-[2px]">
                     <div className="text-[12px] font-medium text-[#5A5A5A] text-center">
-                      {pageNumber}
+                      1
                     </div>
                   </div>
                   <div className="text-[12px] font-medium text-[#5A5A5A]">
@@ -91,17 +98,24 @@ const ChatPage = () => {
                   </div>
                 </div>
               </div>
-              <div className="w-[410px] h-[726px] border-[#9cb4c6] border-[1px] rounded-[10px] px-[15px] py-[25px]">
+              <div className="w-[410px] h-[726px] overflow-auto border-[#9cb4c6] border-[1px] rounded-[10px] px-[15px] py-[25px]">
                 <Document
-                  file="/sample.pdf"
+                  file={file}
                   onLoadSuccess={onDocumentLoadSuccess}
                 >
-                  <Page
-                    width={373}
-                    pageNumber={pageNumber}
-                    renderAnnotationLayer={false}
-                    renderTextLayer={false}
-                  ></Page>
+                  {Array(numPages)
+                    .fill(undefined)
+                    .map((_, i: number) => {
+                      return (
+                        <Page
+                          width={373}
+                          pageNumber={i + 1}
+                          renderAnnotationLayer={false}
+                          renderTextLayer={false}
+                          scale={zoom}
+                        />
+                      );
+                    })}
                 </Document>
               </div>
             </div>
@@ -153,6 +167,7 @@ const ChatPage = () => {
               From URL
             </button>
           </div>
+          <FileUploader handleChange={handleChange} name="file" types={fileTypes} />
         </div>
       </div>
     </>
