@@ -1,6 +1,7 @@
 import CardText from "../components/CardText";
 import Footer from "../components/Footer";
 import HeaderText from "../components/HeaderText";
+import Iklan from "../components/Iklan";
 import { DataCardTextProps } from "../interface/DataCardText";
 import { DataHeaderTextProps } from "../interface/DataHeaderText";
 
@@ -18,7 +19,7 @@ const TextParapharse = () => {
       title1: "Text Improvement",
       title2: "Free Improvement Generator",
       description:
-        " Rephrase the following text using our AI paragraph rewriting tool for instant improvements in your content's clarity and the generation of unique, plagiarism-free text.",
+        "Rephrase the following text using our AI paragraph rewriting tool for instant\nimprovements in your content's clarity and the generation of unique,\nplagiarism-free text.",
     },
   ];
   return (
@@ -36,6 +37,7 @@ const TextParapharse = () => {
           button={cardContent[0].button}
         ></CardText>
       </div>
+      <Iklan />
       <Footer></Footer>
     </>
   );

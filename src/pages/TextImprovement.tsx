@@ -1,5 +1,6 @@
 import Footer from "../components/Footer";
 import HeaderText from "../components/HeaderText";
+import Iklan from "../components/Iklan";
 import { DataHeaderTextProps } from "../interface/DataHeaderText";
 
 const TextImprovement = () => {
@@ -8,7 +9,7 @@ const TextImprovement = () => {
       title1: "Text Improvement",
       title2: "Free Summary Generator",
       description:
-        "Simplify your content writing with our text summary generator. Transform your paragraphs, articles, and other long text into digestible and engaging copy in one click.",
+        "Simplify your content writing with our text summary generator.\nTransform your paragraphs, articles, and other long text into digestible\nand engaging copy in one click.",
     },
   ];
   return (
@@ -18,6 +19,7 @@ const TextImprovement = () => {
         title2={itemContent[0].title2}
         description={itemContent[0].description}
       ></HeaderText>
+      <Iklan />
       <div>Text Improvement</div>
       <Footer></Footer>
     </>

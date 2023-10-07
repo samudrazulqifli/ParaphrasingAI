@@ -1,14 +1,11 @@
 import "./App.css";
 import MainPage from "./components/MainContent";
-import Homepage from "./pages/Homepage";
 
 function App() {
-
   return (
-    <div className="w-full">
+    <div className="w-full relative">
       <MainPage></MainPage>
     </div>
-
   );
 }
 
