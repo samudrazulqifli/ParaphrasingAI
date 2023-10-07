@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import ChatPage from "./pages/ChatPage";
 // import "./App.css";
 import Homepage from "./pages/Homepage";
+import LoginPage from "./pages/LoginPage";
 
 function App() {
   return (
@@ -11,7 +12,7 @@ function App() {
       {/* <Header></Header>
       // <Homepage />
        <Footer></Footer> */}
-      <Homepage />
+      <LoginPage />
     </div>
   );
 }
