@@ -1,9 +1,14 @@
+import CardListHomePage from "../components/CardListHomePage";
 import CardText from "../components/CardText";
 import Footer from "../components/Footer";
 import HeaderText from "../components/HeaderText";
 import Iklan from "../components/Iklan";
+import ParapharsingDefine from "../components/ParapharsingDefine";
+import TextParaphrase from "../components/homepagelist/TextParaphrase";
 import { DataCardTextProps } from "../interface/DataCardText";
 import { DataHeaderTextProps } from "../interface/DataHeaderText";
+import { DataHomePageProps } from "../interface/DataHomePageProps";
+import { DataTextParapharsingDefine } from "../interface/DataTextParapharsingDefine";
 
 const TextParapharse = () => {
   const cardContent: DataCardTextProps[] = [
@@ -16,10 +21,25 @@ const TextParapharse = () => {
   ];
   const itemContent: DataHeaderTextProps[] = [
     {
-      title1: "Text Parpharse",
-      title2: "Free Improvement Generator",
+      title1: "Paraphrasing Tool",
+      title2: "Generate compelling and unique \ntext using AI.",
       description:
-        "Rephrase the following text using our AI paragraph rewriting tool for instant\nimprovements in your content's clarity and the generation of unique,\nplagiarism-free text.",
+        "Transform your thoughts into compelling text that convinces your \naudience and narrates your story effectively",
+    },
+  ];
+  const defineText: DataTextParapharsingDefine[] = [
+    {
+      title: "What benefits does the paraphrasing tool offer you?",
+      description:
+        " Gain valuable insights into this year's content marketing trends,successes, forecasts,\nand other essential information. Take inspiration from businesses similar to yours\n and explore fresh avenues for growth.",
+    },
+  ];
+  const cardDefine: DataHomePageProps[] = [
+    {
+      title: "",
+      subtitle: "Express our thoughts clearl an sincerel",
+      description:
+        "To enhance the effectiveness of oyur communication. The tool will:\n• Condense and reorganize sentences\n• Revise and tailor sentences as needed\n• Offer three distinct rephrased versions for any concept\n• Craft text that sounds natural to a native English audience.",
     },
   ];
   return (
@@ -34,12 +54,23 @@ const TextParapharse = () => {
           ></CardText>
         </div>
       </div>
-      <div className="mb-80">
+      <div className="mb-40 md:mb-68">
         <HeaderText
           title1={itemContent[0].title1}
           title2={itemContent[0].title2}
           description={itemContent[0].description}
         ></HeaderText>
+      </div>
+      <ParapharsingDefine
+        title={defineText[0].title}
+        description={defineText[0].description}
+      ></ParapharsingDefine>
+      <div className="md:mb-10 mb-5">
+        <CardListHomePage
+          bg={""}
+          {...cardDefine[0]}
+          childComp={<TextParaphrase />}
+        ></CardListHomePage>
       </div>
       <Iklan />
       <Footer></Footer>

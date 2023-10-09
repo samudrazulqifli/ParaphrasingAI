@@ -14,7 +14,7 @@ const TextSummarize = () => {
       title1: "Text Summarization",
       title2: "Free Summary Generator",
       description:
-        "Simplify your content writing with our text summary generator. Transform your paragraphs, articles, and other long text into digestible and engaging copy in one click.",
+        "Simplify your content writing with our text summary generator.\n Transform your paragraphs, articles, and other long text into digestible\n and engaging copy in one click.",
     },
   ];
   const cardContent: DataCardTextProps[] = [
@@ -44,10 +44,15 @@ const TextSummarize = () => {
           description={itemContent[0].description}
         ></HeaderText>
       </div>
-      {/* <Iklan /> */}
-      <RevampLengthly />
-      <IdentifyTheMainPoint />
-      <ProduceHigher />
+      <Iklan />
+      <div className="grid grid-flow-row md:gap-5 gap-2 md:mb-10 mb-3">
+        <div className="text-black font-semibold md:text-[50px] text-[20px]  text-center">
+          <div className="">What can you do with the summarizing tool?</div>
+        </div>
+        <RevampLengthly />
+        <IdentifyTheMainPoint />
+        <ProduceHigher />
+      </div>
       <Footer></Footer>
     </>
   );

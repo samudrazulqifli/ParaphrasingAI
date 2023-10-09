@@ -20,7 +20,7 @@ const CardText : React.FC<Props>  = (props : any) => {
   };
   return (
     <>
-      <div className=" flex justify-center md:grid-cols-2 md:grid card rounded-md md:rounded-[20px] shadow-2xl w-[185px] h-[242px] bg-white md:w-[895px] md:h-[499px] ">
+      <div className=" flex justify-center md:grid-cols-2 md:grid card rounded-md md:rounded-[20px] md:shadow-xl shadow-md w-[185px] h-[242px] bg-white md:w-[895px] md:h-[499px] ">
         <div className="ml-4 mb-1 md:mt-[20px] md:ml-[60px]">
           <h2 className="text-[5px] text-[#4E4E4E] font-bold mb-1 md:text-[15px]">
             {title1}

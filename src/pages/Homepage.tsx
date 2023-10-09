@@ -61,10 +61,10 @@ const Homepage = () => {
           <GetStarted />
         </div>
         <Modal />
-        <CardListHomePage {...itemContent[0]} childComp={<TextParaphrase />} />
-        <CardListHomePage {...itemContent[1]} childComp={<ChatPdf />} />
-        <CardListHomePage {...itemContent[2]} childComp={<TextSummarize />} />
-        <CardListHomePage {...itemContent[3]} childComp={<TextImprovement />} />
+        <CardListHomePage {...itemContent[0]} bg={"#F4F4F4"} childComp={<TextParaphrase/>} />
+        <CardListHomePage {...itemContent[1]} bg={"#F4F4F4"} childComp={<ChatPdf />} />
+        <CardListHomePage {...itemContent[2]} bg={"#F4F4F4"} childComp={<TextSummarize />} />
+        <CardListHomePage {...itemContent[3]} bg={"#F4F4F4"} childComp={<TextImprovement />} />
       </div>
       <Footer></Footer>
     </>
