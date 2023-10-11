@@ -6,7 +6,7 @@ const HeaderText: React.FC<Props> = (props: any) => {
   const { title1, title2, description } = props as DataHeaderTextProps;
   return (
     <>
-      <section className="mx-auto bg-header_bg bg-cover w-full h-[189px] md:h-[396px] lg:h-[682px]">
+      <section className="mx-auto bg-header_bg bg-cover w-full h-[312.27px] md:h-[500px] lg:h-[1153px]">
         <div className="relative">
           <NavbarMenu></NavbarMenu>
         </div>
