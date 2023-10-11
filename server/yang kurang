@@ -1,0 +1,4 @@
+-dokumentasi MD Docs untuk API
+-tambahin mongodb BookSchema , sama analyticsSchema, sama error schema (get all with pagination) (kurang pagination)
+-berapa lama ai21 integrasi (done deal, tanggal 15 september, max 18 september)
+-ai21 integrasi API Paraphrase API, Summarize API, Text Improvement API, masuk ke queryPST collection

@@ -1,0 +1,61 @@
+[
+  {
+    "statusCode": 200,
+    "data": {
+      "sourceId": "src_FFuMUo0sGa67uCD7NKlh4"
+    }
+  },
+  {
+    "sourceId": "src_MWvjAvdRwc2CiLFUzg2q7"
+  },
+  {
+    "statusCode": 200,
+    "data": {
+      "sourceId": "src_8enxI3fccbfMZgU7QY83A"
+    }
+  },
+  {
+    "statusCode": 200,
+    "data": {
+      "content": "In the context of the given pages, \"underling\" is a secret word for \"slave\". They are people who are sold and bought with the term \"underling\" and bound with contract magic, which makes them no different from a slave."
+    }
+  },
+  {
+    "statusCode": 200,
+    "data": {
+      "content": "Callbacks are functions that are passed as arguments to other functions and are executed when certain events occur or when a particular task is completed. They are commonly used in JavaScript to handle asynchronous operations such as fetching data from a server or performing animations. Callbacks can be defined as named functions or written inline, and can be used to pass data between functions. [P342]",
+      "references": [
+        {
+          "pageNumber": 342
+        }
+      ]
+    }
+  },
+  {
+    "statusCode": 200,
+    "data": {
+      "content": "Callbacks are functions that are passed as arguments to other functions and are executed when certain events occur. They are commonly used in JavaScript to handle asynchronous operations such as fetching data from a server or responding to user input.\n\nFor example, consider a function that fetches data from a server:\n\n```\nfunction fetchData(url, callback) {\n  // Make a request to the server\n  // When the response is received, call the callback function\n  // and pass the response data as an argument\n  // ...\n  callback(responseData);\n}\n```\n\nThe `fetchData` function takes a URL and a callback function as arguments. It makes a request to the server and when the response is received, it calls the callback function and passes the response data as an argument.\n\nHere's an example of how you might use the `fetchData` function with a callback:\n\n```\nfetchData('https://example.com/data', function(data) {\n  // Do something with the data\n  console.log(data);\n});\n```\n\nIn this example, we pass a function as the second argument to `fetchData`. This function will be called when the response is received and will log the data to the console.\n\nCallbacks can also be named functions that are defined separately and passed as arguments:\n\n```\nfunction processData(data) {\n  // Do something with the data\n  console.log(data);\n}\n\nfetchData('https://example.com/data', processData);\n```\n\nIn this example, we define a separate function `processData` that takes the response data as an argument and logs it to the console. We then pass this function as the second argument to `fetchData`.",
+      "references": []
+    }
+  },
+  {
+    "data": {
+      "content": "Callbacks are functions that are passed as arguments to other functions and are executed when certain events occur. They are commonly used in JavaScript to handle asynchronous operations such as fetching data from a server or responding to user input.\n\nFor example, consider a function that fetches data from a server:\n\n```\nfunction fetchData(url, callback) {\n  // Make a request to the server\n  // When the response is received, call the callback function\n  // and pass the response data as an argument\n  // ...\n  callback(responseData);\n}\n```\n\nThe `fetchData` function takes a URL and a callback function as arguments. It makes a request to the server and when the response is received, it calls the callback function and passes the response data as an argument.\n\nHere's an example of how you might use the `fetchData` function with a callback:\n\n```\nfetchData('https://example.com/data', function(data) {\n  // Do something with the data\n  console.log(data);\n});\n```\n\nIn this example, we pass a function as the second argument to `fetchData`. This function will be called when the response is received and will log the data to the console.\n\nCallbacks can also be named functions that are defined separately and passed as arguments:\n\n```\nfunction processData(data) {\n  // Do something with the data\n  console.log(data);\n}\n\nfetchData('https://example.com/data', processData);\n```\n\nIn this example, we define a separate function `processData` that takes the response data as an argument and logs it to the console. We then pass this function as the second argument to `fetchData`.",
+      "references": []
+    },
+    "src": "src_8enxI3fccbfMZgU7QY83A",
+    "bookName": "",
+    "account": "uuid"
+  },
+  {
+    "src": "src_8enxI3fccbfMZgU7QY83A",
+    "bookName": "Overlimit Skill Holder V2",
+    "account": "uuid",
+    "isDeleted": false
+  },
+  {
+    "err": "Request failed with status code 400",
+    "route": "/book/upload/file",
+    "date": "2023-07-31T14:40:00.559+00:00"
+  }
+]

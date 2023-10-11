@@ -1,0 +1,131 @@
+name: Github action of documentorai-be-service based on Docker Image CI
+
+on:
+  push:
+    branches: ["main", "staging"]
+
+jobs:
+  build:
+    runs-on: "ubuntu-latest"
+    outputs:
+      bdp_docker_image_prod: ${{ steps.bdp_docker_image_prod.outputs.DBS_TAGS }}
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v3    
+      
+      - name: Authenticate with Google Cloud
+        uses: google-github-actions/auth@v0
+        with:
+          credentials_json: ${{ secrets.GOOGLE_SA }}
+
+      - name: Setup gcloud
+        uses: google-github-actions/setup-gcloud@v1
+        with:
+          project_id: "documentorai-400501"
+
+      ########################################
+      #
+      # For main branch
+      #
+      ########################################
+
+      - name: Build, tag, and push the Docker image for main branch
+        id: bdp_docker_image_prod
+        env:
+          HOST: ${{ secrets.HOST }}
+          MONGODB: ${{ secrets.MONGODB }}
+          SECRET: ${{ secrets.SECRET }}
+          ISS: ${{ secrets.ISS }}
+          AUD: ${{ secrets.AUD }}
+          CHATPDF_KEY: ${{ secrets.CHATPDF_KEY }}
+          AI21_KEY: ${{ secrets.AI21_KEY }}
+          LOG: ${{ secrets.LOG }}
+          GOOGLE_PROJECT: ${{ secrets.GOOGLE_PROJECT }} # documentorai-400501
+          GOOGLE_ARTIFACT_REGISTRY: ${{ secrets.GOOGLE_ARTIFACT_REGISTRY }} # asia-southeast1-docker.pkg.dev
+          REPOSITORY_NAME: "${{ secrets.REPOSITORY_NAME }}"
+          REPOSITORY_BRANCH: "${{ secrets.REPOSITORY_BRANCH }}"
+        run: |
+          gcloud auth configure-docker asia-southeast1-docker.pkg.dev --quiet
+          DBS_TAGS="main-$(date +%s)"
+          docker build . --file Dockerfile --no-cache --build-arg HOST=$HOST --build-arg MONGODB=$MONGODB --build-arg SECRET=$SECRET --build-arg ISS=$ISS --build-arg AUD=$AUD --build-arg CHATPDF_KEY=$CHATPDF_KEY --build-arg AI21_KEY=$AI21_KEY --build-arg LOG=$LOG --tag $GOOGLE_ARTIFACT_REGISTRY/$GOOGLE_PROJECT/$REPOSITORY_NAME/$REPOSITORY_NAME:$DBS_TAGS
+          docker push $GOOGLE_ARTIFACT_REGISTRY/$GOOGLE_PROJECT/$REPOSITORY_NAME/$REPOSITORY_NAME:$DBS_TAGS
+          echo "DBS_TAGS=$DBS_TAGS" >> $GITHUB_OUTPUT
+        if: ${{ github.ref == 'refs/heads/main' }}
+
+  deploy:
+    runs-on: "ubuntu-latest"
+    needs: build
+    env:
+      TARGET_VM_NAME: "documentorai-vm-01"
+      TARGET_VM_ZONE: "asia-southeast1-c"
+      TARGET_VM_PROJECTID: "documentorai-400501"
+      CONTAINER_NAME: "documentorai-be-api"
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v3
+      
+      - name: Authenticate with Google Cloud
+        uses: google-github-actions/auth@v0
+        with:
+          credentials_json: "${{ secrets.GOOGLE_SA }}"
+
+      - name: Setup gcloud
+        uses: google-github-actions/setup-gcloud@v1
+        with:
+          project_id: "documentorai-400501"
+
+      ########################################
+      #
+      # For main branch
+      #
+      ########################################
+
+      - name: Write gloud credential over SSH protocol
+        run: |
+          gcloud compute ssh $TARGET_VM_NAME --zone=$TARGET_VM_ZONE --project=$TARGET_VM_PROJECTID --command='sudo echo "${{ secrets.GOOGLE_SA_02 }}" | sudo tee /tmp/sa.json'
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: "${{ secrets.GOOGLE_SA }}"
+      
+      - name: Setup gloud credential over SSH protocol
+        run: |
+          gcloud compute ssh $TARGET_VM_NAME --zone=$TARGET_VM_ZONE --project=$TARGET_VM_PROJECTID --command="echo 'export GOOGLE_APPLICATION_CREDENTIALS=/tmp/sa.json' >> ~/.bashrc && source ~/.bashrc"
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: "${{ secrets.GOOGLE_SA }}"
+      
+      - name: Auth artifact registry using gcloud over SSH protocol
+        run: |
+          gcloud compute ssh $TARGET_VM_NAME --zone=$TARGET_VM_ZONE --project=$TARGET_VM_PROJECTID --command="gcloud auth configure-docker ${{ secrets.GOOGLE_ARTIFACT_REGISTRY }} --quiet"
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: "${{ secrets.GOOGLE_SA }}"
+      
+      - name: Remove existing container over SSH protocol
+        run: |
+          gcloud compute ssh $TARGET_VM_NAME --zone=$TARGET_VM_ZONE --project=$TARGET_VM_PROJECTID --command="sudo docker rm -f $CONTAINER_NAME"
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: "${{ secrets.GOOGLE_SA }}"
+        continue-on-error: true
+      
+      - name: Run container over SSH protocol
+        run: |
+          gcloud compute ssh $TARGET_VM_NAME --zone=$TARGET_VM_ZONE --project=$TARGET_VM_PROJECTID --command="sudo docker run -dit -p 3001:3001 -v documentorai-data:/dataondisk01 --network documentorai-net --name $CONTAINER_NAME $GOOGLE_ARTIFACT_REGISTRY/$GOOGLE_PROJECT/$REPOSITORY_NAME/$REPOSITORY_NAME:${{ needs.build.outputs.bdp_docker_image_prod }}"
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: "${{ secrets.GOOGLE_SA }}"
+          GOOGLE_PROJECT: ${{ secrets.GOOGLE_PROJECT }} # documentorai-400501
+          GOOGLE_ARTIFACT_REGISTRY: ${{ secrets.GOOGLE_ARTIFACT_REGISTRY }} # asia-southeast1-docker.pkg.dev
+          REPOSITORY_NAME: "${{ secrets.REPOSITORY_NAME }}"
+
+      - name: Waiting container running
+        run: sleep 10
+        if: ${{  github.ref == 'refs/heads/main' }}
+      
+      - name: Log container status over SSH protocol
+        run: |
+          gcloud compute ssh $TARGET_VM_NAME --zone=$TARGET_VM_ZONE --project=$TARGET_VM_PROJECTID --command="sudo docker logs $CONTAINER_NAME"
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: "${{ secrets.GOOGLE_SA }}"
+        continue-on-error: true
+
+      - name: Waiting process logging job
+        run: sleep 3
+        if: ${{  github.ref == 'refs/heads/main' }}
