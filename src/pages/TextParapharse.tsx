@@ -5,6 +5,8 @@ import HeaderText from "../components/HeaderText";
 import Iklan from "../components/Iklan";
 import ParapharsingDefine from "../components/ParapharsingDefine";
 import TextParaphrase from "../components/homepagelist/TextParaphrase";
+import FunctioningParaphrase from "../components/textparaphrase/FunctioningParaphrase";
+import ReceiveDataDriven from "../components/textparaphrase/ReceiveDataDriven";
 import { DataCardTextProps } from "../interface/DataCardText";
 import { DataHeaderTextProps } from "../interface/DataHeaderText";
 import { DataHomePageProps } from "../interface/DataHomePageProps";
@@ -73,6 +75,8 @@ const TextParapharse = () => {
         ></CardListHomePage>
       </div>
       <Iklan />
+      <ReceiveDataDriven />
+      <FunctioningParaphrase />
       <Footer></Footer>
     </>
   );
