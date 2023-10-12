@@ -1,3 +1,4 @@
+import CardSummarize from "../components/CardSummarize";
 import CardText from "../components/CardText";
 import Footer from "../components/Footer";
 import HeaderText from "../components/HeaderText";
@@ -44,6 +45,7 @@ const TextSummarize = () => {
           description={itemContent[0].description}
         ></HeaderText>
       </div>
+      <CardSummarize />
       <Iklan />
       <div className="grid grid-flow-row md:gap-5 gap-2 md:mb-10 mb-3">
         <div className="text-black font-semibold md:text-[50px] text-[20px]  text-center">
