@@ -2,6 +2,8 @@ import CardText from "../components/CardText";
 import Footer from "../components/Footer";
 import HeaderText from "../components/HeaderText";
 import Iklan from "../components/Iklan";
+import WhatIsText from "../components/textimprovement/WhatIsText";
+import YourParagraph from "../components/textimprovement/YourParagraph";
 import IdentifyTheMainPoint from "../components/textsummarization/IdentifyTheMainPoint";
 import { DataCardTextProps } from "../interface/DataCardText";
 import { DataHeaderTextProps } from "../interface/DataHeaderText";
@@ -47,6 +49,8 @@ const TextImprovement = () => {
         <div className="text-black font-semibold md:text-[50px] text-[20px]  text-center">
           <div className=""></div>
         </div>
+        <WhatIsText />
+        <YourParagraph />
         <IdentifyTheMainPoint />
       </div>
       <Footer></Footer>
