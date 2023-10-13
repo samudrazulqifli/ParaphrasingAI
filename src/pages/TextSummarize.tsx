@@ -8,8 +8,14 @@ import ProduceHigher from "../components/textsummarization/ProduceHigher";
 import RevampLengthly from "../components/textsummarization/RevampLengthly";
 import { DataCardTextProps } from "../interface/DataCardText";
 import { DataHeaderTextProps } from "../interface/DataHeaderText";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { SummarizeInput } from "../interface/api/IFormInput";
+import { textSummarize } from "../axios/TextSummariza";
+import { ResponseData } from "../interface/api/Response";
 
 const TextSummarize = () => {
+  const { register, handleSubmit } = useForm<SummarizeInput>();
+
   const itemContent: DataHeaderTextProps[] = [
     {
       title1: "Text Summarization",
@@ -24,19 +30,27 @@ const TextSummarize = () => {
       title2: "Summary",
       button: "Summarize",
       link: "/",
+      form: { ...register("query") },
     },
   ];
+
+  const onSubmit: SubmitHandler<SummarizeInput> = (value) =>
+    textSummarize(value, (e: ResponseData) => console.log(e.data));
+
   return (
     <>
       <div className="relative">
-        <div className="flex justify-center  m-auto mt-40 md:mt-[900px] left-0 right-0 top-0 bottom-0 absolute">
-          <CardText
-            title1={cardContent[0].title1}
-            title2={cardContent[0].title2}
-            link={cardContent[0].link}
-            button={cardContent[0].button}
-          ></CardText>
-        </div>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="flex justify-center  m-auto mt-40 md:mt-[900px] left-0 right-0 top-0 bottom-0 absolute">
+            <CardText
+              title1={cardContent[0].title1}
+              title2={cardContent[0].title2}
+              link={cardContent[0].link}
+              button={cardContent[0].button}
+              form={cardContent[0].form}
+            ></CardText>
+          </div>
+        </form>
       </div>
       <div className="mb-28 md:mb-80">
         <HeaderText
