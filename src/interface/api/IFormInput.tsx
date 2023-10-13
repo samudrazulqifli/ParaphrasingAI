@@ -3,3 +3,7 @@ export interface IFormInput {
   name: string;
   password: string;
 }
+export interface Responses {
+  text: string;
+}
+

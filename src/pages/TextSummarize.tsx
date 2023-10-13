@@ -2,7 +2,7 @@ import CardSummarize from "../components/CardSummarize";
 import CardText from "../components/CardText";
 import Footer from "../components/Footer";
 import HeaderText from "../components/HeaderText";
-import Iklan from "../components/Iklan";
+// import Iklan from "../components/Iklan";
 import IdentifyTheMainPoint from "../components/textsummarization/IdentifyTheMainPoint";
 import ProduceHigher from "../components/textsummarization/ProduceHigher";
 import RevampLengthly from "../components/textsummarization/RevampLengthly";
@@ -46,7 +46,7 @@ const TextSummarize = () => {
         ></HeaderText>
       </div>
       <CardSummarize />
-      <Iklan />
+      {/* <Iklan /> */}
       <div className="grid grid-flow-row md:gap-5 gap-2 md:mb-10 mb-3">
         <div className="text-black font-semibold md:text-[50px] text-[20px]  text-center">
           <div className="">What can you do with the summarizing tool?</div>
