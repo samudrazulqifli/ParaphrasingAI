@@ -8,9 +8,9 @@ const LoginPage = () => {
   const {
     register,
     handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm<Inputs>();
+    formState: {errors},
+    watch
+  }= useForm<Inputs>()
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     Login(data);
   };
