@@ -43,7 +43,6 @@ const TextSummarize = () => {
       datas.push(e.data);
       setResult(datas[0].data[0]["text"])
     });
-console.log(result)
 
   return (
     <>
