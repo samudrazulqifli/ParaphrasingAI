@@ -9,12 +9,10 @@ const LoginPage = () => {
     register,
     handleSubmit,
     formState: {errors},
-    watch
   }= useForm<Inputs>()
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     Login(data);
   };
-  console.log(watch("username"));
 
   return (
     <>
