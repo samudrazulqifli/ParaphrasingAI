@@ -14,7 +14,7 @@ const textSummarize = async (data: SummarizeInput, cb: any) => {
       },
     });
 
-    cb(result);
+    cb(result.data);
     
   } catch (error) {
     console.log(error);
