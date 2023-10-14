@@ -1,6 +1,11 @@
-export interface IFormInput {
+export interface IFormRegister {
   username: string;
   name: string;
+  password: string;
+}
+
+export interface IFormLogin {
+  username: string;
   password: string;
 }
 export interface Responses {
@@ -13,5 +18,5 @@ export interface SummarizeInput {
 }
 
 export interface ResultForm {
-  data: Responses[]
+  data: Responses[];
 }
