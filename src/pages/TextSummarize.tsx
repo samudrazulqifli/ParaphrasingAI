@@ -41,9 +41,9 @@ const TextSummarize = () => {
   const onSubmit: SubmitHandler<SummarizeInput> = (value) =>
     textSummarize(value, (e: ResponseData) => {
       datas.push(e.data);
-      setResult(datas[0].data)
+      setResult(datas[0].data[0]["text"])
     });
-
+console.log(result)
 
   return (
     <>
@@ -56,7 +56,7 @@ const TextSummarize = () => {
               link={cardContent[0].link}
               button={cardContent[0].button}
               form={cardContent[0].form}
-              data={result[0]["text"]}
+              data={result}
             ></CardText>
           </div>
         </form>
