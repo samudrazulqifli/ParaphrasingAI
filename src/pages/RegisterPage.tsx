@@ -1,12 +1,19 @@
-import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { registerUser } from "../axios/Register";
-import { IFormInput } from "../interface/api/IFormInput";
+import { IFormRegister } from "../interface/api/IFormInput";
+import { useAppDispatch } from "../redux/feature/hooks";
+
+import { register as registerUser } from "../redux/feature/auth";
+import { useNavigate } from "react-router-dom";
 
 const RegisterPage = () => {
-  const { register, handleSubmit } = useForm<IFormInput>();
-  const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    registerUser(data);
+  const { register, handleSubmit } = useForm<IFormRegister>();
+
+  const dispatch = useAppDispatch();
+
+  const navigation = useNavigate();
+
+  const onSubmit: SubmitHandler<IFormRegister> = (data) => {
+    dispatch(registerUser(data));
   };
   return (
     <div>
@@ -69,7 +76,10 @@ const RegisterPage = () => {
             Already have an account?
           </div>
           <div className="grid">
-            <button className="text-[#3495CE] justify-self-center text-center bg-transparent font-bold p-0 border-none ring-0 focus:outline-none text-[15.23px]">
+            <button
+              onClick={() => navigation("/login", { replace: true })}
+              className="text-[#3495CE] justify-self-center text-center bg-transparent font-bold p-0 border-none ring-0 focus:outline-none text-[15.23px]"
+            >
               Log in
             </button>
           </div>
