@@ -8,7 +8,11 @@ const Login = async (user: any) => {
       url: URL + "account/login",
       data: user,
     });
-    console.log(users);
+
+    console.log(users.data.data.token)
+
+    localStorage.setItem("token",`Bearer ${users.data.data.token}`);
+    // console.log(users);
   } catch (erorr) {
     console.log(erorr);
   }
