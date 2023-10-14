@@ -16,7 +16,7 @@ import { useState } from "react";
 
 const TextSummarize = () => {
   const { register, handleSubmit } = useForm<SummarizeInput>();
-  const [result, setResult] = useState([])
+  const [result, setResult] = useState<any>();
 
   const itemContent: DataHeaderTextProps[] = [
     {
@@ -26,7 +26,7 @@ const TextSummarize = () => {
         "Simplify your content writing with our text summary generator.\n Transform your paragraphs, articles, and other long text into digestible\n and engaging copy in one click.",
     },
   ];
-  const datas: any[] = [];
+
   const cardContent: DataCardTextProps[] = [
     {
       title1: "Your Text",
@@ -34,16 +34,14 @@ const TextSummarize = () => {
       button: "Summarize",
       link: "/",
       form: { ...register("query") },
-      data: datas,
+      data: result,
     },
   ];
 
   const onSubmit: SubmitHandler<SummarizeInput> = (value) =>
     textSummarize(value, (e: ResponseData) => {
-      datas.push(e.data);
-      setResult(datas[0].data[0]["text"])
+      setResult(e);
     });
-console.log(result)
 
   return (
     <>

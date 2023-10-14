@@ -1,20 +1,39 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { DataCardTextProps } from "../interface/DataCardText";
+import { ResultForm } from "../interface/api/IFormInput";
 
 type Props = DataCardTextProps;
 
 const CardText: React.FC<Props> = (props: any) => {
-  const { title1, title2, button, form, data} = props as DataCardTextProps;
+  const { title1, title2, button, form, data } = props as DataCardTextProps;
   const [count, setCount] = useState(0);
   const [result, setResult] = useState(0);
+  const [value, setValue] = useState<string>();
+
+  useEffect(() => {
+    console.log(data);
+    resultChange(data as ResultForm);
+  }, [data as ResultForm]);
 
   const wordChange = (e: { target: { value: string } }) => {
     const word = e.target.value.split(" ").length;
     setCount(word);
   };
-  const resultChange = (e: { target: { value: string } }) => {
-    const words = e.target.value.split(" ").length;
-    setResult(words);
+  const resultChange = (textInput?: ResultForm) => {
+    if (textInput) {
+      console.log(textInput.data);
+      textInput.data.forEach((item, index) => {
+        if (index == 0) {
+          setValue("");
+          setValue(item.text);
+        } else {
+          setValue((prevValue) => prevValue + "/n" + item.text);
+        }
+        const words = item.text.split(" ").length;
+        setResult(words);
+      });
+    }
+    console.log(result);
   };
   return (
     <>
@@ -42,8 +61,7 @@ const CardText: React.FC<Props> = (props: any) => {
           </div>
           <textarea
             className="resize-none text-black text-[5px] textarea-xs md:textarea-md w-[157px] md:w-[377px] h-[85px] md:h-[332px] border-[0.9px] rounded-sm md:rounded-[10px] bg-white placeholder:text-[5px] md:placeholder:text-[15px]"
-            onChange={resultChange}
-            defaultValue={data}
+            value={value}
           ></textarea>
         </div>
         <div className="w-full flex justify-center md:col-span-2 mt-[3px]">

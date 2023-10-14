@@ -11,3 +11,7 @@ export interface SummarizeInput {
   query: string;
   type: string;
 }
+
+export interface ResultForm {
+  data: Responses[]
+}
