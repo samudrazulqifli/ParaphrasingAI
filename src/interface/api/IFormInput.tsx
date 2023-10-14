@@ -7,3 +7,7 @@ export interface Responses {
   text: string;
 }
 
+export interface SummarizeInput {
+  query: string;
+  type: string;
+}
