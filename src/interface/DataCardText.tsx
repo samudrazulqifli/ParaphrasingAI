@@ -4,4 +4,5 @@ export interface DataCardTextProps {
     link: string;
     button: string;
     form: any
+    data: any
 }

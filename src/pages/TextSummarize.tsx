@@ -12,9 +12,11 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { SummarizeInput } from "../interface/api/IFormInput";
 import { textSummarize } from "../axios/TextSummariza";
 import { ResponseData } from "../interface/api/Response";
+import { useState } from "react";
 
 const TextSummarize = () => {
   const { register, handleSubmit } = useForm<SummarizeInput>();
+  const [result, setResult] = useState([])
 
   const itemContent: DataHeaderTextProps[] = [
     {
@@ -24,6 +26,7 @@ const TextSummarize = () => {
         "Simplify your content writing with our text summary generator.\n Transform your paragraphs, articles, and other long text into digestible\n and engaging copy in one click.",
     },
   ];
+  const datas: any[] = [];
   const cardContent: DataCardTextProps[] = [
     {
       title1: "Your Text",
@@ -31,11 +34,16 @@ const TextSummarize = () => {
       button: "Summarize",
       link: "/",
       form: { ...register("query") },
+      data: datas,
     },
   ];
 
   const onSubmit: SubmitHandler<SummarizeInput> = (value) =>
-    textSummarize(value, (e: ResponseData) => console.log(e.data));
+    textSummarize(value, (e: ResponseData) => {
+      datas.push(e.data);
+      setResult(datas[0].data)
+    });
+
 
   return (
     <>
@@ -48,6 +56,7 @@ const TextSummarize = () => {
               link={cardContent[0].link}
               button={cardContent[0].button}
               form={cardContent[0].form}
+              data={result[0]["text"]}
             ></CardText>
           </div>
         </form>
