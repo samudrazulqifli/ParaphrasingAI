@@ -1,22 +1,20 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import { DataCardTextProps } from "../interface/DataCardText";
 
-type Props = DataCardTextProps
+type Props = DataCardTextProps;
 
-const CardText : React.FC<Props>  = (props : any) => {
-
-  const {title1, title2, link, button} = props as DataCardTextProps
+const CardText: React.FC<Props> = (props: any) => {
+  const { title1, title2, button, form, data} = props as DataCardTextProps;
   const [count, setCount] = useState(0);
   const [result, setResult] = useState(0);
 
   const wordChange = (e: { target: { value: string } }) => {
-    const words =e.target.value.split(' ').length;
-    setCount(words)
+    const word = e.target.value.split(" ").length;
+    setCount(word);
   };
   const resultChange = (e: { target: { value: string } }) => {
-    const words =e.target.value.split(' ').length;
-    setResult(words)
+    const words = e.target.value.split(" ").length;
+    setResult(words);
   };
   return (
     <>
@@ -31,6 +29,7 @@ const CardText : React.FC<Props>  = (props : any) => {
           <textarea
             className="resize-none text-black text-[5px] textarea-xs md:textarea-md w-[157px] md:w-[377px] h-[85px] md:h-[332px] border-[0.9px] rounded-sm md:rounded-[10px] bg-white placeholder:text-[5px] md:placeholder:text-[15px]"
             placeholder="Begin typing or paste text here..."
+            {...form}
             onChange={wordChange}
           ></textarea>
         </div>
@@ -44,15 +43,16 @@ const CardText : React.FC<Props>  = (props : any) => {
           <textarea
             className="resize-none text-black text-[5px] textarea-xs md:textarea-md w-[157px] md:w-[377px] h-[85px] md:h-[332px] border-[0.9px] rounded-sm md:rounded-[10px] bg-white placeholder:text-[5px] md:placeholder:text-[15px]"
             onChange={resultChange}
+            defaultValue={data}
           ></textarea>
         </div>
         <div className="w-full flex justify-center md:col-span-2 mt-[3px]">
-          <Link
+          <button
             className=" flex justify-center items-center border-[#047AC0] border-[0.54px] rounded-[1.35px] w-[34.13px] h-[13px] text-[4.06px] text-[#3E3E3E] font-extrabold md:text-[15px] md:w-[126px] md:h-[43px] md:rounded-[5px]"
-            to={link}
+            type="submit"
           >
             {button}
-          </Link>
+          </button>
         </div>
       </div>
     </>
