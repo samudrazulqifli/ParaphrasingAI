@@ -7,7 +7,6 @@ import TextImprovement from "../components/homepagelist/TextImprovement";
 import CardListHomePage from "../components/CardListHomePage";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import Modal from "../components/Modal";
 
 const Homepage = () => {
   const itemContent: DataHomePageProps[] = [
@@ -60,7 +59,6 @@ const Homepage = () => {
           </div>
           <GetStarted />
         </div>
-        <Modal />
         <CardListHomePage {...itemContent[0]} bg={"#F4F4F4"} childComp={<TextParaphrase/>} />
         <CardListHomePage {...itemContent[1]} bg={"#F4F4F4"} childComp={<ChatPdf />} />
         <CardListHomePage {...itemContent[2]} bg={"#F4F4F4"} childComp={<TextSummarize />} />

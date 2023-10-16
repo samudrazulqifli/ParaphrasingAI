@@ -61,7 +61,7 @@ const ChatPdf = () => {
           childComp={<Chat />}
         ></CardListHomePage>
       </div>
-      <Iklan />
+      {/* <Iklan /> */}
       <Footer></Footer>
     </>
   );

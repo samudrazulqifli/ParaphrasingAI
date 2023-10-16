@@ -20,3 +20,7 @@ export interface SummarizeInput {
 export interface ResultForm {
   data: Responses[];
 }
+
+export interface IFormPassword {
+  
+}
