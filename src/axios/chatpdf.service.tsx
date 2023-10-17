@@ -36,8 +36,8 @@ const registerQuetionByURL = async (body: RegisterQuestionByUrl, cb: any) => {
         Authorization: localStorage.token,
       },
     });
-
-    cb(result);
+    Swal.fire("Success", "Chat is already to use", "success");
+    cb(result.data.data);
   } catch (error) {
     console.log(error);
   }

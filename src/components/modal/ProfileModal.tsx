@@ -1,13 +1,35 @@
-import React, { useEffect } from "react";
+import { useEffect, useState } from "react";
 import imgPDF from "../../assets/images/uploaded_pdf.png";
 import imgClose from "../../assets/images/close.png";
+import { logout } from "../../redux/feature/auth";
+import { useAppDispatch, useAppSelector } from "../../redux/feature/hooks";
+import { IFormDelete, IFormPassword } from "../../interface/api/IFormInput";
+import user from "../../axios/user.service";
+import FormChangePassword from "./FormChangePassword";
 
-interface Props {
-  username: string;
-}
+export const ProfileModal = () => {
+  const dispatch = useAppDispatch();
+  const [showModal, setShowModal] = useState(false);
+  const [changePassword, setChangePassword] = useState(false);
+  const { username, uuid } = useAppSelector((state) => state.auth);
 
-export const ProfileModal: React.FC<Props> = ({ username }) => {
-  const [showModal, setShowModal] = React.useState(false);
+  const logoutUser = () => {
+    dispatch(logout());
+    setShowModal(false);
+  };
+
+  const deleteAccount = async () => {
+    if (uuid) {
+      const input: IFormDelete = {
+        uuid: uuid,
+      };
+      await user.deleteAccount(input, (result: string) => {
+        if (result == "OK") {
+          logoutUser();
+        }
+      });
+    }
+  };
 
   useEffect(() => {
     if (showModal == false) {
@@ -37,32 +59,68 @@ export const ProfileModal: React.FC<Props> = ({ username }) => {
                 <button
                   type="button"
                   onClick={() => setShowModal(false)}
-                  className="p-0 md:h-[22.64px] h-[9.02px] md:w-[22.64px] w-[8.96px] inset-y-0 border-none focus:outline-none absolute md:top-[5.22px] top-[2.01px] md:right-[18.39px] right-[7.78px]"
+                  className="p-0 md:h-[22.64px] h-[15px] md:w-[22.64px] w-[15px] inset-y-0 border-none focus:outline-none absolute md:top-[5.22px] top-[10px] md:right-[18.39px] right-[7.78px]"
                 >
                   <img src={imgClose} alt="" />
                 </button>
                 <div className="text-black border-2 border-[#d9d9d9] rounded-md mt-[10%] mx-[3vw] p-[2%]">
-                  <div className="text-[#626262] text-[3vw]">Your Name</div>
-                  <div className="text-[#222222E5]">{username}</div>
-                  <div className="text-[#626262]">Your Name</div>
-                  <div className="text-[#222222E5]">{username}</div>
-                  <div className="text-[#626262]">Password</div>
-                  <div className="text-[#222222E5]">*********</div>
+                  <div className="text-[#626262] md:text-[1.2vw] text-[3vw]">
+                    Your Name
+                  </div>
+                  <div className="text-[#222222E5] md:text-[1.2vw] text-[3vw]">
+                    {username}
+                  </div>
+                  <div className="text-[#626262] md:text-[1.2vw] text-[3vw]">
+                    Your Name
+                  </div>
+                  <div className="text-[#222222E5] md:text-[1.2vw] text-[3vw]">
+                    {username}
+                  </div>
+                  <div className="text-[#626262] md:text-[1.2vw] text-[3vw]">
+                    Password
+                  </div>
+                  <div className="text-[#222222E5] md:text-[1.2vw] text-[3vw]">
+                    *********
+                  </div>
                 </div>
                 <div className="text-black border-2 border-[#d9d9d9] rounded-md mt-[3%] mx-[3vw] p-[2%]">
                   <div className="text-black">PDF Uploaded</div>
                   <img src={imgPDF} className="w-[25%] h-[30%]" alt="" />
                 </div>
                 <div className="text-black border-2 border-[#d9d9d9] rounded-md mx-[3vw] mt-[3%] mb-[10%] p-[2%]">
-                  <div className="text-[#222222E5]">Device</div>
-                  <div className="text-[#222222E5]">Logout</div>
-                  <div className="text-[#222222E5]">Delete Account</div>
-                  <div className="text-[#222222E5]">Change Password</div>
+                  <div className="text-[#222222E5] md:text-[1.4vw] text-[3vw]">Device</div>
+                  <button
+                    type="button"
+                    className="p-0 text-[#222222E5] md:text-[1.2vw] text-[3vw] border-none focus:outline-none"
+                    onClick={() => logoutUser()}
+                  >
+                    Logout
+                  </button>
+                  <br />
+                  <button
+                    type="button"
+                    className="p-0 text-[#222222E5] md:text-[1.2vw] text-[3vw] border-none focus:outline-none"
+                    onClick={() => deleteAccount()}
+                  >
+                    Delete Account
+                  </button>
+                  <br />
+                  <button
+                    type="button"
+                    className="p-0 text-[#222222E5] md:text-[1.2vw] text-[3vw] border-none focus:outline-none"
+                    onClick={() => setChangePassword(true)}
+                  >
+                    Change Password
+                  </button>
                 </div>
               </div>
             </div>
           </div>
           <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+          <FormChangePassword
+            visible={changePassword}
+            setVisible={setChangePassword}
+          />
         </>
       ) : null}
     </>

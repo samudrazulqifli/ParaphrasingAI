@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 const URL = "https://api.documentorai.com/";
 
 const registerUser = (data: IFormRegister) => {
+  console.log(data)
   return axios.post(URL + "account/register", data).then((response) => {
     if (!response.data.message) {
       Swal.fire("Success", "Register Success", "success");

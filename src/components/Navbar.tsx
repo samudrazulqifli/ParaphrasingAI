@@ -1,18 +1,11 @@
 import { Link } from "react-router-dom";
 import logo from "../images/documentorai-05 3.svg";
-import nav from "../images/Group 94.svg";
-import { useAppSelector, useAppDispatch } from "../redux/feature/hooks";
-import { logout } from "../redux/feature/auth";
+import { useAppSelector } from "../redux/feature/hooks";
 import { ProfileModal } from "./modal/ProfileModal";
 import OptionMenuModal from "./modal/OptionMenuModal";
 
 const NavbarMenu = () => {
-  const { isLoggedIn, username } = useAppSelector((state) => state.auth);
-  const dispatch = useAppDispatch();
-
-  const logoutUser = () => {
-    dispatch(logout());
-  };
+  const { isLoggedIn } = useAppSelector((state) => state.auth);
 
   return (
     <>
@@ -55,7 +48,7 @@ const NavbarMenu = () => {
               </Link>
             </>
           ) : (
-            <ProfileModal username={username !== null ? username : ""} />
+            <ProfileModal />
           )}
           <OptionMenuModal />
         </div>
