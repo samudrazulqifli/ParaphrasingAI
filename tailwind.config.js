@@ -6,6 +6,7 @@ export default {
       backgroundImage : {
         'footer_bg' : "url('/src/assets/images/footer.png')",
         'header_bg' : "url('/src/assets/images/header.png')",
+        'lampion_bg': "url('/src/assets/images/lampion-bg.png')",
       },
       fontFamily : {
         'poppins' : ['Poppins', 'sans-serif'],

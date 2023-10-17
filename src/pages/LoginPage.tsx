@@ -1,17 +1,39 @@
-import { Login } from "../axios/Login";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+// import { Login } from "../axios/Login";
 import { useForm, SubmitHandler } from "react-hook-form";
-type Inputs = {
-  username: string;
-  password: string;
-};
+import { IFormLogin } from "../interface/api/IFormInput";
+import { useAppSelector, useAppDispatch } from "../redux/feature/hooks";
+// import { clearMessage } from "../redux/feature/message";
+
+import { login } from "../redux/feature/auth";
+
 const LoginPage = () => {
   const {
     register,
     handleSubmit,
-    formState: {errors},
-  }= useForm<Inputs>()
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
-    Login(data);
+    formState: { errors },
+  } = useForm<IFormLogin>();
+
+  const auth = useAppSelector((state) => state.auth.isLoggedIn);
+  // const message = useAppSelector((state) => state.message);
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (auth) {
+      navigation("/");
+    }
+  }, [auth]);
+
+  // useEffect(() => {
+  //   dispatch(clearMessage());
+  // }, [dispatch]);
+
+  const navigation = useNavigate();
+
+  const onSubmit: SubmitHandler<IFormLogin> = (data) => {
+    dispatch(login(data));
   };
 
   return (
@@ -37,7 +59,7 @@ const LoginPage = () => {
             Password
           </div>
           <input
-            type="text"
+            type="password"
             placeholder="Enter Your Password"
             className="w-full rounded-[3.17px] h-[42.52px] text-black border-[#8d8d8d] border-[1.27px] px-[9.52px] focus:outline-none"
             {...register("password", { required: true })}
@@ -59,7 +81,10 @@ const LoginPage = () => {
             Don’t have an account?
           </div>
           <div className="grid">
-            <button className="text-[#3495CE] justify-self-center text-center bg-transparent font-bold p-0 border-none ring-0 focus:outline-none text-[15.23px]">
+            <button
+              onClick={() => navigation("/register", { replace: true })}
+              className="text-[#3495CE] justify-self-center text-center bg-transparent font-bold p-0 border-none ring-0 focus:outline-none text-[15.23px]"
+            >
               Sign up
             </button>
           </div>

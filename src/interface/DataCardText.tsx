@@ -5,4 +5,13 @@ export interface DataCardTextProps {
     button: string;
     form: any
     data: any
+    option: Option
+    selected: any
 }
+ export interface Option {
+    [x: string]: any;
+    option1: string;
+    option2: string;
+    option3: string;
+ 
+ }

@@ -1,6 +1,13 @@
-export interface IFormInput {
+import { Option } from "../DataCardText";
+
+export interface IFormRegister {
   username: string;
   name: string;
+  password: string;
+}
+
+export interface IFormLogin {
+  username: string;
   password: string;
 }
 export interface Responses {
@@ -8,10 +15,10 @@ export interface Responses {
 }
 
 export interface SummarizeInput {
-  query: string;
+  query: Option;
   type: string;
 }
 
 export interface ResultForm {
-  data: Responses[]
+  data: Responses[];
 }
