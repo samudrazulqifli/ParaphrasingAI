@@ -1,3 +1,5 @@
+import { Option } from "../DataCardText";
+
 export interface IFormRegister {
   username: string;
   name: string;
@@ -13,7 +15,7 @@ export interface Responses {
 }
 
 export interface SummarizeInput {
-  query: string;
+  query: Option;
   type: string;
 }
 

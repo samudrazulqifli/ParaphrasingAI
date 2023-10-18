@@ -6,7 +6,7 @@ import Iklan from "../components/Iklan";
 import IdentifyTheMainPoint from "../components/textsummarization/IdentifyTheMainPoint";
 import ProduceHigher from "../components/textsummarization/ProduceHigher";
 import RevampLengthly from "../components/textsummarization/RevampLengthly";
-import { DataCardTextProps } from "../interface/DataCardText";
+import { DataCardTextProps, Option } from "../interface/DataCardText";
 import { DataHeaderTextProps } from "../interface/DataHeaderText";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { SummarizeInput } from "../interface/api/IFormInput";
@@ -17,7 +17,12 @@ import { useState } from "react";
 const TextSummarize = () => {
   const { register, handleSubmit } = useForm<SummarizeInput>();
   const [result, setResult] = useState<any>();
-
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [options, setOptions] = useState<Option>({
+    option1: "financial_report",
+    option2: "wikipedia_article",
+    option3: "academic_paper",
+  });
   const itemContent: DataHeaderTextProps[] = [
     {
       title1: "Text Summarization",
@@ -27,6 +32,7 @@ const TextSummarize = () => {
     },
   ];
 
+
   const cardContent: DataCardTextProps[] = [
     {
       title1: "Your Text",
@@ -35,6 +41,8 @@ const TextSummarize = () => {
       link: "/",
       form: { ...register("query") },
       data: result,
+      option: options,
+      selected:{...register("type")}
     },
   ];
 
@@ -55,7 +63,9 @@ const TextSummarize = () => {
               button={cardContent[0].button}
               form={cardContent[0].form}
               data={result}
-            ></CardText>
+              option={options}
+              selected={cardContent[0].selected}
+              ></CardText>
           </div>
         </form>
       </div>

@@ -1,15 +1,18 @@
 import { useState, useEffect } from "react";
 import { DataCardTextProps } from "../interface/DataCardText";
 import { ResultForm } from "../interface/api/IFormInput";
+// import { register } from "../redux/feature/auth";
 
 type Props = DataCardTextProps;
 
 const CardText: React.FC<Props> = (props: any) => {
-  const { title1, title2, button, form, data } = props as DataCardTextProps;
+  const { title1, title2, button, form, data, option, selected } =
+    props as DataCardTextProps;
   const [count, setCount] = useState(0);
   const [result, setResult] = useState(0);
   const [value, setValue] = useState<string>();
-
+  // const [selectedOption, setSelectedOption] = useState();
+  // const select:any[]  = props
   useEffect(() => {
     console.log(data);
     resultChange(data as ResultForm);
@@ -33,8 +36,13 @@ const CardText: React.FC<Props> = (props: any) => {
         setResult(words);
       });
     }
-    console.log(result);
   };
+  // const handleOptionClick = (option: any) => {
+  //   setSelectedOption(option);
+  //   // select.push(selectedOption)
+  // };
+  // console.log(selectedOption);
+  // console.log(select)
   return (
     <>
       <div className=" flex justify-center md:grid-cols-2 md:grid card rounded-md md:rounded-[20px] md:shadow-xl shadow-md w-[185px] h-[242px] bg-white md:w-[895px] md:h-[499px] ">
@@ -63,6 +71,13 @@ const CardText: React.FC<Props> = (props: any) => {
             className="resize-none text-black text-[5px] textarea-xs md:textarea-md w-[157px] md:w-[377px] h-[85px] md:h-[332px] border-[0.9px] rounded-sm md:rounded-[10px] bg-white placeholder:text-[5px] md:placeholder:text-[15px]"
             value={value}
           ></textarea>
+          <div className="dropdown top-[2%] absolute left-[80%]">
+            <select {...selected} >
+              <option value={option.option1}>{option.option1}</option>
+              <option value={option.option2}>{option.option2}</option>
+              <option value={option.option3}>{option.option3}</option>
+            </select>
+          </div>
         </div>
         <div className="w-full flex justify-center md:col-span-2 mt-[3px]">
           <button
