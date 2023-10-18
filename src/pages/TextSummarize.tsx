@@ -10,19 +10,25 @@ import { DataCardTextProps, Option } from "../interface/DataCardText";
 import { DataHeaderTextProps } from "../interface/DataHeaderText";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { SummarizeInput } from "../interface/api/IFormInput";
-import { textSummarize } from "../axios/TextSummariza";
+import { textSummarize } from "../axios/textSummarize.service";
 import { ResponseData } from "../interface/api/Response";
 import { useState } from "react";
 
 const TextSummarize = () => {
   const { register, handleSubmit } = useForm<SummarizeInput>();
   const [result, setResult] = useState<any>();
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [options, setOptions] = useState<Option>({
-    option1: "financial_report",
-    option2: "wikipedia_article",
-    option3: "academic_paper",
-  });
+  
+  const options : Option[] = [
+    {
+      option : "financial_report"
+    },
+    {
+      option : "wikipedia_article"
+    },
+    {
+      option : "academic_paper"
+    }
+  ] 
   const itemContent: DataHeaderTextProps[] = [
     {
       title1: "Text Summarization",
