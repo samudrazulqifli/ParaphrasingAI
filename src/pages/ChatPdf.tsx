@@ -1,12 +1,12 @@
 import CardListHomePage from "../components/CardListHomePage";
-import CardText from "../components/CardText";
+// import CardText from "../components/CardText";
 import Footer from "../components/Footer";
 import HeaderText from "../components/HeaderText";
 import Iklan from "../components/Iklan";
 import { DataHeaderTextProps } from "../interface/DataHeaderText";
 import { DataHomePageProps } from "../interface/DataHomePageProps";
-import ChatPage from "./ChatPage";
 import Chat from "../components/homepagelist/ChatPdf";
+import CardChat from "../components/chatpdf/CardChat";
 
 const ChatPdf = () => {
   const itemContent: DataHeaderTextProps[] = [
@@ -30,12 +30,12 @@ const ChatPdf = () => {
     <>
       <div>
         <div className="relative">
-          <div className=" hidden md:block">
+          <div className="">
             <div className="absolute m-auto mt-24 flex justify-center top-0 bottom-0 left-0 right-0">
-              <ChatPage />
+              <CardChat />
             </div>
           </div>
-          <div className="md:hidden block">
+          {/* <div className="md:hidden block">
             <div className="absolute m-auto mt-60 flex justify-center top-0 bottom-0 left-0 right-0">
               <CardText
                 title1={"Your Text"}
@@ -44,7 +44,7 @@ const ChatPdf = () => {
                 button={"Let's Go"}
               ></CardText>
             </div>
-          </div>
+          </div> */}
         </div>
         <div className="md:mb-[475px] mb-48">
           <HeaderText

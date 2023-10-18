@@ -1,16 +1,11 @@
 import { Link } from "react-router-dom";
 import logo from "../images/documentorai-05 3.svg";
-import nav from "../images/Group 94.svg";
-import { useAppSelector, useAppDispatch } from "../redux/feature/hooks";
-import { logout } from "../redux/feature/auth";
+import { useAppSelector } from "../redux/feature/hooks";
+import { ProfileModal } from "./modal/ProfileModal";
+import OptionMenuModal from "./modal/OptionMenuModal";
 
 const NavbarMenu = () => {
-  const { isLoggedIn, username } = useAppSelector((state) => state.auth);
-  const dispatch = useAppDispatch();
-
-  const logoutUser = () => {
-    dispatch(logout());
-  };
+  const { isLoggedIn } = useAppSelector((state) => state.auth);
 
   return (
     <>
@@ -53,17 +48,9 @@ const NavbarMenu = () => {
               </Link>
             </>
           ) : (
-            <button
-              type="button"
-              className="inset-y-0 flex items-center mr-[10.49px] border-none focus:outline-none"
-              onClick={() => logoutUser()}
-            >
-              Hi {username}
-            </button>
+            <ProfileModal />
           )}
-          <button className="md:inline-block lg:inline-block btn-xs border-none">
-            <img src={nav} className="lg:hidden md:hidden" alt="nav" />
-          </button>
+          <OptionMenuModal />
         </div>
       </div>
     </>

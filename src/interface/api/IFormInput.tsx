@@ -10,6 +10,11 @@ export interface IFormLogin {
   username: string;
   password: string;
 }
+
+export interface IFormDelete {
+  uuid: string;
+}
+
 export interface Responses {
   text: string;
 }
@@ -21,4 +26,10 @@ export interface SummarizeInput {
 
 export interface ResultForm {
   data: Responses[];
+}
+
+export interface IFormPassword {
+  oldPassword: string;
+  newPassword: string;
+  uuid: string;
 }
