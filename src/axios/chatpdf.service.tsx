@@ -61,10 +61,24 @@ const registerBookByUploadFIle = async (body: RegisterByUpload, cb: any) => {
   }
 };
 
+const getListBook = () => {
+  return axios
+    .post(URL + "book?skip=0&limit=3", {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: localStorage.token,
+      },
+    })
+    .then((response) => {
+      return response.data;
+    });
+};
+
 const chatpdf = {
   registerQuestion,
   registerQuetionByURL,
   registerBookByUploadFIle,
+  getListBook,
 };
 
 export default chatpdf;

@@ -3,7 +3,7 @@ import imgPDF from "../../assets/images/uploaded_pdf.png";
 import imgClose from "../../assets/images/close.png";
 import { logout } from "../../redux/feature/auth";
 import { useAppDispatch, useAppSelector } from "../../redux/feature/hooks";
-import { IFormDelete, IFormPassword } from "../../interface/api/IFormInput";
+import { IFormDelete } from "../../interface/api/IFormInput";
 import user from "../../axios/user.service";
 import FormChangePassword from "./FormChangePassword";
 
@@ -59,7 +59,7 @@ export const ProfileModal = () => {
                 <button
                   type="button"
                   onClick={() => setShowModal(false)}
-                  className="p-0 md:h-[22.64px] h-[15px] md:w-[22.64px] w-[15px] inset-y-0 border-none focus:outline-none absolute md:top-[5.22px] top-[10px] md:right-[18.39px] right-[7.78px]"
+                  className="p-0 md:h-[22.64px] h-[15px] md:w-[22.64px] w-[15px] inset-y-0 border-none focus:outline-none absolute md:top-[20px] top-[10px] md:right-[18.39px] right-[7.78px]"
                 >
                   <img src={imgClose} alt="" />
                 </button>
@@ -88,7 +88,9 @@ export const ProfileModal = () => {
                   <img src={imgPDF} className="w-[25%] h-[30%]" alt="" />
                 </div>
                 <div className="text-black border-2 border-[#d9d9d9] rounded-md mx-[3vw] mt-[3%] mb-[10%] p-[2%]">
-                  <div className="text-[#222222E5] md:text-[1.4vw] text-[3vw]">Device</div>
+                  <div className="text-[#222222E5] md:text-[1.4vw] text-[3vw]">
+                    Device
+                  </div>
                   <button
                     type="button"
                     className="p-0 text-[#222222E5] md:text-[1.2vw] text-[3vw] border-none focus:outline-none"

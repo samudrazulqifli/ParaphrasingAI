@@ -6,16 +6,18 @@ import Swal from "sweetalert2";
 const URL = "https://api.documentorai.com/";
 
 const changePassword = async (body: IFormPassword, cb: any) => {
+  console.log(body)
   try {
     const result = await axios({
-      method: "POST",
-      url: URL + "book/question",
+      method: "PATCH",
+      url: URL + "account",
       data: body,
       headers: {
         Authorization: localStorage.token,
       },
     });
 
+    console.log(result);
     cb(result.data.data);
   } catch (error) {
     console.log(error);

@@ -43,7 +43,7 @@ const HeaderPdfView = ({
           >
             <img src={zoomInImg} alt="" className="w-[11px]" />
           </button>
-          <div className="h-[18px] w-[32px] bg-[#ECECEC] rounded-[2px]">
+          <div className="h-[18px] px-2 bg-[#ECECEC] rounded-[2px]">
             <div className="text-[12px] font-medium text-[#5A5A5A] text-center">
               {Object.entries(visiblePages)
                 .filter(([_, value]) => value)

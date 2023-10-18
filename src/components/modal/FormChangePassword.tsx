@@ -3,9 +3,11 @@ import imgClose from "../../assets/images/close.png";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { IFormPassword } from "../../interface/api/IFormInput";
 import user from "../../axios/user.service";
+import { useAppSelector } from "../../redux/feature/hooks";
 
 const FormChangePassword = ({ visible, setVisible }: any) => {
   const { register, handleSubmit } = useForm<IFormPassword>();
+  const { uuid } = useAppSelector((state) => state.auth);
 
   useEffect(() => {
     if (visible == false) {
@@ -17,7 +19,10 @@ const FormChangePassword = ({ visible, setVisible }: any) => {
   }, [visible]);
 
   const onSubmit: SubmitHandler<IFormPassword> = (data) => {
-    user.changePassword(data, (result) => {});
+    data.uuid = uuid!;
+    user.changePassword(data, () => {
+      setVisible(false);
+    });
   };
 
   return (
@@ -60,13 +65,10 @@ const FormChangePassword = ({ visible, setVisible }: any) => {
                     Cancel
                   </button>
                   <button
-                    type="button"
-                    onClick={() => {
-                      setVisible(false);
-                    }}
+                    type="submit"
                     className="text-white bg-[#54595E] font-medium md:w-[90.53px] w-[35.99px] md:h-[29.96px] h-[11.99px] md:rounded-[3.94px] rounded-[0.31px] border-[0.79px] border-[#343434] md:text-[9.45px] text-[3.76px] inset-y-0 right-0 focus:border-[#343434] hover:border-[#343434] hover:ring-0 focus:ring-0 focus:outline-none"
                   >
-                    Show PDF
+                    Change Password
                   </button>
                 </div>
               </form>
