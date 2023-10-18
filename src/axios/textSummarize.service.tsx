@@ -12,9 +12,9 @@ const textSummarize = async (data: SummarizeInput, cb: any) => {
         Authorization: localStorage.token,
       },
     });
-
     cb(result.data);
-    
+    console.log(data.type)
+    console.log(result.data)
   } catch (error) {
     console.log(error);
   }

@@ -7,18 +7,44 @@ import ParapharsingDefine from "../components/ParapharsingDefine";
 import TextParaphrase from "../components/homepagelist/TextParaphrase";
 import FunctioningParaphrase from "../components/textparaphrase/FunctioningParaphrase";
 import ReceiveDataDriven from "../components/textparaphrase/ReceiveDataDriven";
-import { DataCardTextProps } from "../interface/DataCardText";
+import { useState } from "react";
+import { DataCardTextProps, Option } from "../interface/DataCardText";
 import { DataHeaderTextProps } from "../interface/DataHeaderText";
 import { DataHomePageProps } from "../interface/DataHomePageProps";
 import { DataTextParapharsingDefine } from "../interface/DataTextParapharsingDefine";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { ParaphraseInput } from "../interface/api/IFormInput";
+import { ResponseData } from "../interface/api/Response";
+import { textParaphrase } from "../axios/textParphrase.service";
 
 const TextParapharse = () => {
+  const { register, handleSubmit } = useForm<ParaphraseInput>();
+  const [result, setResult] = useState<any>();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const options : Option[] = [
+    {
+      option : "general"
+    },
+    {
+      option : "casual"
+    },
+    {
+      option : "formal"
+    },
+    {
+      option : "short"
+    }
+  ] 
   const cardContent: DataCardTextProps[] = [
     {
       title1: "Your Text",
       title2: "Your Idea",
       button: "Improved",
       link: "/",
+      form: { ...register("query") },
+      data: result,
+      option: options,
+      selected: { ...register("style") },
     },
   ];
   const itemContent: DataHeaderTextProps[] = [
@@ -44,17 +70,27 @@ const TextParapharse = () => {
         "To enhance the effectiveness of oyur communication. The tool will:\n• Condense and reorganize sentences\n• Revise and tailor sentences as needed\n• Offer three distinct rephrased versions for any concept\n• Craft text that sounds natural to a native English audience.",
     },
   ];
+  const onSubmit: SubmitHandler<ParaphraseInput> = (value) =>
+    textParaphrase(value, (e: ResponseData) => {
+      setResult(e);
+    });
   return (
     <>
       <div className="relative">
-        <div className="flex justify-center  m-auto mt-52 md:mt-[780px] left-0 right-0 top-0 bottom-0 absolute">
-          <CardText
-            title1={cardContent[0].title1}
-            title2={cardContent[0].title2}
-            link={cardContent[0].link}
-            button={cardContent[0].button}
-          ></CardText>
-        </div>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="flex justify-center  m-auto mt-52 md:mt-[780px] left-0 right-0 top-0 bottom-0 absolute">
+            <CardText
+              title1={cardContent[0].title1}
+              title2={cardContent[0].title2}
+              link={cardContent[0].link}
+              button={cardContent[0].button}
+              form={cardContent[0].form}
+              data={result}
+              option={options}
+              selected={cardContent[0].selected}
+            ></CardText>
+          </div>
+        </form>
       </div>
       <div className="mb-40 md:mb-68">
         <HeaderText

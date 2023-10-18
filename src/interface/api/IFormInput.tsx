@@ -24,10 +24,23 @@ export interface SummarizeInput {
   type: string;
 }
 
+export interface ParaphraseInput {
+  query: string;
+  style: Option;
+}
+
+export interface ImprovementInput {
+  query: string;
+  intent: string
+}
+
 export interface ResultForm {
   data: Responses[];
 }
 
+export interface ResultForm2 {
+  suggestions: Responses[];
+}
 export interface IFormPassword {
   oldPassword: string;
   newPassword: string;
