@@ -3,12 +3,30 @@ import logo from "../images/documentorai-05 3.svg";
 import { useAppSelector } from "../redux/feature/hooks";
 import { ProfileModal } from "./modal/ProfileModal";
 import OptionMenuModal from "./modal/OptionMenuModal";
+import { useEffect, useState } from "react";
+import LoginModal from "./modal/LoginModal";
+import RegisterModal from "./modal/RegisterModal";
 
 const NavbarMenu = () => {
   const { isLoggedIn } = useAppSelector((state) => state.auth);
+  const [showLogin, setShowLogin] = useState(false);
+  const [showRegister, setShowRegister] = useState(false);
+  const [noLoginThenCloseModal, setNoLoginThenCloseModal] = useState(false);
+
+  useEffect(() => {
+    if (!isLoggedIn && !noLoginThenCloseModal) {
+      setShowLogin(!isLoggedIn);
+    }
+  }, [isLoggedIn]);
 
   return (
     <>
+      <LoginModal
+        showModal={showLogin}
+        setShowModal={setShowLogin}
+        setNoLoginThenCloseModal={setNoLoginThenCloseModal}
+      />
+      <RegisterModal showModal={showRegister} setShowModal={setShowRegister} />
       <div className="flex absolute justify-between w-full mt-[17px]">
         <Link to={"/"} className="ml-[28px]">
           <img
@@ -34,18 +52,18 @@ const NavbarMenu = () => {
         <div className="flex items-center gap-3 mr-[20px]">
           {!isLoggedIn ? (
             <>
-              <Link
-                to={"/login"}
+              <button
+                onClick={() => setShowLogin(true)}
                 className="md:hover:border-[1.4px] border-[1px] p-1 md:p-5 text-[6px] h-[11.5px] flex items-center rounded-sm lg:rounded-lg capitalize text-white md:h-[20px] md:text-[10px] lg:text-[15px] lg:h-[45px] "
               >
                 Log in
-              </Link>
-              <Link
-                to={"/register"}
+              </button>
+              <button
+                onClick={() => setShowRegister(true)}
                 className="md:hover:border-[1.4px] border-[1px] p-1 md:p-5 text-[6px] h-[11.5px] flex items-center rounded-sm lg:rounded-lg capitalize text-white mr-[1px] lg:mr-[72px] md:h-[20px] md:text-[10px] lg:text-[15px] lg:h-[45px] "
               >
                 Sign up
-              </Link>
+              </button>
             </>
           ) : (
             <ProfileModal />

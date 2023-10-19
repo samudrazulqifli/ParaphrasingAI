@@ -1,10 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../store/store";
 
-const initialState = {};
+const numberPdf = 0;
+
+const initialState = {
+  numberList = 0
+};
 
 const pdfSlice = createSlice({
-  name: "message",
+  name: "pdf",
   initialState,
   reducers: {
     setMessage: (_, action) => {

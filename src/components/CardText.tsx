@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { DataCardTextProps } from "../interface/DataCardText";
 import { ResultForm, ResultForm2 } from "../interface/api/IFormInput";
+import ComponentReactLoading from "./loading/ComponentReactLoading";
 // import { register } from "../redux/feature/auth";
 
 type Props = DataCardTextProps;
@@ -11,6 +12,7 @@ const CardText: React.FC<Props> = (props: any) => {
   const [count, setCount] = useState(0);
   const [result, setResult] = useState(0);
   const [value, setValue] = useState<string>();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     resultChange(data as ResultForm);
@@ -73,6 +75,7 @@ const CardText: React.FC<Props> = (props: any) => {
             className="resize-none text-black text-[5px] textarea-xs md:textarea-md w-[157px] md:w-[377px] h-[85px] md:h-[332px] border-[0.9px] rounded-sm md:rounded-[10px] bg-white placeholder:text-[5px] md:placeholder:text-[15px]"
             value={value}
           ></textarea>
+          <ComponentReactLoading width={377} height={332} />
           <div>
             <select
               {...selected}

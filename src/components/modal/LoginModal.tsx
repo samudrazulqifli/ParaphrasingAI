@@ -1,0 +1,110 @@
+import { useEffect, useState } from "react";
+import imgClose from "../../assets/images/close.png";
+import { useNavigate } from "react-router-dom";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { IFormLogin } from "../../interface/api/IFormInput";
+import { login } from "../../redux/feature/auth";
+import { useAppDispatch } from "../../redux/feature/hooks";
+
+const LoginModal = ({
+  showModal,
+  setShowModal,
+  setNoLoginThenCloseModal,
+}: any) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IFormLogin>();
+  const navigation = useNavigate();
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (showModal == false) {
+      document.body.style.overflow = "scroll";
+    } else {
+      document.body.style.overflow = "hidden";
+    }
+    return () => {};
+  }, [showModal]);
+
+  const onSubmit: SubmitHandler<IFormLogin> = (data) => {
+    dispatch(login(data));
+    setShowModal(false);
+  };
+
+  return (
+    <>
+      {showModal ? (
+        <>
+          <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="w-[330px] h-[425.19px] mx-auto mt-[3%] px-[19px] bg-white rounded-md shadow-sm font-poppins relative"
+            >
+              <button
+                type="button"
+                onClick={() => {
+                  navigation("/");
+                  setShowModal(false);
+                  setNoLoginThenCloseModal(true);
+                }}
+                className="p-0 md:h-[22.64px] h-[9.02px] md:w-[22.64px] w-[8.96px] inset-y-0 border-none focus:outline-none absolute md:top-[5.22px] top-[2.01px] md:right-[18.39px] right-[7.78px]"
+              >
+                <img src={imgClose} alt="" />
+              </button>
+              <div className="text-[20px] text-center mt-[16px] mb-[66px] font-bold text-[#1C1C1C]">
+                Log in
+              </div>
+              <div className="text-[15.23px] font-bold text-[#1C1C1C] mb-[6.15px]">
+                Username
+              </div>
+              <input
+                {...register("username", { required: true })}
+                type="text"
+                placeholder="Enter Your Username"
+                className="w-full rounded-[3.17px] h-[42.52px] text-black border-[#8d8d8d] border-[1.27px] px-[9.52px] focus:outline-none"
+              />
+              <div className="text-[15.23px] font-bold text-[#1C1C1C] mt-[8.5px] mb-[5.89px]">
+                Password
+              </div>
+              <input
+                type="password"
+                placeholder="Enter Your Password"
+                className="w-full rounded-[3.17px] h-[42.52px] text-black border-[#8d8d8d] border-[1.27px] px-[9.52px] focus:outline-none"
+                {...register("password", { required: true })}
+              ></input>
+              {errors.password && <span>This field is required</span>}
+              <div className="flex items-center gap-x-[1.9px] mt-[8.5px] mb-[9.16px]">
+                <button className="bg-[#D9D9D9] rounded-[1.9px] w-[9.52px] h-[9.81px] bg-transparent font-bold p-0 border-none ring-0 focus:outline-none text-[15.23px]"></button>
+                <div className="text-[15.23px] text-[#1C1C1C] font-normal">
+                  Remember Me
+                </div>
+              </div>
+              <button
+                type="submit"
+                className="h-[42.52px] w-full rounded-[3.17px] bg-[#3495CE] text-white text-[15.23px] font-bold border-none ring-0 focus:outline-none"
+              >
+                Log in
+              </button>
+              <div className="text-[15.23px] text-[#1C1C1C] mt-[26.82px] font-normal text-center">
+                Don’t have an account?
+              </div>
+              <div className="grid">
+                <button
+                  onClick={() => navigation("/register", { replace: true })}
+                  className="text-[#3495CE] justify-self-center text-center bg-transparent font-bold p-0 border-none ring-0 focus:outline-none text-[15.23px]"
+                >
+                  Sign up
+                </button>
+              </div>
+            </form>
+          </div>
+          <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+        </>
+      ) : null}
+    </>
+  );
+};
+
+export default LoginModal;
