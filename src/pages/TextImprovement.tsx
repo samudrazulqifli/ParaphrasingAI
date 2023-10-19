@@ -10,12 +10,14 @@ import { DataCardTextProps, Option } from "../interface/DataCardText";
 import { DataHeaderTextProps } from "../interface/DataHeaderText";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { ImprovementInput } from "../interface/api/IFormInput";
-import { textImprovement } from "../axios/textImprovement";
+import { textImprovement } from "../axios/textImprovement.service";
 import { ResponseData } from "../interface/api/Response";
+import Loading from "../components/loading";
 
 const TextImprovement = () => {
   const { register, handleSubmit } = useForm<ImprovementInput>();
   const [result, setResult] = useState<any>();
+  const [loading, setLoading] = useState<any>();
   const itemContent: DataHeaderTextProps[] = [
     {
       title1: "Text Improvement",
@@ -48,12 +50,15 @@ const TextImprovement = () => {
       data: result,
       option: options,
       selected: { ...register("intent") },
+      loading: loading,
     },
   ];
-  const onSubmit: SubmitHandler<ImprovementInput> = (value) =>
+  const onSubmit: SubmitHandler<ImprovementInput> = (value) => {
+    setLoading(<Loading />);
     textImprovement(value, (e: ResponseData) => {
       setResult(e);
     });
+  };
   return (
     <>
       <div className="relative">
@@ -68,6 +73,7 @@ const TextImprovement = () => {
               data={result}
               option={options}
               selected={cardContent[0].selected}
+              loading={cardContent[0].loading}
             ></CardText>
           </div>
         </form>

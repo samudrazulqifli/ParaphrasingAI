@@ -13,22 +13,25 @@ import { SummarizeInput } from "../interface/api/IFormInput";
 import { textSummarize } from "../axios/textSummarize.service";
 import { ResponseData } from "../interface/api/Response";
 import { useState } from "react";
+import Loading from "../components/loading";
 
 const TextSummarize = () => {
   const { register, handleSubmit } = useForm<SummarizeInput>();
   const [result, setResult] = useState<any>();
+  const [loading, setLoading] = useState<any>();
   
-  const options : Option[] = [
+
+  const options: Option[] = [
     {
-      option : "financial_report"
+      option: "financial_report",
     },
     {
-      option : "wikipedia_article"
+      option: "wikipedia_article",
     },
     {
-      option : "academic_paper"
-    }
-  ] 
+      option: "academic_paper",
+    },
+  ];
   const itemContent: DataHeaderTextProps[] = [
     {
       title1: "Text Summarization",
@@ -37,7 +40,6 @@ const TextSummarize = () => {
         "Simplify your content writing with our text summary generator.\n Transform your paragraphs, articles, and other long text into digestible\n and engaging copy in one click.",
     },
   ];
-
 
   const cardContent: DataCardTextProps[] = [
     {
@@ -48,15 +50,18 @@ const TextSummarize = () => {
       form: { ...register("query") },
       data: result,
       option: options,
-      selected:{...register("type")}
+      selected: { ...register("type") },
+      loading: loading,
     },
   ];
 
-  const onSubmit: SubmitHandler<SummarizeInput> = (value) =>
+  const onSubmit: SubmitHandler<SummarizeInput> = (value) => {
+    setLoading(<Loading/>);
     textSummarize(value, (e: ResponseData) => {
       setResult(e);
     });
-
+  };
+console.log(result)
   return (
     <>
       <div className="relative">
@@ -71,7 +76,8 @@ const TextSummarize = () => {
               data={result}
               option={options}
               selected={cardContent[0].selected}
-              ></CardText>
+              loading={cardContent[0].loading}
+            ></CardText>
           </div>
         </form>
       </div>
