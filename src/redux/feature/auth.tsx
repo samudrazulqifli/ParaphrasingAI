@@ -92,7 +92,9 @@ const authSlice = createSlice({
       state.uuid = null;
     });
   },
-  reducers: {},
+  reducers: {
+
+  },
 });
 
 export default authSlice.reducer;

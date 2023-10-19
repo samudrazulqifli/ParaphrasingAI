@@ -17,7 +17,6 @@ const changePassword = async (body: IFormPassword, cb: any) => {
       },
     });
 
-    console.log(result);
     cb(result.data.data);
   } catch (error) {
     console.log(error);

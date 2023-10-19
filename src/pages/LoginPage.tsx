@@ -26,10 +26,6 @@ const LoginPage = () => {
     }
   }, [auth]);
 
-  // useEffect(() => {
-  //   dispatch(clearMessage());
-  // }, [dispatch]);
-
   const navigation = useNavigate();
 
   const onSubmit: SubmitHandler<IFormLogin> = (data) => {
@@ -41,7 +37,7 @@ const LoginPage = () => {
       <div className="flex gap-8">
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="w-[330px] h-[425.19px] shadow-lg shadow-gray-900 px-[19px] font-poppins"
+          className="w-[330px] h-[425.19px] mx-auto mt-[3%] px-[19px] font-poppins"
         >
           <div className="text-[20px] text-center mt-[16px] mb-[66px] font-bold text-[#1C1C1C]">
             Log in
