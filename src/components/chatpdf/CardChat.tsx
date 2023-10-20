@@ -191,9 +191,9 @@ const CardChat = () => {
               handleDragOver(e)
             }
             onDrop={(e: React.DragEvent<HTMLDivElement>) => handleDrop(e)}
-            className="h-[936px] w-[895px] bg-white mx-auto rounded-[20px] shadow-md"
+            className="md:h-[936px] md:w-[895px] bg-white mx-auto rounded-[20px] shadow-md"
           >
-            <div className="grid grid-cols-2 justify-items-stretch divide-x-[2px] divide-[#D9D9D9]">
+            <div className="grid md:grid-cols-2 grid-cols-1 justify-items-stretch divide-x-[2px] divide-[#D9D9D9]">
               <div className="justify-self-end hidden md:block pr-[12px]">
                 <HeaderPdfView
                   fromFile={fromFile}

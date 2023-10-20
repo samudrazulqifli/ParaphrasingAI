@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import imgPDF from "../../assets/images/uploaded_pdf.png";
 import imgClose from "../../assets/images/close.png";
-import { logout, openProfileModal } from "../../redux/feature/auth";
+import { logout } from "../../redux/feature/auth";
 import { useAppDispatch, useAppSelector } from "../../redux/feature/hooks";
 import { IFormDelete } from "../../interface/api/IFormInput";
 import userService from "../../axios/user.service";
@@ -13,9 +13,7 @@ export const ProfileModal = () => {
   const [showModal, setShowModal] = useState(false);
   const [changePassword, setChangePassword] = useState(false);
   const [data, setData] = useState<ResponseListBook[]>([]);
-  const { username, uuid, isOpenProfile, numberBook } = useAppSelector(
-    (state) => state.auth
-  );
+  const { username, uuid } = useAppSelector((state) => state.auth);
 
   const logoutUser = () => {
     dispatch(logout());
