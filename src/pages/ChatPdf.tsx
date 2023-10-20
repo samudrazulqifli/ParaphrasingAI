@@ -7,6 +7,7 @@ import { DataHeaderTextProps } from "../interface/DataHeaderText";
 import { DataHomePageProps } from "../interface/DataHomePageProps";
 import Chat from "../components/homepagelist/ChatPdf";
 import CardChat from "../components/chatpdf/CardChat";
+import ChatBodyMobile from "../components/chatpdf/ChatBodyMobile";
 
 const ChatPdf = () => {
   const itemContent: DataHeaderTextProps[] = [
@@ -33,6 +34,7 @@ const ChatPdf = () => {
           <div className="">
             <div className="absolute m-auto mt-24 flex justify-center top-0 bottom-0 left-0 right-0">
               <CardChat />
+              {/* <ChatBodyMobile /> */}
             </div>
           </div>
           {/* <div className="md:hidden block">
@@ -61,7 +63,7 @@ const ChatPdf = () => {
           childComp={<Chat />}
         ></CardListHomePage>
       </div>
-      <Iklan />
+      {/* <Iklan /> */}
       <Footer></Footer>
     </>
   );

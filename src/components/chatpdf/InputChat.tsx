@@ -17,7 +17,7 @@ const InputChat = ({
             className="block w-full text-black mx-[18px] pt-[10px] focus:outline-none bg-transparent pr-12"
             onChange={(e) => setMessage(e.target.value)}
             value={message}
-          ></input>
+          />
           <button
             type="button"
             onClick={() => registerQuestionChat()}
