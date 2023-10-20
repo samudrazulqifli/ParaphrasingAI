@@ -1,17 +1,24 @@
 import { useState, useEffect } from "react";
 import { DataCardTextProps } from "../interface/DataCardText";
 import { ResultForm, ResultForm2 } from "../interface/api/IFormInput";
-// import { register } from "../redux/feature/auth";
 
 type Props = DataCardTextProps;
 
 const CardText: React.FC<Props> = (props: any) => {
-  const { title1, title2, button, form, data, option, selected, loading } =
-    props as DataCardTextProps;
+  const {
+    title1,
+    title2,
+    button,
+    form,
+    data,
+    option,
+    selected,
+    loading,
+    status,
+  } = props as DataCardTextProps;
   const [count, setCount] = useState(0);
   const [result, setResult] = useState(0);
   const [value, setValue] = useState<string>();
-  // const [status, setStatus] = useState(false);
 
   useEffect(() => {
     resultChange(data as ResultForm);
@@ -43,10 +50,8 @@ const CardText: React.FC<Props> = (props: any) => {
       });
 
       setValue(updatedValue);
-      // setStatus(true)
     }
   };
-  console.log(value)
   return (
     <>
       <div className=" flex justify-center md:grid-cols-2 md:grid card rounded-md md:rounded-[20px] md:shadow-xl shadow-md w-[185px] h-[242px] bg-white md:w-[895px] md:h-[499px] ">
@@ -71,7 +76,7 @@ const CardText: React.FC<Props> = (props: any) => {
           <div className="text-[5px] md:text-[15px] md:mt-[310px] md:ml-[20px] font-medium absolute ml-[6px] mt-[77px] text-[#A7A7A7]">
             {result}/200
           </div>
-          {value===undefined ? (
+          {status === true ? (
             <>
               <textarea className="resize-none text-black text-[5px] textarea-xs md:textarea-md w-[157px] md:w-[377px] h-[85px] md:h-[332px] border-[0.9px] rounded-sm md:rounded-[10px] bg-white placeholder:text-[5px] md:placeholder:text-[15px]" />
               {loading}
@@ -79,14 +84,11 @@ const CardText: React.FC<Props> = (props: any) => {
           ) : (
             <textarea
               className="resize-none text-black text-[5px] textarea-xs md:textarea-md w-[157px] md:w-[377px] h-[85px] md:h-[332px] border-[0.9px] rounded-sm md:rounded-[10px] bg-white placeholder:text-[5px] md:placeholder:text-[15px]"
-              value={value}
+              defaultValue={value}
             />
           )}
-          <div>
-            <select
-              {...selected}
-              className="top-[2%] absolute left-[80%] bg-transparent text-black rounded-sm"
-            >
+          <div className="top-[2%] left-[55%]  absolute md:left-[80%]  text-[1vw]">
+            <select {...selected} className="bg-white text-black rounded-sm">
               {option.map((item, index) => (
                 <>
                   <option key={index} value={item.option}>

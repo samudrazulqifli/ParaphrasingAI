@@ -1,10 +1,9 @@
-import React from "react";
 import ReactLoading from "react-loading";
 
-const ComponentReactLoading = ({ height, width }: any) => {
+const ComponentReactLoading = ({ height, width, addClass }: any) => {
   return (
     <div
-      className={`w-[${width}px] h-[${height}px] grid justify-items-center content-center`}
+      className={`w-[${width}px] h-[${height}px] grid justify-items-center content-center ${addClass}`}
     >
       <ReactLoading
         type="spinningBubbles"

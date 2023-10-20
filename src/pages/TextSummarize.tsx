@@ -19,7 +19,7 @@ const TextSummarize = () => {
   const { register, handleSubmit } = useForm<SummarizeInput>();
   const [result, setResult] = useState<any>();
   const [loading, setLoading] = useState<any>();
-  
+  const [status, setStatus] = useState<boolean>(false);
 
   const options: Option[] = [
     {
@@ -52,16 +52,19 @@ const TextSummarize = () => {
       option: options,
       selected: { ...register("type") },
       loading: loading,
+      status: status,
     },
   ];
 
   const onSubmit: SubmitHandler<SummarizeInput> = (value) => {
-    setLoading(<Loading/>);
+    setStatus(true);
+    setLoading(<Loading />);
     textSummarize(value, (e: ResponseData) => {
       setResult(e);
+      setStatus(false);
     });
   };
-console.log(result)
+  console.log(result);
   return (
     <>
       <div className="relative">
@@ -77,6 +80,7 @@ console.log(result)
               option={options}
               selected={cardContent[0].selected}
               loading={cardContent[0].loading}
+              status={cardContent[0].status}
             ></CardText>
           </div>
         </form>

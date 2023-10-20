@@ -1,9 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../images/documentorai-05 3.svg";
 import { useAppSelector } from "../redux/feature/hooks";
 import { ProfileModal } from "./modal/ProfileModal";
 import OptionMenuModal from "./modal/OptionMenuModal";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import LoginModal from "./modal/LoginModal";
 import RegisterModal from "./modal/RegisterModal";
 
@@ -11,22 +11,20 @@ const NavbarMenu = () => {
   const { isLoggedIn } = useAppSelector((state) => state.auth);
   const [showLogin, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
-  const [noLoginThenCloseModal, setNoLoginThenCloseModal] = useState(false);
-
-  useEffect(() => {
-    if (!isLoggedIn && !noLoginThenCloseModal) {
-      setShowLogin(!isLoggedIn);
-    }
-  }, [isLoggedIn]);
+  const navigation = useNavigate();
 
   return (
     <>
       <LoginModal
-        showModal={showLogin}
-        setShowModal={setShowLogin}
-        setNoLoginThenCloseModal={setNoLoginThenCloseModal}
+        showLogin={showLogin}
+        setShowLogin={setShowLogin}
+        setShowRegister={setShowRegister}
       />
-      <RegisterModal showModal={showRegister} setShowModal={setShowRegister} />
+      <RegisterModal
+        showRegister={showRegister}
+        setShowRegister={setShowRegister}
+        setShowLogin={setShowLogin}
+      />
       <div className="flex absolute justify-between w-full mt-[17px]">
         <Link to={"/"} className="ml-[28px]">
           <img
@@ -36,18 +34,38 @@ const NavbarMenu = () => {
           />
         </Link>
         <div className="hidden md:flex md:items-center lg:flex lg:items-center gap-4 lg:font-medium md:text-[10px] lg:text-[16px]">
-          <Link to="/chatPdf" className="text-white">
+          <button
+            onClick={() => {
+              isLoggedIn ? navigation("/chatPdf") : setShowLogin(true);
+            }}
+            className="text-white"
+          >
             Chat Pdf
-          </Link>
-          <Link to="/textParapharse" className="text-white">
+          </button>
+          <button
+            onClick={() => {
+              isLoggedIn ? navigation("/textParapharse") : setShowLogin(true);
+            }}
+            className="text-white"
+          >
             Text Paraphrase
-          </Link>
-          <Link to="/textSummarize" className="text-white">
+          </button>
+          <button
+            onClick={() => {
+              isLoggedIn ? navigation("/textSummarize") : setShowLogin(true);
+            }}
+            className="text-white"
+          >
             Text Summarize
-          </Link>
-          <Link to="/textImprovement" className="text-white">
+          </button>
+          <button
+            onClick={() => {
+              isLoggedIn ? navigation("/textImprovement") : setShowLogin(true);
+            }}
+            className="text-white"
+          >
             Text Improvement
-          </Link>
+          </button>
         </div>
         <div className="flex items-center gap-3 mr-[20px]">
           {!isLoggedIn ? (
