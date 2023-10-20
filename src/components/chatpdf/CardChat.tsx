@@ -113,6 +113,7 @@ const CardChat = () => {
     }
 
     async function get() {
+      setLoadingChat(true);
       console.log(src);
       const inputForm: RegisterQuestion = {
         src: src,
@@ -121,6 +122,7 @@ const CardChat = () => {
       };
       await chatpdf.registerQuestion(inputForm, (result: ResponseQuestion) => {
         setChatData(result.content, "server");
+        setLoadingChat(false);
       });
     }
   }, [query]);
@@ -182,8 +184,8 @@ const CardChat = () => {
 
   return (
     <>
-      <div className="absolute top-[582px] w-full">
-        <div className="relative">
+      <div className="absolute top-[582px] w-min">
+        <div className="">
           <div
             onDragOver={(e: React.DragEvent<HTMLDivElement>) =>
               handleDragOver(e)
@@ -215,15 +217,12 @@ const CardChat = () => {
                 />
               </div>
               <div className="justify-self-start relative pl-[12px] mt-[72px]">
-                {loadingChat ? (
-                  <ComponentReactLoading width={410} height={726} />
-                ) : (
-                  <ChatBody dataChat={dataChat} ref={messagesColumnRef} />
-                )}
+                <ChatBody dataChat={dataChat} ref={messagesColumnRef} />
                 <InputChat
                   message={message}
                   setMessage={setMessage}
                   registerQuestionChat={registerQuestionChat}
+                  loading={loadingChat}
                 />
               </div>
             </div>

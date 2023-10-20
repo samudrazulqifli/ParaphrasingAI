@@ -7,7 +7,7 @@ const ChatBody: React.FC<BodyChat> = (props: BodyChat) => {
     <>
       <div
         ref={ref}
-        className="flex overflow-auto flex-col gap-y-[12px] w-[410px] h-[726px] border-[#9cb4c6] border-[1px] rounded-[10px] px-[12px] pt-[23px]"
+        className="flex overflow-auto flex-col gap-y-[12px] w-[410px] h-[726px] pb-14 border-[#9cb4c6] border-[1px] rounded-[10px] px-[12px] pt-[23px]"
       >
         {dataChat?.length !== 0
           ? dataChat?.map((item, index) => {
