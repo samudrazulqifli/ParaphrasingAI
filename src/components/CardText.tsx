@@ -46,7 +46,7 @@ const CardText: React.FC<Props> = (props: any) => {
       // setStatus(true)
     }
   };
-  console.log(value);
+  console.log(value)
   return (
     <>
       <div className=" flex justify-center md:grid-cols-2 md:grid card rounded-md md:rounded-[20px] md:shadow-xl shadow-md w-[185px] h-[242px] bg-white md:w-[895px] md:h-[499px] ">
@@ -71,7 +71,7 @@ const CardText: React.FC<Props> = (props: any) => {
           <div className="text-[5px] md:text-[15px] md:mt-[310px] md:ml-[20px] font-medium absolute ml-[6px] mt-[77px] text-[#A7A7A7]">
             {result}/200
           </div>
-          {!value ? (
+          {value===undefined ? (
             <>
               <textarea className="resize-none text-black text-[5px] textarea-xs md:textarea-md w-[157px] md:w-[377px] h-[85px] md:h-[332px] border-[0.9px] rounded-sm md:rounded-[10px] bg-white placeholder:text-[5px] md:placeholder:text-[15px]" />
               {loading}
