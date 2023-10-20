@@ -14,7 +14,7 @@ export const register = createAsyncThunk(
   async (body: IFormRegister, thunkAPI) => {
     try {
       const response = await AuthService.registerUser(body);
-      thunkAPI.dispatch(setMessage('Register Success'));
+      thunkAPI.dispatch(setMessage("Register Success"));
       return response.data;
     } catch (error) {
       const message =
