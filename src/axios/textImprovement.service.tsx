@@ -13,8 +13,6 @@ const textImprovement = async (data: ImprovementInput, cb: any) => {
         }
     });
     cb(result.data.data)
-    console.log(data.intent)
-    console.log(result)
   } catch (erorr) {
     console.log(console.error());
   }

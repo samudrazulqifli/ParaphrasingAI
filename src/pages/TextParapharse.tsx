@@ -16,35 +16,25 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { ParaphraseInput } from "../interface/api/IFormInput";
 import { ResponseData } from "../interface/api/Response";
 import { textParaphrase } from "../axios/textParphrase.service";
+import Loading from "../components/loading";
 
 const TextParapharse = () => {
   const { register, handleSubmit } = useForm<ParaphraseInput>();
   const [result, setResult] = useState<any>();
+  const [loading, setLoading] = useState<any>();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const options : Option[] = [
+  const options: Option[] = [
     {
-      option : "general"
+      option: "general",
     },
     {
-      option : "casual"
+      option: "casual",
     },
     {
-      option : "formal"
+      option: "formal",
     },
     {
-      option : "short"
-    }
-  ] 
-  const cardContent: DataCardTextProps[] = [
-    {
-      title1: "Your Text",
-      title2: "Your Idea",
-      button: "Improved",
-      link: "/",
-      form: { ...register("query") },
-      data: result,
-      option: options,
-      selected: { ...register("style") },
+      option: "short",
     },
   ];
   const itemContent: DataHeaderTextProps[] = [
@@ -70,10 +60,26 @@ const TextParapharse = () => {
         "To enhance the effectiveness of oyur communication. The tool will:\n• Condense and reorganize sentences\n• Revise and tailor sentences as needed\n• Offer three distinct rephrased versions for any concept\n• Craft text that sounds natural to a native English audience.",
     },
   ];
-  const onSubmit: SubmitHandler<ParaphraseInput> = (value) =>
+  const cardContent: DataCardTextProps[] = [
+    {
+      title1: "Your Text",
+      title2: "Summary",
+      button: "Summarize",
+      link: "/",
+      form: { ...register("query") },
+      data: result,
+      option: options,
+      selected: { ...register("style") },
+      loading: loading,
+    },
+  ];
+
+  const onSubmit: SubmitHandler<ParaphraseInput> = (value) => {
+    setLoading(<Loading/>);
     textParaphrase(value, (e: ResponseData) => {
       setResult(e);
     });
+  };
   return (
     <>
       <div className="relative">
@@ -88,6 +94,7 @@ const TextParapharse = () => {
               data={result}
               option={options}
               selected={cardContent[0].selected}
+              loading={cardContent[0].loading}
             ></CardText>
           </div>
         </form>
