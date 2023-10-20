@@ -1,6 +1,12 @@
 import imgSend from "../../assets/images/btn_send.png";
+import ComponentReactLoading from "../loading/ComponentReactLoading";
 
-const InputChat = ({ message, setMessage, registerQuestionChat }: any) => {
+const InputChat = ({
+  message,
+  setMessage,
+  registerQuestionChat,
+  loading,
+}: any) => {
   return (
     <>
       <div className="absolute bottom-[6px] right-[20px]">
@@ -19,6 +25,13 @@ const InputChat = ({ message, setMessage, registerQuestionChat }: any) => {
           >
             <img src={imgSend} className="h-[27px] w-[27px]"></img>
           </button>
+          {loading ? (
+            <ComponentReactLoading
+              width={100}
+              height={100}
+              addClass={"absolute right-0 bottom-[15%]"}
+            />
+          ) : null}
         </div>
       </div>
     </>

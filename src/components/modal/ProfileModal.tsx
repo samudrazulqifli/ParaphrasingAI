@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
 import imgPDF from "../../assets/images/uploaded_pdf.png";
 import imgClose from "../../assets/images/close.png";
-import { logout } from "../../redux/feature/auth";
+import { logout, openProfileModal } from "../../redux/feature/auth";
 import { useAppDispatch, useAppSelector } from "../../redux/feature/hooks";
 import { IFormDelete } from "../../interface/api/IFormInput";
 import userService from "../../axios/user.service";
 import FormChangePassword from "./FormChangePassword";
+import { ResponseListBook } from "../../interface/api/Response";
 
 export const ProfileModal = () => {
   const dispatch = useAppDispatch();
   const [showModal, setShowModal] = useState(false);
   const [changePassword, setChangePassword] = useState(false);
+  const [data, setData] = useState<ResponseListBook[]>([]);
   const { username, uuid, isOpenProfile, numberBook } = useAppSelector(
     (state) => state.auth
   );
@@ -34,15 +36,10 @@ export const ProfileModal = () => {
   };
 
   useEffect(() => {
-    if (!isOpenProfile) {
-      userService.getListBook(0, 3, (result) => {
-        dispatch()
-        console.log(result)
-      })
-    }
-  }, [isOpenProfile]);
-
-
+    userService.getListBook(0, 3, (result: ResponseListBook[]) => {
+      setData(result);
+    });
+  }, [data]);
 
   useEffect(() => {
     if (showModal == false) {
@@ -98,7 +95,18 @@ export const ProfileModal = () => {
                 </div>
                 <div className="text-black border-2 border-[#d9d9d9] rounded-md mt-[3%] mx-[3vw] p-[2%]">
                   <div className="text-black">PDF Uploaded</div>
-                  <img src={imgPDF} className="w-[25%] h-[30%]" alt="" />
+                  <div className="flex">
+                    {data.map((_, idx) => {
+                      return (
+                        <img
+                          key={idx.toString()}
+                          src={imgPDF}
+                          className="w-[25%] h-[30%]"
+                          alt=""
+                        />
+                      );
+                    })}
+                  </div>
                 </div>
                 <div className="text-black border-2 border-[#d9d9d9] rounded-md mx-[3vw] mt-[3%] mb-[10%] p-[2%]">
                   <div className="text-[#222222E5] md:text-[1.4vw] text-[3vw]">
