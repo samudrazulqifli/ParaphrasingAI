@@ -4,14 +4,16 @@ import imgClose from "../../assets/images/close.png";
 import { logout } from "../../redux/feature/auth";
 import { useAppDispatch, useAppSelector } from "../../redux/feature/hooks";
 import { IFormDelete } from "../../interface/api/IFormInput";
-import user from "../../axios/user.service";
+import userService from "../../axios/user.service";
 import FormChangePassword from "./FormChangePassword";
 
 export const ProfileModal = () => {
   const dispatch = useAppDispatch();
   const [showModal, setShowModal] = useState(false);
   const [changePassword, setChangePassword] = useState(false);
-  const { username, uuid } = useAppSelector((state) => state.auth);
+  const { username, uuid, isOpenProfile, numberBook } = useAppSelector(
+    (state) => state.auth
+  );
 
   const logoutUser = () => {
     dispatch(logout());
@@ -23,13 +25,23 @@ export const ProfileModal = () => {
       const input: IFormDelete = {
         uuid: uuid,
       };
-      await user.deleteAccount(input, (result: string) => {
+      await userService.deleteAccount(input, (result: string) => {
         if (result == "OK") {
           logoutUser();
         }
       });
     }
   };
+
+  useEffect(() => {
+    if (!isOpenProfile) {
+      userService.getListBook(0, 3, (result) => {
+        dispatch()
+      })
+    }
+  }, [isOpenProfile]);
+
+
 
   useEffect(() => {
     if (showModal == false) {

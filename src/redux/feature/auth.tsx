@@ -14,7 +14,7 @@ export const register = createAsyncThunk(
   async (body: IFormRegister, thunkAPI) => {
     try {
       const response = await AuthService.registerUser(body);
-      thunkAPI.dispatch(setMessage('Register Success'));
+      thunkAPI.dispatch(setMessage("Register Success"));
       return response.data;
     } catch (error) {
       const message =
@@ -59,20 +59,46 @@ const initialState = user
       isLoggedIn: true,
       username: decodeToken(user).username,
       uuid: decodeToken(user).uuid,
+      loading: false,
+      finish: false,
+      numberBook: 0,
+      isOpenProfile: false,
     }
-  : { isLoggedIn: false, username: null, uuid: null };
+  : {
+      isLoggedIn: false,
+      username: null,
+      uuid: null,
+      loading: false,
+      finish: false,
+      numberBook: 0,
+      isOpenProfile: false,
+    };
 
 const authSlice = createSlice({
   name: "auth",
   initialState,
   extraReducers: (builder) => {
+    builder.addCase(register.pending, (state) => {
+      state.loading = true;
+      state.finish = false;
+    });
     builder.addCase(register.fulfilled, (state) => {
+      state.loading = false;
+      state.finish = true;
       state.isLoggedIn = false;
     });
     builder.addCase(register.rejected, (state) => {
+      state.loading = false;
+      state.finish = true;
       state.isLoggedIn = false;
     });
+    builder.addCase(login.pending, (state) => {
+      state.loading = true;
+      state.finish = false;
+    });
     builder.addCase(login.fulfilled, (state, action) => {
+      state.finish = true;
+      state.loading = false;
       state.isLoggedIn = true;
       if (action.payload.username) {
         state.username = action.payload.username;
@@ -82,6 +108,8 @@ const authSlice = createSlice({
       }
     });
     builder.addCase(login.rejected, (state) => {
+      state.finish = true;
+      state.loading = false;
       state.isLoggedIn = false;
       state.username = null;
       state.uuid = null;
@@ -90,9 +118,17 @@ const authSlice = createSlice({
       state.isLoggedIn = false;
       state.username = null;
       state.uuid = null;
+      state.isOpenProfile = false;
     });
   },
-  reducers: {},
+  reducers: {
+    openProfileModal: (state, payload) => {
+      state.numberBook = +payload;
+      state.isOpenProfile = true;
+    },
+  },
 });
+
+export const { openProfileModal } = authSlice.actions;
 
 export default authSlice.reducer;

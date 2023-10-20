@@ -17,6 +17,7 @@ import ChatBody from "./ChatBody";
 import InputChat from "./InputChat";
 import PdfView from "./PdfView";
 import HeaderPdfView from "./HeaderPdfView";
+import ComponentReactLoading from "../loading/ComponentReactLoading";
 
 const CardChat = () => {
   const [numPages, setNumPages] = useState<number>(0);
@@ -33,6 +34,8 @@ const CardChat = () => {
   const [fromFile, setFromFile] = useState(true);
   const ref = useRef<HTMLInputElement | null>(null);
   const [visiblePages, setVisiblePages] = useState({});
+  const [loadingPdf, setLoadingPdf] = useState(false);
+  const [loadingChat, setLoadingChat] = useState(false);
 
   const messagesColumnRef = useRef<HTMLDivElement>(null);
 
@@ -136,6 +139,7 @@ const CardChat = () => {
   }, [displayChat]);
 
   const registerQuestionByUpload = (input: File) => {
+    setLoadingPdf(true);
     if (input) {
       const inputForm: RegisterByUpload = {
         file: input,
@@ -146,6 +150,7 @@ const CardChat = () => {
         (response: ResponseUpload) => {
           setSrc(response.sourceId);
           setDisplayChat([]);
+          setLoadingPdf(false);
         }
       );
     }
@@ -160,6 +165,7 @@ const CardChat = () => {
 
   const registerQuestionByUrl = () => {
     if (url != "" && title != "") {
+      setLoadingPdf(true);
       const inputForm: RegisterQuestionByUrl = {
         url: url,
         title: title,
@@ -169,6 +175,7 @@ const CardChat = () => {
       chatpdf.registerQuetionByURL(inputForm, (response: ResponseUpload) => {
         setDisplayChat([]);
         setSrc(response.sourceId);
+        setLoadingPdf(false);
       });
     }
   };
@@ -204,10 +211,15 @@ const CardChat = () => {
                   numPages={numPages}
                   setPageVisibility={setPageVisibility}
                   zoom={zoom}
+                  loading={loadingPdf}
                 />
               </div>
               <div className="justify-self-start relative pl-[12px] mt-[72px]">
-                <ChatBody dataChat={dataChat} ref={messagesColumnRef} />
+                {loadingChat ? (
+                  <ComponentReactLoading width={410} height={726} />
+                ) : (
+                  <ChatBody dataChat={dataChat} ref={messagesColumnRef} />
+                )}
                 <InputChat
                   message={message}
                   setMessage={setMessage}

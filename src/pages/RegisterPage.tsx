@@ -18,7 +18,7 @@ const RegisterPage = () => {
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="w-[330px] h-[500px] shadow-lg shadow-gray-900 px-[19px] font-poppins">
+        <div className="w-[330px] h-[500px] mx-auto mt-[3%] px-[19px] font-poppins">
           <div className="text-[20px] text-center mt-[16px] mb-[66px] font-bold text-[#1C1C1C]">
             Sign up
           </div>
