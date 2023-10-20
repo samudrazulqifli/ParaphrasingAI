@@ -25,7 +25,7 @@ const NavbarMenu = () => {
         setShowRegister={setShowRegister}
         setShowLogin={setShowLogin}
       />
-      <div className="flex absolute justify-between w-full mt-[17px]">
+      <div className="flex relative justify-between w-full pt-[17px]">
         <Link to={"/"} className="ml-[28px]">
           <img
             src={logo}
@@ -33,7 +33,7 @@ const NavbarMenu = () => {
             className="w-[28px] lg:w-[82px] md:w-[45px] "
           />
         </Link>
-        <div className="hidden md:flex md:items-center lg:flex lg:items-center gap-4 lg:font-medium md:text-[10px] lg:text-[16px]">
+        <div className=" absolute left-[33%] top-[50%] hidden md:flex md:items-center lg:flex lg:items-center gap-4 lg:font-medium md:text-[10px] lg:text-[16px]">
           <button
             onClick={() => {
               isLoggedIn ? navigation("/chatPdf") : setShowLogin(true);
@@ -67,7 +67,7 @@ const NavbarMenu = () => {
             Text Improvement
           </button>
         </div>
-        <div className="flex items-center gap-3 mr-[20px]">
+        <div className="flex items-center gap-2">
           {!isLoggedIn ? (
             <>
               <button

@@ -39,13 +39,13 @@ const FileUrlModal = ({ setTitle, setUrl, setDownloadPdf }: any) => {
                 <input
                   type="text"
                   placeholder="title"
-                  className="border-2 text-black md:mx-7 mx-2 mt-9 px-3"
+                  className="border-2 bg-white text-black md:mx-7 mx-2 mt-9 px-3 rounded-sm"
                   onChange={(e) => setTitle(e.target.value)}
                 />
                 <input
                   type="text"
                   placeholder="url"
-                  className="border-2 text-black md:mx-7 mx-2 mt-3 px-3"
+                  className="border-2 bg-white text-black md:mx-7 mx-2 mt-3 px-3 rounded-sm"
                   onChange={(e) => setUrl(e.target.value)}
                 />
                 <div className="flex justify-center md:gap-[29.13px] gap-[11.66px] md:mb-[31.3px] mb-[12.5px] md:mt-3 mt-2">

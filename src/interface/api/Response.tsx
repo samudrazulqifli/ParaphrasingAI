@@ -6,3 +6,11 @@ export interface ResponseData {
   statusCode: number;
   data: Response[];
 }
+
+export interface ResponseListBook {
+  created_at: string;
+  src: string;
+  title: string;
+  updated_at: string;
+  userUuid: string;
+}

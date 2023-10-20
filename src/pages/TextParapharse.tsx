@@ -22,6 +22,7 @@ const TextParapharse = () => {
   const { register, handleSubmit } = useForm<ParaphraseInput>();
   const [result, setResult] = useState<any>();
   const [loading, setLoading] = useState<any>();
+  const [status, setStatus] = useState<boolean>(false);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const options: Option[] = [
     {
@@ -71,13 +72,16 @@ const TextParapharse = () => {
       option: options,
       selected: { ...register("style") },
       loading: loading,
+      status: status
     },
   ];
 
   const onSubmit: SubmitHandler<ParaphraseInput> = (value) => {
+    setStatus(true)
     setLoading(<Loading/>);
     textParaphrase(value, (e: ResponseData) => {
       setResult(e);
+      setStatus(false)
     });
   };
   return (
@@ -95,6 +99,7 @@ const TextParapharse = () => {
               option={options}
               selected={cardContent[0].selected}
               loading={cardContent[0].loading}
+              status={cardContent[0].status}
             ></CardText>
           </div>
         </form>

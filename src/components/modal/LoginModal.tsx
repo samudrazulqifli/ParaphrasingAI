@@ -62,7 +62,7 @@ const LoginModal = ({ showLogin, setShowLogin, setShowRegister }: any) => {
                 {...register("username", { required: true })}
                 type="text"
                 placeholder="Enter Your Username"
-                className="w-full rounded-[3.17px] h-[42.52px] text-black border-[#8d8d8d] border-[1.27px] px-[9.52px] focus:outline-none"
+                className="w-full rounded-[3.17px] h-[42.52px] bg-white text-black border-[#8d8d8d] border-[1.27px] px-[9.52px] focus:outline-none"
               />
               <div className="text-[15.23px] font-bold text-[#1C1C1C] mt-[8.5px] mb-[5.89px]">
                 Password
@@ -70,7 +70,7 @@ const LoginModal = ({ showLogin, setShowLogin, setShowRegister }: any) => {
               <input
                 type="password"
                 placeholder="Enter Your Password"
-                className="w-full rounded-[3.17px] h-[42.52px] text-black border-[#8d8d8d] border-[1.27px] px-[9.52px] focus:outline-none"
+                className="w-full rounded-[3.17px] h-[42.52px] bg-white text-black border-[#8d8d8d] border-[1.27px] px-[9.52px] focus:outline-none"
                 {...register("password", { required: true })}
               ></input>
               {errors.password && <span>This field is required</span>}
