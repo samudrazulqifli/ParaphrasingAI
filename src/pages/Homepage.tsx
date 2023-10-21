@@ -15,30 +15,34 @@ const Homepage = () => {
       subtitle: "Express our thoughts clearl an sincerel",
       description:
         "To enhance the effectiveness of oyur communication. The tool will:\n• Condense and reorganize sentences\n• Revise and tailor sentences as needed\n• Offer three distinct rephrased versions for any concept\n• Craft text that sounds natural to a native English audience.",
+      page: "/textParapharse",
     },
     {
       title: "Chat Pdf",
       subtitle: "Convert Text into Pdf file safely and easily",
       description:
         "Remember to review your PDF file after conversion to ensure it\nlooks as expected. These methods should help you safely\nand easily convert your text into a PDF file based on\nyour preferences and needs.",
+      page: "/chatPdf",
     },
     {
       title: "Text Summarize",
       subtitle: "Revamp lengthy content into captivating and approachable text",
       description:
         "Easily transform your paragraphs and articles into digestible\nsummaries and bullet points.",
+      page: "/textSummarize",
     },
     {
       title: "Text Improvement",
       subtitle: "What is a Text Improvement tool?",
       description:
         "The AI Text Improvement offered by Documentor.AI serves to rephrase\nand restructure your paragraphs, assisting in the prevention of\nplagiarism Additionally, it enhances the overall readability of your\ncontent, rendering it more captivating and user-friendly.",
+      page: "/textImprovement",
     },
   ];
 
   return (
     <>
-    <Header></Header>
+      <Header></Header>
       <div className="w-full bg-white md:mt-20 mt-6 md:mb-16 mb-5">
         <div className="md:text-[50px] text-[12px] text-[#404040] text-center font-bold md:mb-11 mb-3">
           Accessible practical content marketing expertise
@@ -57,12 +61,28 @@ const Homepage = () => {
             <br />
             content quickly?{" "}
           </div>
-          <GetStarted />
+          <GetStarted page={"/textParapharse"} />
         </div>
-        <CardListHomePage {...itemContent[0]} bg={"#F4F4F4"} childComp={<TextParaphrase/>} />
-        <CardListHomePage {...itemContent[1]} bg={"#F4F4F4"} childComp={<ChatPdf />} />
-        <CardListHomePage {...itemContent[2]} bg={"#F4F4F4"} childComp={<TextSummarize />} />
-        <CardListHomePage {...itemContent[3]} bg={"#F4F4F4"} childComp={<TextImprovement />} />
+        <CardListHomePage
+          {...itemContent[0]}
+          bg={"#F4F4F4"}
+          childComp={<TextParaphrase />}
+        />
+        <CardListHomePage
+          {...itemContent[1]}
+          bg={"#F4F4F4"}
+          childComp={<ChatPdf />}
+        />
+        <CardListHomePage
+          {...itemContent[2]}
+          bg={"#F4F4F4"}
+          childComp={<TextSummarize />}
+        />
+        <CardListHomePage
+          {...itemContent[3]}
+          bg={"#F4F4F4"}
+          childComp={<TextImprovement />}
+        />
       </div>
       <Footer></Footer>
     </>

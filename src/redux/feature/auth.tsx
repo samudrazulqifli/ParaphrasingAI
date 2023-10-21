@@ -4,7 +4,6 @@ import jwt_decode from "jwt-decode";
 import AuthService from "../../axios/auth.service";
 import { IFormRegister, IFormLogin } from "../../interface/api/IFormInput";
 import { UserDecode } from "../../interface/api/UserDecode";
-import { ResponseListBook } from "../../interface/api/Response";
 
 const user = localStorage.getItem("token");
 
@@ -62,8 +61,6 @@ const initialState = user
       uuid: decodeToken(user).uuid,
       loading: false,
       finish: false,
-      numberBook: 0,
-      isOpenProfile: false,
     }
   : {
       isLoggedIn: false,
@@ -71,8 +68,6 @@ const initialState = user
       uuid: null,
       loading: false,
       finish: false,
-      numberBook: 0,
-      isOpenProfile: false,
     };
 
 const authSlice = createSlice({
@@ -119,17 +114,10 @@ const authSlice = createSlice({
       state.isLoggedIn = false;
       state.username = null;
       state.uuid = null;
-      state.isOpenProfile = false;
     });
   },
   reducers: {
-    openProfileModal: (state, payload) => {
-      state.numberBook = +payload;
-      state.isOpenProfile = true;
-    },
   },
 });
-
-export const { openProfileModal } = authSlice.actions;
 
 export default authSlice.reducer;
