@@ -1,18 +1,33 @@
 import ComponentReactLoading from "../loading/ComponentReactLoading";
+import imgSend from "../../assets/images/btn_send.png";
+import imgUpPdf from "../../assets/images/upload_pdf.png";
+import { useEffect, useRef } from "react";
 
 const ChatBodyMobile = ({
   dataChat,
-  ref,
   message,
   setMessage,
   registerQuestionChat,
   loading,
+  setFile,
+  registerQuestionByUpload,
 }: any) => {
+  const ref = useRef<HTMLInputElement | null>(null);
+  const messagesColumnRef = useRef<HTMLDivElement>(null);
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    ref.current?.click();
+  };
+  useEffect(() => {
+    if (messagesColumnRef.current !== null) {
+      messagesColumnRef.current.scrollTop =
+        messagesColumnRef.current.scrollHeight;
+    }
+  }, [dataChat]);
   return (
-    <div className="justify-self-start relative pl-[12px] mt-[72px]">
+    <div className="justify-self-start md:hidden block relative pl-[12px] mt-[72px]">
       <div
-        ref={ref}
-        className="flex overflow-auto flex-col gap-y-[12px] w-[410px] h-[726px] pb-14 border-[#9cb4c6] border-[1px] rounded-[10px] px-[12px] pt-[23px]"
+        ref={messagesColumnRef}
+        className="flex overflow-auto scrollbar-hide flex-col gap-y-[12px] border-[0.5px] border-gray-500 w-[187px] h-[295px] pb-14 bg-white rounded-[6px] px-[12px] pt-[23px]"
       >
         {dataChat?.length !== 0
           ? dataChat?.map((item, index) => {
@@ -20,7 +35,7 @@ const ChatBodyMobile = ({
                 return (
                   <div
                     key={index.toString()}
-                    className="bg-[#047ac0] rounded-[20px] self-end text-white text-[14px] py-[13px] px-[24px] max-w-[341px]"
+                    className="bg-[#047ac0] rounded-[5px] self-end text-white text-[5.83px] py-[5px] px-[6px] max-w-[341px]"
                   >
                     {item.message}
                   </div>
@@ -29,7 +44,7 @@ const ChatBodyMobile = ({
                 return (
                   <div
                     key={index.toString()}
-                    className="bg-[#F3F3F3] rounded-[20px] self-start text-black text-[14px] py-[13px] px-[24px] max-w-[341px]"
+                    className="bg-[#F3F3F3] rounded-[5px] self-start text-black text-[5.83px] py-[5px] px-[6px] max-w-[341px]"
                   >
                     {item.message}
                   </div>
@@ -38,30 +53,53 @@ const ChatBodyMobile = ({
             })
           : null}
       </div>
-      <div className="absolute bottom-[6px] right-[20px]">
-        <div className="h-[46px] w-[376px] rounded-[25px] relative bg-[#F3F3F3]">
+      <div className="bg-white absolute bottom-0 w-[184px] m-[2px] h-14 rounded-[6px]"></div>
+      <div className="absolute bottom-[33px] text-[5.41px] right-[3px]">
+        <div className="h-[21.9px] w-[179px] rounded-[11.9px] relative bg-[#F3F3F3]">
           <input
             type="text"
             placeholder="Ask any question"
-            className="block w-full text-black mx-[18px] pt-[10px] focus:outline-none bg-transparent pr-12"
+            className="block w-full text-black mx-[5px] pt-[8px] focus:outline-none bg-transparent pr-12"
             onChange={(e) => setMessage(e.target.value)}
             value={message}
           />
           <button
             type="button"
             onClick={() => registerQuestionChat()}
-            className="absolute inset-y-0 right-0 flex items-center mr-[10.49px] border-none focus:outline-none"
+            className="absolute inset-y-0 right-3 flex items-center border-none focus:outline-none"
           >
-            <img src={imgSend} className="h-[27px] w-[27px]"></img>
+            <img src={imgSend} className="h-[7.5px] w-[7.5px]"></img>
           </button>
           {loading ? (
             <ComponentReactLoading
-              width={100}
-              height={100}
+              width={70}
+              height={70}
               addClass={"absolute right-0 bottom-[15%]"}
             />
           ) : null}
         </div>
+      </div>
+      <div className="absolute bottom-0 left-[43%]">
+        <button
+          type="button"
+          onClick={handleClick}
+          className="border-none focus:outline-none"
+        >
+          <img src={imgUpPdf} className="mx-auto w-[20%] h-[16%]" />
+          <div className="text-black text-[3.04px]">Browse PDF</div>
+        </button>
+        <input
+          className="hidden"
+          ref={ref}
+          type="file"
+          accept="application/pdf"
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+            if (event.target.files != null && event.target.files[0] != null) {
+              setFile(event.target.files[0]);
+              registerQuestionByUpload(event.target.files[0]);
+            }
+          }}
+        />
       </div>
     </div>
   );
