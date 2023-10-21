@@ -4,6 +4,7 @@ import imgUpPdf from "../../assets/images/upload_pdf.png";
 import { useEffect, useRef } from "react";
 
 const ChatBodyMobile = ({
+  loadingPdf,
   dataChat,
   message,
   setMessage,
@@ -25,6 +26,9 @@ const ChatBodyMobile = ({
   }, [dataChat]);
   return (
     <div className="justify-self-start md:hidden block relative pl-[12px] mt-[72px]">
+      {loadingPdf ? (
+        <ComponentReactLoading width={187} height={295} addClass={"absolute"} />
+      ) : null}
       <div
         ref={messagesColumnRef}
         className="flex overflow-auto scrollbar-hide flex-col gap-y-[12px] border-[0.5px] border-gray-500 w-[187px] h-[295px] pb-14 bg-white rounded-[6px] px-[12px] pt-[23px]"
