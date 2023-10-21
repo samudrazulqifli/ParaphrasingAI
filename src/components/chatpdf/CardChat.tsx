@@ -137,7 +137,6 @@ const CardChat = () => {
 
   const registerQuestionByUpload = (input: File) => {
     setLoadingPdf(true);
-    console.log("test");
     if (input) {
       const inputForm: RegisterByUpload = {
         file: input,
@@ -182,6 +181,7 @@ const CardChat = () => {
     <>
       <div className="absolute md:top-[582px] top-[35px] w-min">
         <ChatBodyMobile
+          loadingPdf={loadingPdf}
           dataChat={dataChat}
           message={message}
           setMessage={setMessage}

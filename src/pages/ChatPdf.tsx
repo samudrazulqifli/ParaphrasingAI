@@ -1,13 +1,11 @@
-import CardListHomePage from "../components/CardListHomePage";
-// import CardText from "../components/CardText";
 import Footer from "../components/Footer";
 import HeaderText from "../components/HeaderText";
 import Iklan from "../components/Iklan";
 import { DataHeaderTextProps } from "../interface/DataHeaderText";
-import { DataHomePageProps } from "../interface/DataHomePageProps";
-import Chat from "../components/homepagelist/ChatPdf";
 import CardChat from "../components/chatpdf/CardChat";
-import ChatBodyMobile from "../components/chatpdf/ChatBodyMobile";
+import { useAppSelector } from "../redux/feature/hooks";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const ChatPdf = () => {
   const itemContent: DataHeaderTextProps[] = [
@@ -19,14 +17,16 @@ const ChatPdf = () => {
         "Please let me know what questions or topics you'd like to discuss,and I'll \ndo my best to provide you with information and assistance",
     },
   ];
-  const chatPdfContent: DataHomePageProps[] = [
-    {
-      title: "",
-      subtitle: "Convert Text into Pdf file safely and easily",
-      description:
-        "Remember to review your PDF file after conversion to ensure it\nlooks as expected. These methods should help you safely\nand easily convert your text into a PDF file based on\nyour preferences and needs.",
-    },
-  ];
+
+  const { isLoggedIn } = useAppSelector((state) => state.auth);
+  const navigation = useNavigate();
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      navigation("/");
+    }
+  }, [isLoggedIn]);
+
   return (
     <>
       <div>
@@ -34,19 +34,8 @@ const ChatPdf = () => {
           <div className="">
             <div className="absolute m-auto mt-24 flex justify-center top-0 bottom-0 left-0 right-0">
               <CardChat />
-              {/* <ChatBodyMobile /> */}
             </div>
           </div>
-          {/* <div className="md:hidden block">
-            <div className="absolute m-auto mt-60 flex justify-center top-0 bottom-0 left-0 right-0">
-              <CardText
-                title1={"Your Text"}
-                title2={"Chat Pdf"}
-                link={""}
-                button={"Let's Go"}
-              ></CardText>
-            </div>
-          </div> */}
         </div>
         <div className="md:mb-[475px] mb-48">
           <HeaderText
@@ -56,14 +45,7 @@ const ChatPdf = () => {
           ></HeaderText>
         </div>
       </div>
-      <div className=" md:hidden block mb-5">
-        <CardListHomePage
-          bg={"#F4F4F4"}
-          {...chatPdfContent[0]}
-          childComp={<Chat />}
-        ></CardListHomePage>
-      </div>
-      {/* <Iklan /> */}
+      <Iklan />
       <Footer></Footer>
     </>
   );

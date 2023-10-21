@@ -7,7 +7,7 @@ import ParapharsingDefine from "../components/ParapharsingDefine";
 import TextParaphrase from "../components/homepagelist/TextParaphrase";
 import FunctioningParaphrase from "../components/textparaphrase/FunctioningParaphrase";
 import ReceiveDataDriven from "../components/textparaphrase/ReceiveDataDriven";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DataCardTextProps, Option } from "../interface/DataCardText";
 import { DataHeaderTextProps } from "../interface/DataHeaderText";
 import { DataHomePageProps } from "../interface/DataHomePageProps";
@@ -17,13 +17,23 @@ import { ParaphraseInput } from "../interface/api/IFormInput";
 import { ResponseData } from "../interface/api/Response";
 import { textParaphrase } from "../axios/textParphrase.service";
 import Loading from "../components/loading";
+import { useAppSelector } from "../redux/feature/hooks";
+import { useNavigate } from "react-router-dom";
 
 const TextParapharse = () => {
   const { register, handleSubmit } = useForm<ParaphraseInput>();
   const [result, setResult] = useState<any>();
   const [loading, setLoading] = useState<any>();
   const [status, setStatus] = useState<boolean>(false);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { isLoggedIn } = useAppSelector((state) => state.auth);
+  const navigation = useNavigate();
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      navigation("/");
+    }
+  }, [isLoggedIn]);
+  
   const options: Option[] = [
     {
       option: "general",
@@ -59,6 +69,7 @@ const TextParapharse = () => {
       subtitle: "Express our thoughts clearl an sincerel",
       description:
         "To enhance the effectiveness of oyur communication. The tool will:\n• Condense and reorganize sentences\n• Revise and tailor sentences as needed\n• Offer three distinct rephrased versions for any concept\n• Craft text that sounds natural to a native English audience.",
+      page: "",
     },
   ];
   const cardContent: DataCardTextProps[] = [
@@ -72,16 +83,16 @@ const TextParapharse = () => {
       option: options,
       selected: { ...register("style") },
       loading: loading,
-      status: status
+      status: status,
     },
   ];
 
   const onSubmit: SubmitHandler<ParaphraseInput> = (value) => {
-    setStatus(true)
-    setLoading(<Loading/>);
+    setStatus(true);
+    setLoading(<Loading />);
     textParaphrase(value, (e: ResponseData) => {
       setResult(e);
-      setStatus(false)
+      setStatus(false);
     });
   };
   return (
