@@ -1,7 +1,7 @@
 import ComponentReactLoading from "../loading/ComponentReactLoading";
 import imgSend from "../../assets/images/btn_send.png";
 import imgUpPdf from "../../assets/images/upload_pdf.png";
-import { useEffect, useRef } from "react";
+import { JSXElementConstructor, Key, ReactElement, ReactNode, useEffect, useRef } from "react";
 
 const ChatBodyMobile = ({
   loadingPdf,
@@ -15,6 +15,7 @@ const ChatBodyMobile = ({
 }: any) => {
   const ref = useRef<HTMLInputElement | null>(null);
   const messagesColumnRef = useRef<HTMLDivElement>(null);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     ref.current?.click();
   };
@@ -34,7 +35,7 @@ const ChatBodyMobile = ({
         className="flex overflow-auto scrollbar-hide flex-col gap-y-[12px] border-[0.5px] border-gray-500 w-[187px] h-[295px] pb-14 bg-white rounded-[6px] px-[12px] pt-[23px]"
       >
         {dataChat?.length !== 0
-          ? dataChat?.map((item, index) => {
+          ? dataChat?.map((item: { from: string; message: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined; }, index: { toString: () => Key | null | undefined; }) => {
               if (item.from == "client") {
                 return (
                   <div

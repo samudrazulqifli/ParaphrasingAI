@@ -57,21 +57,22 @@ const TextImprovement = () => {
       title1: "Your Text",
       title2: "Improved Text",
       button: "Improved",
-      link: "/",
+      link: "/textImprovement",
       form: { ...register("query") },
       data: result,
       option: options,
       selected: { ...register("intent") },
       loading: loading,
-      status: status
+      status: status,
+      addClass: "",
     },
   ];
   const onSubmit: SubmitHandler<ImprovementInput> = (value) => {
-    setStatus(true)
+    setStatus(true);
     setLoading(<Loading />);
     textImprovement(value, (e: ResponseData) => {
       setResult(e);
-      setStatus(false)
+      setStatus(false);
     });
   };
   return (
@@ -90,6 +91,7 @@ const TextImprovement = () => {
               selected={cardContent[0].selected}
               loading={cardContent[0].loading}
               status={cardContent[0].status}
+              addClass={cardContent[0].addClass}
             ></CardText>
           </div>
         </form>

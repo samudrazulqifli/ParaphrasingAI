@@ -77,13 +77,14 @@ const TextParapharse = () => {
       title1: "Your Text",
       title2: "Summary",
       button: "Summarize",
-      link: "/",
+      link: "/textParapharse",
       form: { ...register("query") },
       data: result,
       option: options,
       selected: { ...register("style") },
       loading: loading,
       status: status,
+      addClass: "",
     },
   ];
 
@@ -111,6 +112,7 @@ const TextParapharse = () => {
               selected={cardContent[0].selected}
               loading={cardContent[0].loading}
               status={cardContent[0].status}
+              addClass={cardContent[0].addClass}
             ></CardText>
           </div>
         </form>

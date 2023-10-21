@@ -19,7 +19,6 @@ const loginUser = async (data: IFormLogin) => {
   const response = await axios.post(URL + "account/login", data);
   if (response.data.data.token) {
     localStorage.setItem("token", `Bearer ${response.data.data.token}`);
-    Swal.fire("Success", "Login Success", "success");
   }
   return response.data;
 };

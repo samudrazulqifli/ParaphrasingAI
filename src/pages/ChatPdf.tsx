@@ -29,22 +29,20 @@ const ChatPdf = () => {
 
   return (
     <>
-      <div>
         <div className="relative">
           <div className="">
-            <div className="absolute m-auto mt-24 flex justify-center top-0 bottom-0 left-0 right-0">
+            <div className="absolute m-auto mt-24 flex justify-center top-0 bottom-0 left-0 right-[2.5%]">
               <CardChat />
             </div>
           </div>
         </div>
-        <div className="md:mb-[475px] mb-48">
+        <div className="md:mb-[475px] mb-[200px]">
           <HeaderText
             title1={itemContent[0].title1}
             title2={itemContent[0].title2}
             description={itemContent[0].description}
           ></HeaderText>
         </div>
-      </div>
       <Iklan />
       <Footer></Footer>
     </>
