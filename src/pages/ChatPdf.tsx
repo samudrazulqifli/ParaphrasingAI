@@ -3,6 +3,9 @@ import HeaderText from "../components/HeaderText";
 import Iklan from "../components/Iklan";
 import { DataHeaderTextProps } from "../interface/DataHeaderText";
 import CardChat from "../components/chatpdf/CardChat";
+import { useAppSelector } from "../redux/feature/hooks";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const ChatPdf = () => {
   const itemContent: DataHeaderTextProps[] = [
@@ -14,6 +17,16 @@ const ChatPdf = () => {
         "Please let me know what questions or topics you'd like to discuss,and I'll \ndo my best to provide you with information and assistance",
     },
   ];
+
+  const { isLoggedIn } = useAppSelector((state) => state.auth);
+  const navigation = useNavigate();
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      navigation("/");
+    }
+  }, [isLoggedIn]);
+
   return (
     <>
         <div className="relative">

@@ -12,14 +12,24 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { SummarizeInput } from "../interface/api/IFormInput";
 import { textSummarize } from "../axios/textSummarize.service";
 import { ResponseData } from "../interface/api/Response";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Loading from "../components/loading";
+import { useNavigate } from "react-router-dom";
+import { useAppSelector } from "../redux/feature/hooks";
 
 const TextSummarize = () => {
   const { register, handleSubmit } = useForm<SummarizeInput>();
   const [result, setResult] = useState<any>();
   const [loading, setLoading] = useState<any>();
   const [status, setStatus] = useState<boolean>(false);
+  const { isLoggedIn } = useAppSelector((state) => state.auth);
+  const navigation = useNavigate();
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      navigation("/");
+    }
+  }, [isLoggedIn]);
 
   const options: Option[] = [
     {

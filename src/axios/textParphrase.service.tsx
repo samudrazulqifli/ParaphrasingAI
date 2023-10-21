@@ -13,7 +13,6 @@ const textParaphrase = async (data: ParaphraseInput, cb: any) => {
         }
     });
     cb(result.data)
-    console.log(data.style)
   } catch (erorr) {
     console.log(console.error());
   }

@@ -7,7 +7,7 @@ import ParapharsingDefine from "../components/ParapharsingDefine";
 import TextParaphrase from "../components/homepagelist/TextParaphrase";
 import FunctioningParaphrase from "../components/textparaphrase/FunctioningParaphrase";
 import ReceiveDataDriven from "../components/textparaphrase/ReceiveDataDriven";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DataCardTextProps, Option } from "../interface/DataCardText";
 import { DataHeaderTextProps } from "../interface/DataHeaderText";
 import { DataHomePageProps } from "../interface/DataHomePageProps";
@@ -17,13 +17,23 @@ import { ParaphraseInput } from "../interface/api/IFormInput";
 import { ResponseData } from "../interface/api/Response";
 import { textParaphrase } from "../axios/textParphrase.service";
 import Loading from "../components/loading";
+import { useAppSelector } from "../redux/feature/hooks";
+import { useNavigate } from "react-router-dom";
 
 const TextParapharse = () => {
   const { register, handleSubmit } = useForm<ParaphraseInput>();
   const [result, setResult] = useState<any>();
   const [loading, setLoading] = useState<any>();
   const [status, setStatus] = useState<boolean>(false);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { isLoggedIn } = useAppSelector((state) => state.auth);
+  const navigation = useNavigate();
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      navigation("/");
+    }
+  }, [isLoggedIn]);
+  
   const options: Option[] = [
     {
       option: "general",
