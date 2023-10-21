@@ -46,7 +46,7 @@ const TextImprovement = () => {
       title1: "Your Text",
       title2: "Improved Text",
       button: "Improved",
-      link: "/",
+      link: "/textImprovement",
       form: { ...register("query") },
       data: result,
       option: options,

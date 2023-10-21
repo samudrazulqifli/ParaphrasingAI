@@ -67,7 +67,7 @@ const TextParapharse = () => {
       title1: "Your Text",
       title2: "Summary",
       button: "Summarize",
-      link: "/",
+      link: "/textParapharse",
       form: { ...register("query") },
       data: result,
       option: options,

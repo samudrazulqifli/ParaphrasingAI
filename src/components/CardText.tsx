@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
 import { DataCardTextProps } from "../interface/DataCardText";
 import { ResultForm, ResultForm2 } from "../interface/api/IFormInput";
+import LoginModal from "./modal/LoginModal";
+import RegisterModal from "./modal/RegisterModal";
+import { useAppSelector } from "../redux/feature/hooks";
+import { useNavigate } from "react-router-dom";
 
 type Props = DataCardTextProps;
 
@@ -16,10 +20,15 @@ const CardText: React.FC<Props> = (props: any) => {
     loading,
     status,
     addClass,
+    link
   } = props as DataCardTextProps;
   const [count, setCount] = useState(0);
   const [result, setResult] = useState(0);
   const [value, setValue] = useState<string>();
+  const { isLoggedIn } = useAppSelector((state) => state.auth);
+  const [showLogin, setShowLogin] = useState(false);
+  const [showRegister, setShowRegister] = useState(false);
+  const navigation = useNavigate();
 
   useEffect(() => {
     resultChange(data as ResultForm);
@@ -55,6 +64,16 @@ const CardText: React.FC<Props> = (props: any) => {
   };
   return (
     <>
+     <LoginModal
+        showLogin={showLogin}
+        setShowLogin={setShowLogin}
+        setShowRegister={setShowRegister}
+      />
+      <RegisterModal
+        showRegister={showRegister}
+        setShowRegister={setShowRegister}
+        setShowLogin={setShowLogin}
+      />
       <div className=" flex justify-center md:grid-cols-2 md:grid card rounded-md md:rounded-[20px] md:shadow-xl shadow-md w-[185px] h-[242px] bg-white md:w-[895px] md:h-[499px] ">
         <div className="ml-4 mb-1 md:mt-[20px] md:ml-[60px]">
           <h2 className="text-[5px] text-[#4E4E4E] font-bold mb-1 md:text-[15px]">
@@ -68,6 +87,9 @@ const CardText: React.FC<Props> = (props: any) => {
             placeholder="Begin typing or paste text here..."
             {...form}
             onChange={wordChange}
+            onClick={() => {
+              isLoggedIn ? navigation(`${link}`) : setShowLogin(true);
+            }}
           ></textarea>
         </div>
         <div className="ml-4 md:mt-[20px]">
@@ -79,13 +101,18 @@ const CardText: React.FC<Props> = (props: any) => {
           </div>
           {status === true ? (
             <>
-              <textarea className="resize-none text-black text-[5px] textarea-xs md:textarea-md w-[157px] md:w-[377px] h-[85px] md:h-[332px] border-[0.9px] rounded-sm md:rounded-[10px] bg-white placeholder:text-[5px] md:placeholder:text-[15px]" />
+              <textarea className="resize-none text-black text-[5px] textarea-xs md:textarea-md w-[157px] md:w-[377px] h-[85px] md:h-[332px] border-[0.9px] rounded-sm md:rounded-[10px] bg-white placeholder:text-[5px] md:placeholder:text-[15px]"  onClick={() => {
+              isLoggedIn ? navigation(`${link}`) : setShowLogin(true);
+            }} />
               {loading}
             </>
           ) : (
             <textarea
               className="resize-none text-black text-[5px] textarea-xs md:textarea-md w-[157px] md:w-[377px] h-[85px] md:h-[332px] border-[0.9px] rounded-sm md:rounded-[10px] bg-white placeholder:text-[5px] md:placeholder:text-[15px]"
               defaultValue={value}
+              onClick={() => {
+                isLoggedIn ? navigation(`${link}`) : setShowLogin(true);
+              }}
             />
           )}
           <div className={`top-[2%] left-[80%] absolute text-[4.8px] md:text-[15px] ${addClass}`}>
@@ -105,6 +132,9 @@ const CardText: React.FC<Props> = (props: any) => {
           <button
             className=" flex justify-center items-center border-[#047AC0] border-[0.54px] rounded-[1.35px] w-[34.13px] h-[13px] text-[4.06px] text-[#3E3E3E] font-extrabold md:text-[15px] md:w-[126px] md:h-[43px] md:rounded-[5px]"
             type="submit"
+             onClick={() => {
+              isLoggedIn ? navigation(`${link}`) : setShowLogin(true);
+            }}
           >
             {button}
           </button>
