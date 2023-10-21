@@ -15,6 +15,7 @@ const CardText: React.FC<Props> = (props: any) => {
     selected,
     loading,
     status,
+    addClass,
   } = props as DataCardTextProps;
   const [count, setCount] = useState(0);
   const [result, setResult] = useState(0);
@@ -87,7 +88,7 @@ const CardText: React.FC<Props> = (props: any) => {
               defaultValue={value}
             />
           )}
-          <div className="top-[2%] left-[55%]  absolute md:left-[80%]  text-[1vw]">
+          <div className={`top-[2%] left-[80%] absolute text-[4.8px] md:text-[15px] ${addClass}`}>
             <select {...selected} className="bg-white text-black rounded-sm">
               {option.map((item, index) => (
                 <>

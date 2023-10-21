@@ -9,6 +9,7 @@ export interface DataCardTextProps {
   selected: any;
   loading: React.ReactNode;
   status: boolean;
+  addClass: null |string
 }
 export interface Option {
   option: string;

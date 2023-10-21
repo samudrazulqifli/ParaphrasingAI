@@ -59,6 +59,7 @@ const TextParapharse = () => {
       subtitle: "Express our thoughts clearl an sincerel",
       description:
         "To enhance the effectiveness of oyur communication. The tool will:\n• Condense and reorganize sentences\n• Revise and tailor sentences as needed\n• Offer three distinct rephrased versions for any concept\n• Craft text that sounds natural to a native English audience.",
+      page: "",
     },
   ];
   const cardContent: DataCardTextProps[] = [
@@ -72,16 +73,17 @@ const TextParapharse = () => {
       option: options,
       selected: { ...register("style") },
       loading: loading,
-      status: status
+      status: status,
+      addClass: "",
     },
   ];
 
   const onSubmit: SubmitHandler<ParaphraseInput> = (value) => {
-    setStatus(true)
-    setLoading(<Loading/>);
+    setStatus(true);
+    setLoading(<Loading />);
     textParaphrase(value, (e: ResponseData) => {
       setResult(e);
-      setStatus(false)
+      setStatus(false);
     });
   };
   return (
@@ -100,6 +102,7 @@ const TextParapharse = () => {
               selected={cardContent[0].selected}
               loading={cardContent[0].loading}
               status={cardContent[0].status}
+              addClass={cardContent[0].addClass}
             ></CardText>
           </div>
         </form>

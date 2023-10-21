@@ -53,6 +53,7 @@ const TextSummarize = () => {
       selected: { ...register("type") },
       loading: loading,
       status: status,
+      addClass:""
     },
   ];
 
@@ -80,8 +81,7 @@ const TextSummarize = () => {
               option={options}
               selected={cardContent[0].selected}
               loading={cardContent[0].loading}
-              status={cardContent[0].status}
-            ></CardText>
+              status={cardContent[0].status} addClass={cardContent[0].addClass}            ></CardText>
           </div>
         </form>
       </div>

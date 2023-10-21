@@ -18,7 +18,7 @@ const TextImprovement = () => {
   const { register, handleSubmit } = useForm<ImprovementInput>();
   const [result, setResult] = useState<any>();
   const [loading, setLoading] = useState<any>();
-  const [status, setStatus] = useState<boolean>(false)
+  const [status, setStatus] = useState<boolean>(false);
   const itemContent: DataHeaderTextProps[] = [
     {
       title1: "Text Improvement",
@@ -52,15 +52,16 @@ const TextImprovement = () => {
       option: options,
       selected: { ...register("intent") },
       loading: loading,
-      status: status
+      status: status,
+      addClass: "",
     },
   ];
   const onSubmit: SubmitHandler<ImprovementInput> = (value) => {
-    setStatus(true)
+    setStatus(true);
     setLoading(<Loading />);
     textImprovement(value, (e: ResponseData) => {
       setResult(e);
-      setStatus(false)
+      setStatus(false);
     });
   };
   return (
@@ -79,6 +80,7 @@ const TextImprovement = () => {
               selected={cardContent[0].selected}
               loading={cardContent[0].loading}
               status={cardContent[0].status}
+              addClass={cardContent[0].addClass}
             ></CardText>
           </div>
         </form>
