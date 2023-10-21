@@ -11,7 +11,11 @@ const RegisterModal = ({
   setShowRegister,
   setShowLogin,
 }: any) => {
-  const { register, handleSubmit } = useForm<IFormRegister>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IFormRegister>();
   const { loading, finish } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
 
@@ -40,7 +44,7 @@ const RegisterModal = ({
         <>
           <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
             <form onSubmit={handleSubmit(onSubmit)}>
-              <div className="w-[330px] h-[520px] mx-auto mt-[3%] px-[19px] font-poppins bg-white rounded-md pt-2 relative">
+              <div className="w-[330px] text-black mx-auto mt-[3%] px-[19px] font-poppins bg-white rounded-md pt-2 relative">
                 <button
                   type="button"
                   onClick={() => {
@@ -57,29 +61,49 @@ const RegisterModal = ({
                   Username
                 </div>
                 <input
-                  {...register("username")}
+                  aria-invalid={errors.username ? "true" : "false"}
                   type="text"
+                  {...register("username", {
+                    required: "Username is required",
+                  })}
                   placeholder="Enter Your Username"
                   className="w-full rounded-[3.17px] bg-white h-[42.52px] text-black border-[#8d8d8d] border-[1.27px] px-[9.52px] focus:outline-none"
                 ></input>
+                {errors.username && (
+                  <p role="alert">{errors.username.message}</p>
+                )}
                 <div className="text-[15.23px] font-bold text-[#1C1C1C] mt-[8.5px] mb-[5.89px]">
                   Name
                 </div>
                 <input
-                  {...register("name")}
+                  {...register("name", { required: "Name is required" })}
                   type="text"
                   placeholder="At least 8 characters"
                   className="w-full rounded-[3.17px]  bg-white h-[42.52px] text-black border-[#8d8d8d] border-[1.27px] px-[9.52px] focus:outline-none"
                 ></input>
+                {errors.name && <p role="alert">{errors.name.message}</p>}
                 <div className="text-[15.23px] font-bold text-[#1C1C1C] mt-[8.5px] mb-[5.89px]">
                   Password
                 </div>
                 <input
-                  {...register("password")}
+                  {...register("password", {
+                    required: "Password is required",
+                    minLength: {
+                      value: 8,
+                      message: "Minimum 8 Characters required",
+                    },
+                    maxLength: {
+                      value: 20,
+                      message: "Maximum 20 Characters required",
+                    },
+                  })}
                   type="password"
                   placeholder="At least 8 characters"
                   className="w-full rounded-[3.17px]  bg-white h-[42.52px] text-black border-[#8d8d8d] border-[1.27px] px-[9.52px] focus:outline-none"
                 ></input>
+                {errors.password && (
+                  <p role="alert">{errors.password.message}</p>
+                )}
                 <div className="flex items-center gap-x-[1.9px] mt-[8.5px] mb-[9.16px]">
                   <button className="bg-[#D9D9D9] rounded-[1.9px] w-[9.52px] h-[9.81px] bg-transparent font-bold p-0 border-none ring-0 focus:outline-none text-[15.23px]"></button>
                   <div className="text-[15.23px] text-[#1C1C1C] font-normal">

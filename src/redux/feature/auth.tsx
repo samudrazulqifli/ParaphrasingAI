@@ -4,6 +4,7 @@ import jwt_decode from "jwt-decode";
 import AuthService from "../../axios/auth.service";
 import { IFormRegister, IFormLogin } from "../../interface/api/IFormInput";
 import { UserDecode } from "../../interface/api/UserDecode";
+import Swal from "sweetalert2";
 
 const user = localStorage.getItem("token");
 
@@ -15,8 +16,10 @@ export const register = createAsyncThunk(
     try {
       const response = await AuthService.registerUser(body);
       thunkAPI.dispatch(setMessage("Register Success"));
+      Swal.fire("Success", "Register Success", "success");
       return response.data;
     } catch (error) {
+      Swal.fire("Failed", "Register failed", "error");
       const message =
         (error.response &&
           error.response.data &&
@@ -35,9 +38,10 @@ export const login = createAsyncThunk(
     try {
       const data = await AuthService.loginUser(body);
       const userData: UserDecode = jwt_decode(data.data.token);
-      console.log(userData);
+      Swal.fire("Success", "Login Success", "success");
       return { username: userData.username, uuid: userData.uuid };
     } catch (error) {
+      Swal.fire("Failed", "Login Failed", "warning");
       const message =
         (error.response &&
           error.response.data &&
@@ -80,7 +84,7 @@ const authSlice = createSlice({
     });
     builder.addCase(register.fulfilled, (state) => {
       state.loading = false;
-      state.finish = true;
+      state.finish = false;
       state.isLoggedIn = false;
     });
     builder.addCase(register.rejected, (state) => {
@@ -116,8 +120,7 @@ const authSlice = createSlice({
       state.uuid = null;
     });
   },
-  reducers: {
-  },
+  reducers: {},
 });
 
 export default authSlice.reducer;
