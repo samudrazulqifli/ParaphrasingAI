@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CardText from "../components/CardText";
 import Footer from "../components/Footer";
 import HeaderText from "../components/HeaderText";
@@ -13,12 +13,16 @@ import { ImprovementInput } from "../interface/api/IFormInput";
 import { textImprovement } from "../axios/textImprovement.service";
 import { ResponseData } from "../interface/api/Response";
 import Loading from "../components/loading";
+import { useAppSelector } from "../redux/feature/hooks";
+import { useNavigate } from "react-router-dom";
 
 const TextImprovement = () => {
   const { register, handleSubmit } = useForm<ImprovementInput>();
   const [result, setResult] = useState<any>();
   const [loading, setLoading] = useState<any>();
   const [status, setStatus] = useState<boolean>(false)
+  const { isLoggedIn } = useAppSelector((state) => state.auth);
+  const navigation = useNavigate();
   const itemContent: DataHeaderTextProps[] = [
     {
       title1: "Text Improvement",
@@ -27,6 +31,13 @@ const TextImprovement = () => {
         "Simplify your content writing with our text summary generator.\nTransform your paragraphs, articles, and other long text into digestible\nand engaging copy in one click.",
     },
   ];
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      navigation("/");
+    }
+  }, [isLoggedIn]);
+  
   const options: Option[] = [
     {
       option: "general",
