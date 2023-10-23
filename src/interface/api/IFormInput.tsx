@@ -9,6 +9,7 @@ export interface IFormRegister {
 export interface IFormLogin {
   username: string;
   password: string;
+  rememberme: false;
 }
 
 export interface IFormDelete {
@@ -31,7 +32,7 @@ export interface ParaphraseInput {
 
 export interface ImprovementInput {
   query: string;
-  intent: string
+  intent: string;
 }
 
 export interface ResultForm {

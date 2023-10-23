@@ -38,6 +38,7 @@ export const login = createAsyncThunk(
     try {
       const data = await AuthService.loginUser(body);
       const userData: UserDecode = jwt_decode(data.data.token);
+      console.log(userData)
       Swal.fire("Success", "Login Success", "success");
       return { username: userData.username, uuid: userData.uuid };
     } catch (error) {

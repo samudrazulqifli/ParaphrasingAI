@@ -80,7 +80,7 @@ const LoginModal = ({ showLogin, setShowLogin, setShowRegister }: any) => {
               ></input>
               {errors.password && <span>This field is required</span>}
               <div className="flex items-center gap-x-[1.9px] mt-[8.5px] mb-[9.16px]">
-                <button className="bg-[#D9D9D9] rounded-[1.9px] w-[9.52px] h-[9.81px] bg-transparent font-bold p-0 border-none ring-0 focus:outline-none text-[15.23px]"></button>
+                {/* <input type="checkbox" className="bg-white" {...register("")}/> */}
                 <div className="text-[15.23px] text-[#1C1C1C] font-normal">
                   Remember Me
                 </div>

@@ -13,7 +13,7 @@ export const ProfileModal = () => {
   const [showModal, setShowModal] = useState(false);
   const [changePassword, setChangePassword] = useState(false);
   const [data, setData] = useState<ResponseListBook[]>([]);
-  const { username, uuid } = useAppSelector((state) => state.auth);
+  const { username, uuid, isLoggedIn } = useAppSelector((state) => state.auth);
 
   const logoutUser = () => {
     dispatch(logout());
@@ -34,10 +34,12 @@ export const ProfileModal = () => {
   };
 
   useEffect(() => {
-    userService.getListBook(0, 3, (result: ResponseListBook[]) => {
-      setData(result);
-    });
-  }, [data]);
+    if (isLoggedIn) {
+      userService.getListBook(0, 3, (result: ResponseListBook[]) => {
+        setData(result);
+      });
+    }
+  }, [isLoggedIn]);
 
   useEffect(() => {
     if (showModal == false) {
