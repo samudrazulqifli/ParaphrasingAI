@@ -11,6 +11,7 @@ const LoginModal = ({ showLogin, setShowLogin, setShowRegister }: any) => {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm<IFormLogin>();
   const { loading, finish } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
@@ -20,6 +21,11 @@ const LoginModal = ({ showLogin, setShowLogin, setShowRegister }: any) => {
       document.body.style.overflow = "scroll";
     } else {
       document.body.style.overflow = "hidden";
+      if (localStorage.getItem("rememberme") == "true") {
+        setValue("username", localStorage.getItem("username") ?? "");
+        setValue("password", localStorage.getItem("password") ?? "");
+        setValue("rememberme", true);
+      }
     }
     return () => {};
   }, [showLogin]);
@@ -38,10 +44,10 @@ const LoginModal = ({ showLogin, setShowLogin, setShowRegister }: any) => {
     <>
       {showLogin ? (
         <>
-          <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+          <div className="justify-center text-black items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
             <form
               onSubmit={handleSubmit(onSubmit)}
-              className="w-[330px] h-[425.19px] mx-auto mt-[3%] px-[19px] bg-white rounded-md shadow-sm font-poppins relative"
+              className="w-[330px] mx-auto mt-[3%] px-[19px] bg-white rounded-md shadow-sm font-poppins relative"
             >
               <button
                 type="button"
@@ -64,6 +70,7 @@ const LoginModal = ({ showLogin, setShowLogin, setShowRegister }: any) => {
                 placeholder="Enter Your Username"
                 className="w-full rounded-[3.17px] h-[42.52px] bg-white text-black border-[#8d8d8d] border-[1.27px] px-[9.52px] focus:outline-none"
               />
+              {errors.username && <span>This field is required</span>}
               <div className="text-[15.23px] font-bold text-[#1C1C1C] mt-[8.5px] mb-[5.89px]">
                 Password
               </div>
@@ -71,12 +78,20 @@ const LoginModal = ({ showLogin, setShowLogin, setShowRegister }: any) => {
                 type={showPassword ? 'text' : 'password'}
                 placeholder="Enter Your Password"
                 className="w-full rounded-[3.17px] h-[42.52px] bg-white text-black border-[#8d8d8d] border-[1.27px] px-[9.52px] focus:outline-none"
-                {...register("password", { required: true })}
+                {...register("password", {
+                  required: true,
+                  minLength: 8,
+                  maxLength: 20,
+                })}
               ></input>
               <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute btn-sm btn-info text-[10px] rounded-lg my-[5px] font-semibold left-[78%]">{!showPassword ? "Show" :"Hide" }</button>
               {errors.password && <span>This field is required</span>}
-              <div className="flex items-center gap-x-[1.9px] mt-[8.5px] mb-[9.16px]">
-                <button className="bg-[#D9D9D9] rounded-[1.9px] w-[9.52px] h-[9.81px] bg-transparent font-bold p-0 border-none ring-0 focus:outline-none text-[15.23px]"></button>
+              <div className="flex  items-center gap-x-[1.9px] mt-[8.5px] mb-[9.16px]">
+                <input
+                  type="checkbox"
+                  className="bg-white fill-black"
+                  {...register("rememberme")}
+                />
                 <div className="text-[15.23px] text-[#1C1C1C] font-normal">
                   Remember Me
                 </div>

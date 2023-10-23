@@ -1,7 +1,9 @@
 import imgPopUp from "../../assets/images/img-popup.png";
 import imgClose from "../../assets/images/close.png";
+import { useNavigate } from "react-router-dom";
 
-export default function LandingModal({ showModal, setShowModal }: any) {
+export default function LandingModal({ showModal, setShowModal, navigateTo }: any) {
+  const navigate = useNavigate();
   return (
     <>
       {showModal ? (
@@ -41,7 +43,7 @@ export default function LandingModal({ showModal, setShowModal }: any) {
                   </button>
                   <button
                     type="button"
-                    onClick={() => setShowModal(false)}
+                    onClick={() => navigate(navigateTo)}
                     className="text-white bg-[#54595E] font-medium w-[90.53px] h-[29.96px] rounded-[3.94px] border-[0.79px] border-[#343434] text-[9.45px] inset-y-0 right-0 focus:border-[#343434] hover:border-[#343434] hover:ring-0 focus:ring-0 focus:outline-none"
                   >
                     Yes, Confirm
