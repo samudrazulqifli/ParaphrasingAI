@@ -15,6 +15,7 @@ const CardText: React.FC<Props> = (props: any) => {
     selected,
     loading,
     status,
+    addClass,
   } = props as DataCardTextProps;
   const [count, setCount] = useState(0);
   const [result, setResult] = useState(0);
@@ -25,7 +26,10 @@ const CardText: React.FC<Props> = (props: any) => {
   }, [data as ResultForm]);
 
   const wordChange = (e: { target: { value: string } }) => {
-    const word = e.target.value.split(" ").length;
+    let word = e.target.value.split(" ").length;
+    if (e.target.value.split(" ")[word - 1] === "") {
+      word = word - 1;
+    }
     setCount(word);
   };
   const resultChange = (textInput?: ResultForm | ResultForm2) => {
@@ -87,7 +91,9 @@ const CardText: React.FC<Props> = (props: any) => {
               defaultValue={value}
             />
           )}
-          <div className="top-[2%] left-[55%]  absolute md:left-[80%]  text-[1vw]">
+          <div
+            className={`top-[2%] left-[80%] absolute text-[4.8px] md:text-[15px] ${addClass}`}
+          >
             <select {...selected} className="bg-white text-black rounded-sm">
               {option.map((item, index) => (
                 <>
@@ -102,7 +108,8 @@ const CardText: React.FC<Props> = (props: any) => {
         </div>
         <div className="w-full flex justify-center md:col-span-2 mt-[3px]">
           <button
-            className=" flex justify-center items-center border-[#047AC0] border-[0.54px] rounded-[1.35px] w-[34.13px] h-[13px] text-[4.06px] text-[#3E3E3E] font-extrabold md:text-[15px] md:w-[126px] md:h-[43px] md:rounded-[5px]"
+            className={`flex justify-center items-center border-[#047AC0] border-[0.54px] rounded-[1.35px] w-[34.13px] h-[13px] text-[4.06px] text-[#3E3E3E] font-extrabold md:text-[15px] md:w-[126px] md:h-[43px] md:rounded-[5px] 
+            ${count === 0 ? "btn-disabled" : ""}`}
             type="submit"
           >
             {button}
