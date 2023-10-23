@@ -1,11 +1,9 @@
-import CardSummarize from "../components/CardSummarize";
 import CardText from "../components/CardText";
 import Footer from "../components/Footer";
 import HeaderText from "../components/HeaderText";
 import Iklan from "../components/Iklan";
 import IdentifyTheMainPoint from "../components/textsummarization/IdentifyTheMainPoint";
 import ProduceHigher from "../components/textsummarization/ProduceHigher";
-import RevampLengthly from "../components/textsummarization/RevampLengthly";
 import { DataCardTextProps, Option } from "../interface/DataCardText";
 import { DataHeaderTextProps } from "../interface/DataHeaderText";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -80,7 +78,7 @@ const TextSummarize = () => {
     <>
       <div className="relative">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="flex justify-center  m-auto mt-40 md:mt-[900px] left-0 right-0 top-0 bottom-0 absolute">
+          <div className="flex justify-center  m-auto mt-40 md:mt-[500px] left-0 right-0 top-0 bottom-0 absolute">
             <CardText
               title1={cardContent[0].title1}
               title2={cardContent[0].title2}
@@ -97,20 +95,15 @@ const TextSummarize = () => {
           </div>
         </form>
       </div>
-      <div className="mb-28 md:mb-80">
+      <div className="mb-28 md:mb-60">
         <HeaderText
           title1={itemContent[0].title1}
           title2={itemContent[0].title2}
           description={itemContent[0].description}
         ></HeaderText>
       </div>
-      <CardSummarize />
       <Iklan />
       <div className="grid grid-flow-row md:gap-5 gap-2 md:mb-10 mb-3">
-        <div className="text-black font-semibold md:text-[50px] text-[20px]  text-center">
-          <div className="">What can you do with the summarizing tool?</div>
-        </div>
-        <RevampLengthly />
         <IdentifyTheMainPoint />
         <ProduceHigher />
       </div>

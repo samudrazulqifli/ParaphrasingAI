@@ -4,8 +4,6 @@ import Footer from "../components/Footer";
 import HeaderText from "../components/HeaderText";
 import Iklan from "../components/Iklan";
 import WhatIsText from "../components/textimprovement/WhatIsText";
-import YourParagraph from "../components/textimprovement/YourParagraph";
-import IdentifyTheMainPoint from "../components/textsummarization/IdentifyTheMainPoint";
 import { DataCardTextProps, Option } from "../interface/DataCardText";
 import { DataHeaderTextProps } from "../interface/DataHeaderText";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -79,7 +77,7 @@ const TextImprovement = () => {
     <>
       <div className="relative">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="flex justify-center  m-auto mt-52 md:mt-[780px] left-0 right-0 top-0 bottom-0 absolute">
+          <div className="flex justify-center  m-auto mt-52 md:mt-[500px] left-0 right-0 top-0 bottom-0 absolute">
             <CardText
               title1={cardContent[0].title1}
               title2={cardContent[0].title2}
@@ -96,7 +94,7 @@ const TextImprovement = () => {
           </div>
         </form>
       </div>
-      <div className="mb-28 md:mb-80">
+      <div className="mb-28 md:mb-[220px]">
         <HeaderText
           title1={itemContent[0].title1}
           title2={itemContent[0].title2}
@@ -109,8 +107,6 @@ const TextImprovement = () => {
           <div className=""></div>
         </div>
         <WhatIsText />
-        <YourParagraph />
-        <IdentifyTheMainPoint />
       </div>
       <Footer></Footer>
     </>

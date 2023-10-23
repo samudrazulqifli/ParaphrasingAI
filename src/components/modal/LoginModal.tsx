@@ -1,4 +1,4 @@
-import { useEffect} from "react";
+import { useEffect, useState} from "react";
 import imgClose from "../../assets/images/close.png";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { IFormLogin } from "../../interface/api/IFormInput";
@@ -14,7 +14,7 @@ const LoginModal = ({ showLogin, setShowLogin, setShowRegister }: any) => {
   } = useForm<IFormLogin>();
   const { loading, finish } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
-
+  const [showPassword, setShowPassword] = useState(false);
   useEffect(() => {
     if (showLogin == false) {
       document.body.style.overflow = "scroll";
@@ -68,11 +68,12 @@ const LoginModal = ({ showLogin, setShowLogin, setShowRegister }: any) => {
                 Password
               </div>
               <input
-                type="password"
+                type={showPassword ? 'text' : 'password'}
                 placeholder="Enter Your Password"
                 className="w-full rounded-[3.17px] h-[42.52px] bg-white text-black border-[#8d8d8d] border-[1.27px] px-[9.52px] focus:outline-none"
                 {...register("password", { required: true })}
               ></input>
+              <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute btn-sm btn-info text-[10px] rounded-lg my-[5px] font-semibold left-[78%]">{!showPassword ? "Show" :"Hide" }</button>
               {errors.password && <span>This field is required</span>}
               <div className="flex items-center gap-x-[1.9px] mt-[8.5px] mb-[9.16px]">
                 <button className="bg-[#D9D9D9] rounded-[1.9px] w-[9.52px] h-[9.81px] bg-transparent font-bold p-0 border-none ring-0 focus:outline-none text-[15.23px]"></button>

@@ -31,7 +31,7 @@ const ChatPdf = () => {
     <>
         <div className="relative">
           <div className="">
-            <div className="absolute m-auto mt-24 flex justify-center top-0 bottom-0 left-0 right-[2.5%]">
+            <div className="absolute m-auto mt-24 flex justify-center top-0 bottom-0 left-0 right-0">
               <CardChat />
             </div>
           </div>

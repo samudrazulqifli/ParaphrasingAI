@@ -22,11 +22,10 @@ const Footer = () => {
           </div>
           <div className="my-3 ml-10 flex flex-col gap-[5px] w-[80px] md:w-[160px] md:gap-[10px] md:my-4 md:mx-4 lg:gap-[20px] lg:w-[240px] lg:my-8 lg:mx-8">
             <h1 className="text-[6.25px] md:text-[12px] lg:text-[20px] font-bold">Navigation</h1>
-            <a href="/" className="text-white text-[4.69px]  md:text-[10px] lg:text-[15px] font-medium">Chat Pdf</a>
-            <a href="/" className="text-white text-[4.69px]  md:text-[10px] lg:text-[15px] font-medium">Text Paraphase</a>
-            <a href="/" className="text-white text-[4.69px]  md:text-[10px] lg:text-[15px] font-medium">Text Summarize</a>
-            <a href="/" className="text-white text-[4.69px]  md:text-[10px] lg:text-[15px] font-medium">Text Improvement</a>
-            <a href="/" className="text-white text-[4.69px]  md:text-[10px] lg:text-[15px] font-medium">Advertisement</a>
+            <a href="/chatPdf" className="text-white text-[4.69px]  md:text-[10px] lg:text-[15px] font-medium">Chat Pdf</a>
+            <a href="/textParapharse" className="text-white text-[4.69px]  md:text-[10px] lg:text-[15px] font-medium">Text Paraphase</a>
+            <a href="/textSummarize" className="text-white text-[4.69px]  md:text-[10px] lg:text-[15px] font-medium">Text Summarize</a>
+            <a href="/textImprovement" className="text-white text-[4.69px]  md:text-[10px] lg:text-[15px] font-medium">Text Improvement</a>
           </div>
         <div className="my-3 flex flex-col gap-[5px] md:w-[160px] md:gap-[10px] w-[100px] lg:gap-[20px] lg:w-[270px] mr-3 lg:my-8 lg:mx-8">
           <h1 className="text-[6.25px] md:text-[12px] lg:text-[20px] font-bold">Contact Us</h1>
