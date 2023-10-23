@@ -104,7 +104,7 @@ const TextParapharse = () => {
     <>
       <div className="relative">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="flex justify-center  m-auto mt-52 md:mt-[780px] left-0 right-0 top-0 bottom-0 absolute">
+          <div className="flex justify-center  m-auto mt-52 md:mt-[600px] left-0 right-0 top-0 bottom-0 absolute">
             <CardText
               title1={cardContent[0].title1}
               title2={cardContent[0].title2}
@@ -121,7 +121,7 @@ const TextParapharse = () => {
           </div>
         </form>
       </div>
-      <div className="mb-40 md:mb-68">
+      <div className="mb-40 md:mb-10">
         <HeaderText
           title1={itemContent[0].title1}
           title2={itemContent[0].title2}

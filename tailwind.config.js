@@ -20,4 +20,7 @@ export default {
       strategy: "class",
     }),
   ],
+  daisyui: {
+    themes: ["light"],
+  },
 };
