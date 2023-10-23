@@ -6,6 +6,9 @@ import CardChat from "../components/chatpdf/CardChat";
 import { useAppSelector } from "../redux/feature/hooks";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import CardListHomePage from "../components/CardListHomePage";
+import Chat from "../components/homepagelist/ChatPdf";
+import { DataHomePageProps } from "../interface/DataHomePageProps";
 
 const ChatPdf = () => {
   const itemContent: DataHeaderTextProps[] = [
@@ -18,6 +21,16 @@ const ChatPdf = () => {
     },
   ];
 
+  const chatPdfContent: DataHomePageProps[] = [
+    {
+      title: "",
+      subtitle: "Convert Text into Pdf file safely and easily",
+      description:
+        "Remember to review your PDF file after conversion to ensure it\nlooks as expected. These methods should help you safely\nand easily convert your text into a PDF file based on\nyour preferences and needs.",
+      page: "",
+    },
+  ];
+
   const { isLoggedIn } = useAppSelector((state) => state.auth);
   const navigation = useNavigate();
 
@@ -27,22 +40,33 @@ const ChatPdf = () => {
     }
   }, [isLoggedIn]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
-        <div className="relative">
-          <div className="">
-            <div className="absolute m-auto mt-24 flex justify-center top-0 bottom-0 left-0 right-[2.5%]">
-              <CardChat />
-            </div>
+      <div className="relative">
+        <div className="">
+          <div className="absolute m-auto mt-24 flex justify-center top-0 bottom-0 left-0 right-[2.5%]">
+            <CardChat />
           </div>
         </div>
-        <div className="md:mb-[475px] mb-[200px]">
-          <HeaderText
-            title1={itemContent[0].title1}
-            title2={itemContent[0].title2}
-            description={itemContent[0].description}
-          ></HeaderText>
-        </div>
+      </div>
+      <div className="md:mb-[475px] mb-[200px]">
+        <HeaderText
+          title1={itemContent[0].title1}
+          title2={itemContent[0].title2}
+          description={itemContent[0].description}
+        ></HeaderText>
+      </div>
+      <div className=" md:hidden block mb-5">
+        <CardListHomePage
+          bg={"#F4F4F4"}
+          {...chatPdfContent[0]}
+          childComp={<Chat />}
+        ></CardListHomePage>
+      </div>
       <Iklan />
       <Footer></Footer>
     </>

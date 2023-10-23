@@ -37,6 +37,10 @@ const TextImprovement = () => {
       navigation("/");
     }
   }, [isLoggedIn]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
   
   const options: Option[] = [
     {

@@ -31,6 +31,10 @@ const TextSummarize = () => {
     }
   }, [isLoggedIn]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   const options: Option[] = [
     {
       option: "financial_report",
