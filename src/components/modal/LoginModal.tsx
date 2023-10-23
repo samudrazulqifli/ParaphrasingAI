@@ -11,6 +11,7 @@ const LoginModal = ({ showLogin, setShowLogin, setShowRegister }: any) => {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm<IFormLogin>();
   const { loading, finish } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
@@ -20,6 +21,11 @@ const LoginModal = ({ showLogin, setShowLogin, setShowRegister }: any) => {
       document.body.style.overflow = "scroll";
     } else {
       document.body.style.overflow = "hidden";
+      if (localStorage.getItem("rememberme") == "true") {
+        setValue("username", localStorage.getItem("username") ?? "");
+        setValue("password", localStorage.getItem("password") ?? "");
+        setValue("rememberme", true);
+      }
     }
     return () => {};
   }, [showLogin]);
@@ -79,8 +85,12 @@ const LoginModal = ({ showLogin, setShowLogin, setShowRegister }: any) => {
                 })}
               ></input>
               {errors.password && <span>This field is required</span>}
-              <div className="flex items-center gap-x-[1.9px] mt-[8.5px] mb-[9.16px]">
-                {/* <input type="checkbox" className="bg-white" {...register("")}/> */}
+              <div className="flex  items-center gap-x-[1.9px] mt-[8.5px] mb-[9.16px]">
+                <input
+                  type="checkbox"
+                  className="bg-white fill-black"
+                  {...register("rememberme")}
+                />
                 <div className="text-[15.23px] text-[#1C1C1C] font-normal">
                   Remember Me
                 </div>

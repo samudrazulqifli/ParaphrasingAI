@@ -1,12 +1,18 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
 import arrowright from "../assets/images/right-arrows.png";
+import LandingModal from "./modal/LandingModal";
 
 const GetStarted = ({ page }: any) => {
+  const [showIklan, setShowIklan] = useState(false);
   return (
     <>
-      <Link
-        // onClick={() => navigateTo}
-        to={page}
+      <LandingModal
+        showModal={showIklan}
+        setShowModal={setShowIklan}
+        navigateTo={page}
+      />
+      <button
+        onClick={() => setShowIklan(true)}
         className="bg-[#03FFFE] md:max-w-[190px] md:h-[41px] text-black max-w-[47.38px] h-[10.22px] md:rounded-md rounded-sm flex flex-col justify-center items-center"
       >
         <div className="flex md:gap-3 gap-1 justify-center">
@@ -19,7 +25,7 @@ const GetStarted = ({ page }: any) => {
             alt=""
           />
         </div>
-      </Link>
+      </button>
     </>
   );
 };

@@ -15,6 +15,15 @@ const loginUser = async (data: IFormLogin) => {
   const response = await axios.post(URL + "account/login", data);
   if (response.data.data.token) {
     localStorage.setItem("token", `Bearer ${response.data.data.token}`);
+    if (data.rememberme) {
+      localStorage.setItem("rememberme", "true");
+      localStorage.setItem("username", data.username);
+      localStorage.setItem("password", data.password);
+    } else {
+      localStorage.removeItem("rememberme");
+      localStorage.removeItem("username");
+      localStorage.removeItem("password");
+    }
   }
   return response.data;
 };

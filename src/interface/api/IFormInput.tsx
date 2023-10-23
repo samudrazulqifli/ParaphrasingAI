@@ -9,7 +9,7 @@ export interface IFormRegister {
 export interface IFormLogin {
   username: string;
   password: string;
-  rememberme: false;
+  rememberme: boolean;
 }
 
 export interface IFormDelete {
