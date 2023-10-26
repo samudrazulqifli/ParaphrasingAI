@@ -1,10 +1,11 @@
-import { useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import imgClose from "../../assets/images/close.png";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { IFormLogin } from "../../interface/api/IFormInput";
 import { login } from "../../redux/feature/auth";
 import { useAppDispatch, useAppSelector } from "../../redux/feature/hooks";
 import ComponentReactLoading from "../loading/ComponentReactLoading";
+import { LiaEyeSolid, LiaEyeSlash } from "react-icons/lia";
 
 const LoginModal = ({ showLogin, setShowLogin, setShowRegister }: any) => {
   const {
@@ -75,7 +76,7 @@ const LoginModal = ({ showLogin, setShowLogin, setShowRegister }: any) => {
                 Password
               </div>
               <input
-                type={showPassword ? 'text' : 'password'}
+                type={showPassword ? "text" : "password"}
                 placeholder="Enter Your Password"
                 className="w-full rounded-[3.17px] h-[42.52px] bg-white text-black border-[#8d8d8d] border-[1.27px] px-[9.52px] focus:outline-none"
                 {...register("password", {
@@ -84,7 +85,17 @@ const LoginModal = ({ showLogin, setShowLogin, setShowRegister }: any) => {
                   maxLength: 20,
                 })}
               ></input>
-              <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute btn-sm btn-info text-[10px] rounded-lg my-[5px] font-semibold left-[78%]">{!showPassword ? "Show" :"Hide" }</button>
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute bottom-[42.5%] left-[85%]"
+              >
+                {!showPassword ? (
+                  <LiaEyeSolid fontSize="1.5em" />
+                ) : (
+                  <LiaEyeSlash fontSize="1.5em" />
+                )}
+              </button>
               {errors.password && <span>This field is required</span>}
               <div className="flex  items-center gap-x-[1.9px] mt-[8.5px] mb-[9.16px]">
                 <input
@@ -112,7 +123,7 @@ const LoginModal = ({ showLogin, setShowLogin, setShowRegister }: any) => {
                     setShowRegister(true);
                     setShowLogin(false);
                   }}
-                  className="text-[#3495CE] justify-self-center text-center bg-transparent font-bold p-0 border-none ring-0 focus:outline-none text-[15.23px]"
+                  className="text-[#3495CE] justify-self-center text-center bg-transparent font-bold p-0 border-none ring-0 focus:outline-none text-[15.23px] mb-6"
                 >
                   Sign up
                 </button>
