@@ -1,16 +1,13 @@
-import CardListHomePage from "../components/CardListHomePage";
 import CardText from "../components/CardText";
 import Footer from "../components/Footer";
 import HeaderText from "../components/HeaderText";
 import Iklan from "../components/Iklan";
 import ParapharsingDefine from "../components/ParapharsingDefine";
-import TextParaphrase from "../components/homepagelist/TextParaphrase";
 import FunctioningParaphrase from "../components/textparaphrase/FunctioningParaphrase";
 import ReceiveDataDriven from "../components/textparaphrase/ReceiveDataDriven";
 import { useEffect, useState } from "react";
 import { DataCardTextProps, Option } from "../interface/DataCardText";
 import { DataHeaderTextProps } from "../interface/DataHeaderText";
-import { DataHomePageProps } from "../interface/DataHomePageProps";
 import { DataTextParapharsingDefine } from "../interface/DataTextParapharsingDefine";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { ParaphraseInput } from "../interface/api/IFormInput";
@@ -35,9 +32,9 @@ const TextParapharse = () => {
   }, [isLoggedIn]);
 
   useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
-  
+    window.scrollTo(0, 0);
+  }, []);
+
   const options: Option[] = [
     {
       option: "general",
@@ -67,15 +64,7 @@ const TextParapharse = () => {
         " Gain valuable insights into this year's content marketing trends,successes, forecasts,\nand other essential information. Take inspiration from businesses similar to yours\n and explore fresh avenues for growth.",
     },
   ];
-  const cardDefine: DataHomePageProps[] = [
-    {
-      title: "",
-      subtitle: "Express our thoughts clearl an sincerel",
-      description:
-        "To enhance the effectiveness of oyur communication. The tool will:\n• Condense and reorganize sentences\n• Revise and tailor sentences as needed\n• Offer three distinct rephrased versions for any concept\n• Craft text that sounds natural to a native English audience.",
-      page: "",
-    },
-  ];
+
   const cardContent: DataCardTextProps[] = [
     {
       title1: "Your Text",
@@ -132,15 +121,10 @@ const TextParapharse = () => {
         title={defineText[0].title}
         description={defineText[0].description}
       ></ParapharsingDefine>
-      <div className="md:mb-10 mb-5">
-        <CardListHomePage
-          bg={""}
-          {...cardDefine[0]}
-          childComp={<TextParaphrase />}
-        ></CardListHomePage>
-      </div>
       <Iklan />
-      <ReceiveDataDriven />
+      <div className="mt-5">
+        <ReceiveDataDriven />
+      </div>
       <FunctioningParaphrase />
       <Footer></Footer>
     </>
