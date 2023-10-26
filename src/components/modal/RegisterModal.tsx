@@ -150,7 +150,7 @@ const RegisterModal = ({
                       setShowRegister(false);
                       setShowLogin(true);
                     }}
-                    className="text-[#3495CE] justify-self-center text-center bg-transparent font-bold p-0 border-none ring-0 focus:outline-none text-[15.23px]"
+                    className="mb-6 text-[#3495CE] justify-self-center text-center bg-transparent font-bold p-0 border-none ring-0 focus:outline-none text-[15.23px]"
                   >
                     Log in
                   </button>
