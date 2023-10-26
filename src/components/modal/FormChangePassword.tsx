@@ -1,13 +1,16 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import imgClose from "../../assets/images/close.png";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { IFormPassword } from "../../interface/api/IFormInput";
 import user from "../../axios/user.service";
 import { useAppSelector } from "../../redux/feature/hooks";
+import { BsEyeSlashFill, BsEyeSlash } from "react-icons/bs";
 
 const FormChangePassword = ({ visible, setVisible }: any) => {
   const { register, handleSubmit } = useForm<IFormPassword>();
   const { uuid } = useAppSelector((state) => state.auth);
+  const [showPasswordOld, setShowPasswordOld] = useState(false);
+  const [showPasswordNew, setShowPasswordNew] = useState(false);
 
   useEffect(() => {
     if (visible == false) {
@@ -45,17 +48,31 @@ const FormChangePassword = ({ visible, setVisible }: any) => {
                   <img src={imgClose} alt="" />
                 </button>
                 <input
-                  type="text"
+                  type={showPasswordOld ? "text" : "password"}
                   placeholder="Old Password"
-                  className="border-2 text-black md:mx-7 mx-2 mt-9 px-3"
+                  className="border-2 text-black md:mx-7 mx-2 mt-9 px-3 bg-white"
                   {...register("oldPassword")}
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowPasswordOld(!showPasswordOld)}
+                  className="absolute md:top-[22%] top-[30%] right-[5%] border-none focus:outline-none p-0 text-black text-[20px] rounded-lg font-semibold "
+                >
+                  {!showPasswordOld ? <BsEyeSlashFill /> : <BsEyeSlash />}
+                </button>
                 <input
-                  type="text"
+                  type={showPasswordNew ? "text" : "password"}
                   placeholder="New Password"
-                  className="border-2 text-black md:mx-7 mx-2 mt-3 px-3"
+                  className="border-2 text-black md:mx-7 mx-2 mt-3 px-3 bg-white"
                   {...register("newPassword")}
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowPasswordNew(!showPasswordNew)}
+                  className="absolute md:top-[45%] top-[58%] right-[5%] border-none focus:outline-none p-0 text-black text-[20px] rounded-lg font-semibold "
+                >
+                  {!showPasswordNew ? <BsEyeSlashFill /> : <BsEyeSlash />}
+                </button>
                 <div className="flex justify-center md:gap-[29.13px] gap-[11.66px] md:mb-[31.3px] mb-[12.5px] md:mt-3 mt-2">
                   <button
                     type="button"

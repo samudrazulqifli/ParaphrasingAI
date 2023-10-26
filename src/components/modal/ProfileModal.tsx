@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
-import imgPDF from "../../assets/images/uploaded_pdf.png";
+// import imgPDF from "../../assets/images/uploaded_pdf.png";
 import imgClose from "../../assets/images/close.png";
 import { logout } from "../../redux/feature/auth";
 import { useAppDispatch, useAppSelector } from "../../redux/feature/hooks";
 import { IFormDelete } from "../../interface/api/IFormInput";
 import userService from "../../axios/user.service";
 import FormChangePassword from "./FormChangePassword";
-import { ResponseListBook } from "../../interface/api/Response";
+// import { ResponseListBook } from "../../interface/api/Response";
 
 export const ProfileModal = () => {
   const dispatch = useAppDispatch();
   const [showModal, setShowModal] = useState(false);
   const [changePassword, setChangePassword] = useState(false);
-  const [data, setData] = useState<ResponseListBook[]>([]);
-  const { username, uuid, isLoggedIn } = useAppSelector((state) => state.auth);
+  // const [data, setData] = useState<ResponseListBook[]>([]);
+  const { username, uuid } = useAppSelector((state) => state.auth);
 
   const logoutUser = () => {
     dispatch(logout());
@@ -33,13 +33,13 @@ export const ProfileModal = () => {
     }
   };
 
-  useEffect(() => {
-    if (isLoggedIn) {
-      userService.getListBook(0, 3, (result: ResponseListBook[]) => {
-        setData(result);
-      });
-    }
-  }, [isLoggedIn]);
+  // useEffect(() => {
+  //   if (isLoggedIn) {
+  //     userService.getListBook(0, 3, (result: ResponseListBook[]) => {
+  //       setData(result);
+  //     });
+  //   }
+  // }, [isLoggedIn]);
 
   useEffect(() => {
     if (showModal == false) {
@@ -93,7 +93,8 @@ export const ProfileModal = () => {
                     *********
                   </div>
                 </div>
-                <div className="text-black border-2 border-[#d9d9d9] rounded-md mt-[3%] mx-[3vw] p-[2%]">
+                {/* pdf uploaded */}
+                {/* <div className="text-black border-2 border-[#d9d9d9] rounded-md mt-[3%] mx-[3vw] p-[2%]">
                   <div className="text-black">PDF Uploaded</div>
                   <div className="flex">
                     {data.map((_, idx) => {
@@ -107,7 +108,7 @@ export const ProfileModal = () => {
                       );
                     })}
                   </div>
-                </div>
+                </div> */}
                 <div className="text-black border-2 border-[#d9d9d9] rounded-md mx-[3vw] mt-[3%] mb-[10%] p-[2%]">
                   <div className="text-[#222222E5] md:text-[1.4vw] text-[3vw]">
                     Device
