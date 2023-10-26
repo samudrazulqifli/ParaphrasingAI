@@ -55,7 +55,7 @@ const LoginModal = ({ showLogin, setShowLogin, setShowRegister }: any) => {
                 onClick={() => {
                   setShowLogin(false);
                 }}
-                className="p-0 md:h-[22.64px] h-[9.02px] md:w-[22.64px] w-[8.96px] inset-y-0 border-none focus:outline-none absolute md:top-[5.22px] top-[2.01px] md:right-[18.39px] right-[7.78px]"
+                className="p-0 md:h-[22.64px] h-[15px] md:w-[22.64px] w-[15px] inset-y-0 border-none focus:outline-none absolute md:top-[5.22px] top-[2.01px] md:right-[18.39px] right-[7.78px]"
               >
                 <img src={imgClose} alt="" />
               </button>
@@ -91,19 +91,19 @@ const LoginModal = ({ showLogin, setShowLogin, setShowRegister }: any) => {
                 className="absolute bottom-[42.5%] left-[85%]"
               >
                 {!showPassword ? (
-                  <LiaEyeSolid fontSize="1.5em" />
-                ) : (
                   <LiaEyeSlash fontSize="1.5em" />
+                ) : (
+                  <LiaEyeSolid fontSize="1.5em" />
                 )}
               </button>
               {errors.password && <span>This field is required</span>}
-              <div className="flex  items-center gap-x-[1.9px] mt-[8.5px] mb-[9.16px]">
+              <div className="flex items-center gap-x-[1.9px] mt-[8.5px] mb-[9.16px]">
                 <input
                   type="checkbox"
-                  className="bg-white fill-black"
+                  className="appearance-none h-4 w-4 rounded-sm cursor-pointer bg-white border border-black text-black focus:ring-2"
                   {...register("rememberme")}
                 />
-                <div className="text-[15.23px] text-[#1C1C1C] font-normal">
+                <div className="text-[15.23px] mr-1 text-[#1C1C1C] font-normal">
                   Remember Me
                 </div>
               </div>

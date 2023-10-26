@@ -5,6 +5,7 @@ import { IFormRegister } from "../../interface/api/IFormInput";
 import { register as registerUser } from "../../redux/feature/auth";
 import { useAppDispatch, useAppSelector } from "../../redux/feature/hooks";
 import ComponentReactLoading from "../loading/ComponentReactLoading";
+import { LiaEyeSolid, LiaEyeSlash } from "react-icons/lia";
 
 const RegisterModal = ({
   showRegister,
@@ -19,6 +20,7 @@ const RegisterModal = ({
   const { loading, finish } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
   const [checked, setChecked] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     if (showRegister == false) {
@@ -51,7 +53,7 @@ const RegisterModal = ({
                   onClick={() => {
                     setShowRegister(false);
                   }}
-                  className="p-0 md:h-[22.64px] h-[9.02px] md:w-[22.64px] w-[8.96px] inset-y-0 border-none focus:outline-none absolute md:top-[5.22px] top-[2.01px] md:right-[18.39px] right-[7.78px]"
+                  className="p-0 md:h-[22.64px] h-[15px] md:w-[22.64px] w-[15px] inset-y-0 border-none focus:outline-none absolute md:top-[5.22px] top-[2.01px] md:right-[18.39px] right-[7.78px]"
                 >
                   <img src={imgClose} alt="" />
                 </button>
@@ -86,29 +88,42 @@ const RegisterModal = ({
                 <div className="text-[15.23px] font-bold text-[#1C1C1C] mt-[8.5px] mb-[5.89px]">
                   Password
                 </div>
-                <input
-                  {...register("password", {
-                    required: "Password is required",
-                    minLength: {
-                      value: 8,
-                      message: "Minimum 8 Characters required",
-                    },
-                    maxLength: {
-                      value: 20,
-                      message: "Maximum 20 Characters required",
-                    },
-                  })}
-                  type="password"
-                  placeholder="At least 8 characters"
-                  className="w-full rounded-[3.17px]  bg-white h-[42.52px] text-black border-[#8d8d8d] border-[1.27px] px-[9.52px] focus:outline-none"
-                ></input>
-                {errors.password && (
-                  <p role="alert">{errors.password.message}</p>
-                )}
+                <div className="relative">
+                  <input
+                    {...register("password", {
+                      required: "Password is required",
+                      minLength: {
+                        value: 8,
+                        message: "Minimum 8 Characters required",
+                      },
+                      maxLength: {
+                        value: 20,
+                        message: "Maximum 20 Characters required",
+                      },
+                    })}
+                    type={showPassword ? "text" : "password"}
+                    placeholder="At least 8 characters"
+                    className="w-full rounded-[3.17px]  bg-white h-[42.52px] text-black border-[#8d8d8d] border-[1.27px] px-[9.52px] focus:outline-none"
+                  ></input>
+                  {errors.password && (
+                    <p role="alert">{errors.password.message}</p>
+                  )}
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute top-[16%] left-[85%]"
+                  >
+                    {!showPassword ? (
+                      <LiaEyeSlash fontSize="1.5em" />
+                    ) : (
+                      <LiaEyeSolid fontSize="1.5em" />
+                    )}
+                  </button>
+                </div>
                 <div className="flex items-center gap-x-[1.9px] mt-[8.5px] mb-[9.16px]">
                   <input
                     type="checkbox"
-                    className="bg-white fill-black"
+                    className="appearance-none h-4 w-4 rounded-sm cursor-pointer bg-white border border-black text-black focus:ring-2"
                     checked={checked}
                     onChange={() => setChecked(!checked)}
                   />
