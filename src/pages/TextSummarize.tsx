@@ -30,18 +30,18 @@ const TextSummarize = () => {
   }, [isLoggedIn]);
 
   useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
+    window.scrollTo(0, 0);
+  }, []);
 
   const options: Option[] = [
     {
-      option: "financial_report",
+      option: "financial report",
     },
     {
-      option: "wikipedia_article",
+      option: "wikipedia article",
     },
     {
-      option: "academic_paper",
+      option: "academic paper",
     },
   ];
   const itemContent: DataHeaderTextProps[] = [

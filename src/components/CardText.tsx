@@ -92,7 +92,7 @@ const CardText: React.FC<Props> = (props: any) => {
             />
           )}
           <div
-            className={`top-[2%] left-[80%] absolute text-[4.8px] md:text-[15px] ${addClass}`}
+            className={`top-[2%] left-[83%] right-[40%] absolute text-[4.8px] md:text-[15px] ${addClass}`}
           >
             <select {...selected} className="bg-white text-black rounded-sm">
               {option.map((item, index) => (
