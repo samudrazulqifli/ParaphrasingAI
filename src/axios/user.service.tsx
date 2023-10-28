@@ -19,7 +19,12 @@ const changePassword = async (body: IFormPassword, cb: any) => {
     Swal.fire("Success", "Change password success", "success");
     cb(result.data.data);
   } catch (error) {
-    Swal.fire("Failed", "Change password failed", "error");
+    const responseError = error.response.data;
+    Swal.fire(
+      responseError.statusCode.toString(),
+      responseError.message,
+      "warning"
+    );
   }
 };
 
@@ -65,7 +70,12 @@ const deleteAccount = async (body: IFormDelete, cb: any) => {
       }
     });
   } catch (error) {
-    console.log(error);
+    const responseError = error.response.data;
+    Swal.fire(
+      responseError.statusCode.toString(),
+      responseError.message,
+      "warning"
+    );
   }
 };
 

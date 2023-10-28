@@ -36,10 +36,15 @@ const registerQuetionByURL = async (body: RegisterQuestionByUrl, cb: any) => {
         Authorization: localStorage.token,
       },
     });
-    Swal.fire("Success", "Chat is already to use", "success");
+    Swal.fire("Success", "Chat is already to use, ", "success");
     cb(result.data.data);
   } catch (error) {
-    console.log(error);
+    const responseError = error.response.data;
+    Swal.fire(
+      responseError.statusCode.toString(),
+      responseError.message,
+      "warning"
+    );
   }
 };
 
@@ -57,7 +62,12 @@ const registerBookByUploadFIle = async (body: RegisterByUpload, cb: any) => {
     Swal.fire("Success", "Chat is already to use", "success");
     cb(result.data.data);
   } catch (error) {
-    Swal.fire("Error", "Error upload pdf", "error");
+    const responseError = error.response.data;
+    Swal.fire(
+      responseError.statusCode.toString(),
+      responseError.message,
+      "warning"
+    );
   }
 };
 

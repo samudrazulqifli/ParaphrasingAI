@@ -1,6 +1,7 @@
 import axios from "axios";
 import { SummarizeInput } from "../interface/api/IFormInput";
 import { ResponseData } from "../interface/api/Response";
+import Swal from "sweetalert2";
 
 const textSummarize = async (data: SummarizeInput, cb: any) => {
   try {
@@ -13,10 +14,13 @@ const textSummarize = async (data: SummarizeInput, cb: any) => {
       },
     });
     cb(result.data);
-    console.log(data.type)
-    console.log(result.data)
   } catch (error) {
-    console.log(error);
+    const responseError = error.response.data;
+    Swal.fire(
+      responseError.statusCode.toString(),
+      responseError.message,
+      "warning"
+    );
   }
 };
 
