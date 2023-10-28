@@ -26,10 +26,7 @@ const CardText: React.FC<Props> = (props: any) => {
   }, [data as ResultForm]);
 
   const wordChange = (e: { target: { value: string } }) => {
-    let word = e.target.value.split(" ").length;
-    if (e.target.value.split(" ")[word - 1] === "") {
-      word = word - 1;
-    }
+    const word = e.target.value.length;
     setCount(word);
   };
   const resultChange = (textInput?: ResultForm | ResultForm2) => {
@@ -49,7 +46,7 @@ const CardText: React.FC<Props> = (props: any) => {
       data.map((item, index) => {
         const optionLabel = `option ${index + 1} : `;
         updatedValue += optionLabel + item.text + "\n" + "\n";
-        const words = item.text.split(" ").length;
+        const words = updatedValue.length;
         setResult(words);
       });
 
@@ -64,9 +61,10 @@ const CardText: React.FC<Props> = (props: any) => {
             {title1}
           </h2>
           <div className="text-[5px] md:text-[15px] md:mt-[310px] md:ml-[20px] font-medium absolute ml-[6px] mt-[77px] text-[#A7A7A7]">
-            {count}/200
+            {count}/500
           </div>
           <textarea
+            maxLength={500}
             className="resize-none text-black text-[5px] textarea-xs md:textarea-md w-[157px] md:w-[377px] h-[85px] md:h-[332px] border-[0.9px] rounded-sm md:rounded-[10px] bg-white placeholder:text-[5px] md:placeholder:text-[15px]"
             placeholder="Begin typing or paste text here..."
             {...form}
@@ -78,7 +76,7 @@ const CardText: React.FC<Props> = (props: any) => {
             {title2}
           </h2>
           <div className="text-[5px] md:text-[15px] md:mt-[310px] md:ml-[20px] font-medium absolute ml-[6px] mt-[77px] text-[#A7A7A7]">
-            {result}/200
+            {result}
           </div>
           {status === true ? (
             <>
@@ -87,6 +85,7 @@ const CardText: React.FC<Props> = (props: any) => {
             </>
           ) : (
             <textarea
+              disabled
               className="resize-none text-black text-[5px] textarea-xs md:textarea-md w-[157px] md:w-[377px] h-[85px] md:h-[332px] border-[0.9px] rounded-sm md:rounded-[10px] bg-white placeholder:text-[5px] md:placeholder:text-[15px]"
               defaultValue={value}
             />

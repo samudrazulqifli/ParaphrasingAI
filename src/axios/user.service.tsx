@@ -16,10 +16,10 @@ const changePassword = async (body: IFormPassword, cb: any) => {
         Authorization: localStorage.token,
       },
     });
-
+    Swal.fire("Success", "Change password success", "success");
     cb(result.data.data);
   } catch (error) {
-    console.log(error);
+    Swal.fire("Failed", "Change password failed", "error");
   }
 };
 
