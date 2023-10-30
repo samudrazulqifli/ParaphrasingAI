@@ -76,13 +76,13 @@ const Footer = () => {
           <hr className="mx-3" />
           <div className=" flex justify-end gap-5 mx-3 mt-2">
             <Link
-              to="/"
+              to="/termsUse&Policy"
               className="text-white text-[4.69px]  md:text-[10.7px] lg:text-[15px] font-medium "
             >
               Terms of Use
             </Link>
             <Link
-              to="/"
+              to="/termsUse&Policy"
               className="text-white text-[4.69px]  md:text-[10.7px] lg:text-[15px] font-medium mr-4 lg:mr-36"
             >
               Privacy Policy
