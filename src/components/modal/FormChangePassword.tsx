@@ -4,7 +4,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { IFormPassword } from "../../interface/api/IFormInput";
 import user from "../../axios/user.service";
 import { useAppSelector } from "../../redux/feature/hooks";
-import { BsEyeSlashFill, BsEyeSlash } from "react-icons/bs";
+import { LiaEyeSlash, LiaEyeSolid } from "react-icons/lia";
 
 const FormChangePassword = ({ visible, setVisible }: any) => {
   const { register, handleSubmit } = useForm<IFormPassword>();
@@ -58,7 +58,7 @@ const FormChangePassword = ({ visible, setVisible }: any) => {
                   onClick={() => setShowPasswordOld(!showPasswordOld)}
                   className="absolute md:top-[22%] top-[30%] right-[5%] border-none focus:outline-none p-0 text-black text-[20px] rounded-lg font-semibold "
                 >
-                  {!showPasswordOld ? <BsEyeSlashFill /> : <BsEyeSlash />}
+                  {!showPasswordOld ? <LiaEyeSlash /> : <LiaEyeSolid />}
                 </button>
                 <input
                   type={showPasswordNew ? "text" : "password"}
@@ -71,7 +71,7 @@ const FormChangePassword = ({ visible, setVisible }: any) => {
                   onClick={() => setShowPasswordNew(!showPasswordNew)}
                   className="absolute md:top-[45%] top-[58%] right-[5%] border-none focus:outline-none p-0 text-black text-[20px] rounded-lg font-semibold "
                 >
-                  {!showPasswordNew ? <BsEyeSlashFill /> : <BsEyeSlash />}
+                  {!showPasswordNew ? <LiaEyeSlash /> : <LiaEyeSolid />}
                 </button>
                 <div className="flex justify-center md:gap-[29.13px] gap-[11.66px] md:mb-[31.3px] mb-[12.5px] md:mt-3 mt-2">
                   <button

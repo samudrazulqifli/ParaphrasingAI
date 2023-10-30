@@ -19,7 +19,12 @@ export const register = createAsyncThunk(
       Swal.fire("Success", "Register Success", "success");
       return response.data;
     } catch (error) {
-      Swal.fire("Failed", "Register failed", "error");
+      const responseError = error.response.data;
+      Swal.fire(
+        responseError.statusCode.toString(),
+        responseError.message,
+        "warning"
+      );
       const message =
         (error.response &&
           error.response.data &&
@@ -38,11 +43,16 @@ export const login = createAsyncThunk(
     try {
       const data = await AuthService.loginUser(body);
       const userData: UserDecode = jwt_decode(data.data.token);
-      console.log(userData)
+      console.log(userData);
       Swal.fire("Success", "Login Success", "success");
       return { username: userData.username, uuid: userData.uuid };
     } catch (error) {
-      Swal.fire("Failed", "Login Failed", "warning");
+      const responseError = error.response.data;
+      Swal.fire(
+        responseError.statusCode.toString(),
+        responseError.message,
+        "warning"
+      );
       const message =
         (error.response &&
           error.response.data &&
