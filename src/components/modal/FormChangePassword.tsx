@@ -36,6 +36,7 @@ const FormChangePassword = ({ visible, setVisible }: any) => {
             <div className="relative md:w-3/6 w-5/6 my-6 rounded-[11.81px] mx-auto md:h-[391.94px] h-[156.92px]">
               {/*content*/}
               <form
+                autoComplete="off"
                 className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none"
                 onSubmit={handleSubmit(onSubmit)}
               >
@@ -51,7 +52,18 @@ const FormChangePassword = ({ visible, setVisible }: any) => {
                   type={showPasswordOld ? "text" : "password"}
                   placeholder="Old Password"
                   className="border-2 text-black md:mx-7 mx-2 mt-9 px-3 bg-white"
-                  {...register("oldPassword")}
+                  {...register("oldPassword", {
+                    required: "Old Password is required",
+                    minLength: {
+                      value: 8,
+                      message: "Minimum 8 Characters required",
+                    },
+                    maxLength: {
+                      value: 20,
+                      message: "Maximum 20 Characters required",
+                    },
+                    shouldUnregister: true,
+                  })}
                 />
                 <button
                   type="button"
@@ -64,7 +76,18 @@ const FormChangePassword = ({ visible, setVisible }: any) => {
                   type={showPasswordNew ? "text" : "password"}
                   placeholder="New Password"
                   className="border-2 text-black md:mx-7 mx-2 mt-3 px-3 bg-white"
-                  {...register("newPassword")}
+                  {...register("newPassword", {
+                    required: "New Password is required",
+                    minLength: {
+                      value: 8,
+                      message: "Minimum 8 Characters required",
+                    },
+                    maxLength: {
+                      value: 20,
+                      message: "Maximum 20 Characters required",
+                    },
+                    shouldUnregister: true,
+                  })}
                 />
                 <button
                   type="button"

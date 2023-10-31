@@ -17,7 +17,7 @@ const RegisterModal = ({
     handleSubmit,
     formState: { errors },
   } = useForm<IFormRegister>();
-  const { loading, finish } = useAppSelector((state) => state.auth);
+  const { loading, finish, failed } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
   const [checked, setChecked] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -36,7 +36,7 @@ const RegisterModal = ({
   };
 
   useEffect(() => {
-    if (finish) {
+    if (finish && !failed) {
       setShowRegister(false);
     }
   }, [finish]);
@@ -46,7 +46,7 @@ const RegisterModal = ({
       {showRegister ? (
         <>
           <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
               <div className="w-[330px] text-black mx-auto mt-[3%] px-[19px] font-poppins bg-white rounded-md pt-2 relative">
                 <button
                   type="button"
@@ -68,23 +68,35 @@ const RegisterModal = ({
                   type="text"
                   {...register("username", {
                     required: "Username is required",
+                    shouldUnregister: true,
                   })}
+                  autoComplete="off"
                   placeholder="Enter Your Username"
                   className="w-full rounded-[3.17px] bg-white h-[42.52px] text-black border-[#8d8d8d] border-[1.27px] px-[9.52px] focus:outline-none"
                 ></input>
                 {errors.username && (
-                  <p role="alert">{errors.username.message}</p>
+                  <p role="alert" className="text-red-600">
+                    {errors.username.message}
+                  </p>
                 )}
                 <div className="text-[15.23px] font-bold text-[#1C1C1C] mt-[8.5px] mb-[5.89px]">
                   Name
                 </div>
                 <input
-                  {...register("name", { required: "Name is required" })}
+                  {...register("name", {
+                    required: "Name is required",
+                    shouldUnregister: true,
+                  })}
                   type="text"
+                  autoComplete="off"
                   placeholder="At least 8 characters"
                   className="w-full rounded-[3.17px]  bg-white h-[42.52px] text-black border-[#8d8d8d] border-[1.27px] px-[9.52px] focus:outline-none"
                 ></input>
-                {errors.name && <p role="alert">{errors.name.message}</p>}
+                {errors.name && (
+                  <p role="alert" className="text-red-600">
+                    {errors.name.message}
+                  </p>
+                )}
                 <div className="text-[15.23px] font-bold text-[#1C1C1C] mt-[8.5px] mb-[5.89px]">
                   Password
                 </div>
@@ -100,13 +112,17 @@ const RegisterModal = ({
                         value: 20,
                         message: "Maximum 20 Characters required",
                       },
+                      shouldUnregister: true,
                     })}
+                    autoComplete="new-password"
                     type={showPassword ? "text" : "password"}
                     placeholder="At least 8 characters"
                     className="w-full rounded-[3.17px]  bg-white h-[42.52px] text-black border-[#8d8d8d] border-[1.27px] px-[9.52px] focus:outline-none"
                   ></input>
                   {errors.password && (
-                    <p role="alert">{errors.password.message}</p>
+                    <p role="alert" className="text-red-600">
+                      {errors.password.message}
+                    </p>
                   )}
                   <button
                     type="button"
@@ -150,8 +166,8 @@ const RegisterModal = ({
                 </div>
                 <button
                   type="submit"
-                  className={`h-[42.52px] w-full rounded-[3.17px] bg-[#3495CE] text-white text-[15.23px] font-bold border-none ring-0 focus:outline-none ${
-                    !checked ? "btn-disabled" : ""
+                  className={`h-[42.52px] w-full rounded-[3.17px]  text-white text-[15.23px] font-bold border-none ring-0 focus:outline-none ${
+                    !checked ? "btn-disabled bg-gray-400" : "bg-[#3495CE]"
                   }`}
                 >
                   Sign up
