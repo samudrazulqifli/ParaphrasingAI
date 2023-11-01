@@ -71,7 +71,9 @@ const LoginModal = ({ showLogin, setShowLogin, setShowRegister }: any) => {
                 placeholder="Enter Your Username"
                 className="w-full rounded-[3.17px] h-[42.52px] bg-white text-black border-[#8d8d8d] border-[1.27px] px-[9.52px] focus:outline-none"
               />
-              {errors.username && <span>This field is required</span>}
+              {errors.username && (
+                <span className="text-red-500">This field is required</span>
+              )}
               <div className="text-[15.23px] font-bold text-[#1C1C1C] mt-[8.5px] mb-[5.89px]">
                 Password
               </div>
@@ -97,7 +99,9 @@ const LoginModal = ({ showLogin, setShowLogin, setShowRegister }: any) => {
                     <LiaEyeSolid fontSize="1.5em" />
                   )}
                 </button>
-                {errors.password && <span>This field is required</span>}
+                {errors.password && (
+                  <span className="text-red-500">This field is required</span>
+                )}
               </div>
               <div className="flex items-center gap-x-[1.9px] mt-[8.5px] mb-[9.16px]">
                 <input
