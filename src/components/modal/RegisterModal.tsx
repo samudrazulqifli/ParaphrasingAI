@@ -73,7 +73,9 @@ const RegisterModal = ({
                   className="w-full rounded-[3.17px] bg-white h-[42.52px] text-black border-[#8d8d8d] border-[1.27px] px-[9.52px] focus:outline-none"
                 ></input>
                 {errors.username && (
-                  <p role="alert">{errors.username.message}</p>
+                  <p role="alert" className="text-red-500">
+                    {errors.username.message}
+                  </p>
                 )}
                 <div className="text-[15.23px] font-bold text-[#1C1C1C] mt-[8.5px] mb-[5.89px]">
                   Name
@@ -84,7 +86,11 @@ const RegisterModal = ({
                   placeholder="At least 8 characters"
                   className="w-full rounded-[3.17px]  bg-white h-[42.52px] text-black border-[#8d8d8d] border-[1.27px] px-[9.52px] focus:outline-none"
                 ></input>
-                {errors.name && <p role="alert">{errors.name.message}</p>}
+                {errors.name && (
+                  <p role="alert" className="text-red-500">
+                    {errors.name.message}
+                  </p>
+                )}
                 <div className="text-[15.23px] font-bold text-[#1C1C1C] mt-[8.5px] mb-[5.89px]">
                   Password
                 </div>
@@ -106,7 +112,9 @@ const RegisterModal = ({
                     className="w-full rounded-[3.17px]  bg-white h-[42.52px] text-black border-[#8d8d8d] border-[1.27px] px-[9.52px] focus:outline-none"
                   ></input>
                   {errors.password && (
-                    <p role="alert">{errors.password.message}</p>
+                    <p role="alert" className="text-red-500">
+                      {errors.password.message}
+                    </p>
                   )}
                   <button
                     type="button"
