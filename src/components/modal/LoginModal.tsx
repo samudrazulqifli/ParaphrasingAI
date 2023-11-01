@@ -17,6 +17,20 @@ const LoginModal = ({ showLogin, setShowLogin, setShowRegister }: any) => {
   const { loading, finish, failed } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
   const [showPassword, setShowPassword] = useState(false);
+  const [stateUsername, setStateUsername] = useState<string>("");
+  const [statePassword, setStatePassword] = useState<string>("");
+  const [disableButton, setDisableButton] = useState(true);
+
+  useEffect(() => {
+    console.log(stateUsername);
+    if (statePassword != "" && stateUsername != "") {
+      console.log("masuk");
+      setDisableButton(false);
+    }else{
+      setDisableButton(true);
+    }
+  }, [stateUsername, statePassword]);
+
   useEffect(() => {
     if (showLogin == false) {
       document.body.style.overflow = "scroll";
@@ -72,6 +86,7 @@ const LoginModal = ({ showLogin, setShowLogin, setShowRegister }: any) => {
                   required: "Username is required",
                   shouldUnregister: true,
                 })}
+                onChange={(e) => setStateUsername(e.target.value)}
                 type="text"
                 placeholder="Enter Your Username"
                 className="w-full rounded-[3.17px] h-[42.52px] bg-white text-black border-[#8d8d8d] border-[1.27px] px-[9.52px] focus:outline-none"
@@ -102,6 +117,7 @@ const LoginModal = ({ showLogin, setShowLogin, setShowRegister }: any) => {
                     },
                     shouldUnregister: true,
                   })}
+                  onChange={(e) => setStatePassword(e.target.value)}
                 ></input>
                 <button
                   type="button"
@@ -132,7 +148,9 @@ const LoginModal = ({ showLogin, setShowLogin, setShowRegister }: any) => {
               </div>
               <button
                 type="submit"
-                className="h-[42.52px] w-full rounded-[3.17px] bg-[#3495CE] text-white text-[15.23px] font-bold border-none ring-0 focus:outline-none"
+                className={`h-[42.52px] w-full rounded-[3.17px] text-white text-[15.23px] font-bold border-none ring-0 focus:outline-none ${
+                  disableButton ? "btn-disabled bg-gray-500" : "bg-[#3495CE]"
+                }`}
               >
                 Log in
               </button>
