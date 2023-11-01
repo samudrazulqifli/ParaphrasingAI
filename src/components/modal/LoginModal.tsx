@@ -26,7 +26,7 @@ const LoginModal = ({ showLogin, setShowLogin, setShowRegister }: any) => {
     if (statePassword != "" && stateUsername != "") {
       console.log("masuk");
       setDisableButton(false);
-    }else{
+    } else {
       setDisableButton(true);
     }
   }, [stateUsername, statePassword]);
