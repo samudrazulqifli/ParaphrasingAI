@@ -13,6 +13,7 @@ import "react-pdf/dist/Page/TextLayer.css";
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import ChatBodyMobile from "./ChatBodyMobile";
 import ChatWeb from "./ChatWeb";
+import { useAppSelector } from "../../redux/feature/hooks";
 
 const CardChat = () => {
   const [numPages, setNumPages] = useState<number>(0);
@@ -31,6 +32,7 @@ const CardChat = () => {
   const [visiblePages, setVisiblePages] = useState({});
   const [loadingPdf, setLoadingPdf] = useState(false);
   const [loadingChat, setLoadingChat] = useState(false);
+  const { username } = useAppSelector((state) => state.auth);
 
   const messagesColumnRef = useRef<HTMLDivElement>(null);
 
@@ -148,6 +150,7 @@ const CardChat = () => {
           setSrc(response.sourceId);
           setDisplayChat([]);
           setLoadingPdf(false);
+          setChatData(`Hi ${username}, How may i help you?`, "server");
         }
       );
     }

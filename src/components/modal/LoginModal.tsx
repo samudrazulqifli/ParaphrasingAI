@@ -14,9 +14,23 @@ const LoginModal = ({ showLogin, setShowLogin, setShowRegister }: any) => {
     formState: { errors },
     setValue,
   } = useForm<IFormLogin>();
-  const { loading, finish } = useAppSelector((state) => state.auth);
+  const { loading, finish, failed } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
   const [showPassword, setShowPassword] = useState(false);
+  const [stateUsername, setStateUsername] = useState<string>("");
+  const [statePassword, setStatePassword] = useState<string>("");
+  const [disableButton, setDisableButton] = useState(true);
+
+  useEffect(() => {
+    console.log(stateUsername);
+    if (statePassword != "" && stateUsername != "") {
+      console.log("masuk");
+      setDisableButton(false);
+    } else {
+      setDisableButton(true);
+    }
+  }, [stateUsername, statePassword]);
+
   useEffect(() => {
     if (showLogin == false) {
       document.body.style.overflow = "scroll";
@@ -32,7 +46,7 @@ const LoginModal = ({ showLogin, setShowLogin, setShowRegister }: any) => {
   }, [showLogin]);
 
   useEffect(() => {
-    if (finish) {
+    if (finish && !failed) {
       setShowLogin(false);
     }
   }, [finish]);
@@ -48,6 +62,7 @@ const LoginModal = ({ showLogin, setShowLogin, setShowRegister }: any) => {
           <div className="justify-center text-black items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
             <form
               onSubmit={handleSubmit(onSubmit)}
+              autoComplete="off"
               className="w-[330px] mx-auto mt-[3%] px-[19px] bg-white rounded-md shadow-sm font-poppins relative"
             >
               <button
@@ -66,27 +81,43 @@ const LoginModal = ({ showLogin, setShowLogin, setShowRegister }: any) => {
                 Username
               </div>
               <input
-                {...register("username", { required: true })}
+                autoComplete="off"
+                {...register("username", {
+                  required: "Username is required",
+                  shouldUnregister: true,
+                })}
+                onChange={(e) => setStateUsername(e.target.value)}
                 type="text"
                 placeholder="Enter Your Username"
                 className="w-full rounded-[3.17px] h-[42.52px] bg-white text-black border-[#8d8d8d] border-[1.27px] px-[9.52px] focus:outline-none"
               />
               {errors.username && (
-                <span className="text-red-500">This field is required</span>
+                <p role="alert" className="text-red-600">
+                  {errors.username.message}
+                </p>
               )}
               <div className="text-[15.23px] font-bold text-[#1C1C1C] mt-[8.5px] mb-[5.89px]">
                 Password
               </div>
               <div className="relative">
                 <input
+                  autoComplete="new-password"
                   type={showPassword ? "text" : "password"}
                   placeholder="Enter Your Password"
                   className="w-full rounded-[3.17px] h-[42.52px] bg-white text-black border-[#8d8d8d] border-[1.27px] px-[9.52px] focus:outline-none"
                   {...register("password", {
-                    required: true,
-                    minLength: 8,
-                    maxLength: 20,
+                    required: "Password is required",
+                    minLength: {
+                      value: 8,
+                      message: "Minimum 8 Characters required",
+                    },
+                    maxLength: {
+                      value: 20,
+                      message: "Maximum 20 Characters required",
+                    },
+                    shouldUnregister: true,
                   })}
+                  onChange={(e) => setStatePassword(e.target.value)}
                 ></input>
                 <button
                   type="button"
@@ -100,7 +131,9 @@ const LoginModal = ({ showLogin, setShowLogin, setShowRegister }: any) => {
                   )}
                 </button>
                 {errors.password && (
-                  <span className="text-red-500">This field is required</span>
+                  <p role="alert" className="text-red-600">
+                    {errors.password.message}
+                  </p>
                 )}
               </div>
               <div className="flex items-center gap-x-[1.9px] mt-[8.5px] mb-[9.16px]">
@@ -115,7 +148,9 @@ const LoginModal = ({ showLogin, setShowLogin, setShowRegister }: any) => {
               </div>
               <button
                 type="submit"
-                className="h-[42.52px] w-full rounded-[3.17px] bg-[#3495CE] text-white text-[15.23px] font-bold border-none ring-0 focus:outline-none"
+                className={`h-[42.52px] w-full rounded-[3.17px] text-white text-[15.23px] font-bold border-none ring-0 focus:outline-none ${
+                  disableButton ? "btn-disabled bg-gray-500" : "bg-[#3495CE]"
+                }`}
               >
                 Log in
               </button>

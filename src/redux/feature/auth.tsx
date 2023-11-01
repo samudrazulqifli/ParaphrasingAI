@@ -76,6 +76,7 @@ const initialState = user
       uuid: decodeToken(user).uuid,
       loading: false,
       finish: false,
+      failed: false,
     }
   : {
       isLoggedIn: false,
@@ -83,6 +84,7 @@ const initialState = user
       uuid: null,
       loading: false,
       finish: false,
+      failed: false
     };
 
 const authSlice = createSlice({
@@ -92,25 +94,30 @@ const authSlice = createSlice({
     builder.addCase(register.pending, (state) => {
       state.loading = true;
       state.finish = false;
+      state.failed = false;
     });
     builder.addCase(register.fulfilled, (state) => {
       state.loading = false;
       state.finish = false;
       state.isLoggedIn = false;
+      state.failed = false;
     });
     builder.addCase(register.rejected, (state) => {
       state.loading = false;
       state.finish = true;
       state.isLoggedIn = false;
+      state.failed = true;
     });
     builder.addCase(login.pending, (state) => {
       state.loading = true;
       state.finish = false;
+      state.failed = false;
     });
     builder.addCase(login.fulfilled, (state, action) => {
       state.finish = true;
       state.loading = false;
       state.isLoggedIn = true;
+      state.failed = false;
       if (action.payload.username) {
         state.username = action.payload.username;
       }
@@ -124,11 +131,13 @@ const authSlice = createSlice({
       state.isLoggedIn = false;
       state.username = null;
       state.uuid = null;
+      state.failed = true;
     });
     builder.addCase(logout.fulfilled, (state) => {
       state.isLoggedIn = false;
       state.username = null;
       state.uuid = null;
+      state.failed = false;
     });
   },
   reducers: {},
