@@ -43,8 +43,8 @@ export const ProfileModal = () => {
       // });
       if (uuid) {
         userService.getAccount(uuid, (result: ResponseGetAccount) => {
-          setUsername(result.username)
-          setName(result.name)
+          setUsername(result.username);
+          setName(result.name);
         });
       }
     }
