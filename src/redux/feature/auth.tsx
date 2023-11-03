@@ -17,7 +17,6 @@ export const register = createAsyncThunk(
       const data = await AuthService.registerUser(body);
       thunkAPI.dispatch(setMessage("Register Success"));
       const userData: UserDecode = jwt_decode(data.data.token);
-      console.log(userData);
       Swal.fire("Success", "Register Success", "success");
       return { username: userData.username, uuid: userData.uuid };
     } catch (error) {
@@ -45,7 +44,6 @@ export const login = createAsyncThunk(
     try {
       const data = await AuthService.loginUser(body);
       const userData: UserDecode = jwt_decode(data.data.token);
-      console.log(userData);
       Swal.fire("Success", "Login Success", "success");
       return { username: userData.username, uuid: userData.uuid };
     } catch (error) {
@@ -84,7 +82,7 @@ const initialState = user
       uuid: null,
       loading: false,
       finish: false,
-      failed: false
+      failed: false,
     };
 
 const authSlice = createSlice({

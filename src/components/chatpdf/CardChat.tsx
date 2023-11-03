@@ -111,7 +111,6 @@ const CardChat = () => {
 
     async function get() {
       setLoadingChat(true);
-      console.log(src);
       const inputForm: RegisterQuestion = {
         src: src,
         messages: JSON.stringify([{ role: "user", content: query }]),

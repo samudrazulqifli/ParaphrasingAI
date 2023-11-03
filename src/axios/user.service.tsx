@@ -6,7 +6,6 @@ import Swal from "sweetalert2";
 const URL = "https://api.documentorai.com/";
 
 const changePassword = async (body: IFormPassword, cb: any) => {
-  console.log(body);
   try {
     const result = await axios({
       method: "PATCH",
@@ -99,7 +98,7 @@ const userService = {
   changePassword,
   deleteAccount,
   getListBook,
-  getAccount
+  getAccount,
 };
 
 export default userService;
