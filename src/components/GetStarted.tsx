@@ -1,15 +1,15 @@
 import { useState } from "react";
 import arrowright from "../assets/images/right-arrows.png";
-import LandingModal from "./modal/LandingModal";
-import { useAppSelector } from "../redux/feature/hooks";
 import LoginModal from "./modal/LoginModal";
 import RegisterModal from "./modal/RegisterModal";
+import { useAppSelector } from "../redux/feature/hooks";
+import LandingModal from "./modal/LandingModal";
 
 const GetStarted = ({ page }: any) => {
-  const [showIklan, setShowIklan] = useState(false);
   const { isLoggedIn } = useAppSelector((state) => state.auth);
   const [showLogin, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
+  const [showIklan, setShowIklan] = useState(false)
 
   return (
     <>
