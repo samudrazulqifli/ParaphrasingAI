@@ -1,8 +1,41 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import logo from "../images/documentorai-05 3.svg";
+import { useAppSelector } from "../redux/feature/hooks";
+import { useState } from "react";
+import LoginModal from "./modal/LoginModal";
+import RegisterModal from "./modal/RegisterModal";
+import LandingModal from "./modal/LandingModal";
 const Footer = () => {
+  const { isLoggedIn } = useAppSelector((state) => state.auth);
+  const [showLogin, setShowLogin] = useState(false);
+  const [showIklan, setShowIklan] = useState(false);
+  const [page, setPage] = useState("");
+  const [showRegister, setShowRegister] = useState(false);
+  const location = useLocation();
+
+  const navigateAndOpenAds = (pageTo: string) => {
+    if (location.pathname != pageTo) {
+      setPage(pageTo);
+      setShowIklan(true);
+    }
+  };
   return (
     <>
+      <LoginModal
+        showLogin={showLogin}
+        setShowLogin={setShowLogin}
+        setShowRegister={setShowRegister}
+      />
+      <RegisterModal
+        showRegister={showRegister}
+        setShowRegister={setShowRegister}
+        setShowLogin={setShowLogin}
+      />
+      <LandingModal
+        showModal={showIklan}
+        setShowModal={setShowIklan}
+        navigateTo={page}
+      />
       <div>
         <div className="font-montserrat bg-footer_bg bg-cover h-[118.13px] md:h-[200px] lg:h-[378px]">
           <div className="mx-auto flex justify-between gap-3 w-full lg:h-[330px] md:h-[165px]">
@@ -25,25 +58,45 @@ const Footer = () => {
                 Navigation
               </h1>
               <Link
-                to="/chatPdf"
+                to={""}
+                onClick={() => {
+                  isLoggedIn
+                    ? navigateAndOpenAds("/chatPdf")
+                    : setShowLogin(true);
+                }}
                 className="text-white text-[4.69px]  md:text-[10px] lg:text-[15px] font-medium"
               >
                 Chat Pdf
               </Link>
               <Link
-                to="/textParapharse"
+                to={""}
+                onClick={() => {
+                  isLoggedIn
+                    ? navigateAndOpenAds("/textParapharse")
+                    : setShowLogin(true);
+                }}
                 className="text-white text-[4.69px]  md:text-[10px] lg:text-[15px] font-medium"
               >
                 Text Paraphase
               </Link>
               <Link
-                to="/textSummarize"
+                to={""}
+                onClick={() => {
+                  isLoggedIn
+                    ? navigateAndOpenAds("/textSummarize")
+                    : setShowLogin(true);
+                }}
                 className="text-white text-[4.69px]  md:text-[10px] lg:text-[15px] font-medium"
               >
                 Text Summarize
               </Link>
               <Link
-                to="/textImprovement"
+                to={""}
+                onClick={() => {
+                  isLoggedIn
+                    ? navigateAndOpenAds("/textImprovement")
+                    : setShowLogin(true);
+                }}
                 className="text-white text-[4.69px]  md:text-[10px] lg:text-[15px] font-medium"
               >
                 Text Improvement

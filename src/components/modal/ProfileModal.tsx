@@ -75,7 +75,7 @@ export const ProfileModal = () => {
                 </button>
                 <div className="text-black border-2 border-[#d9d9d9] rounded-md mt-[10%] mx-[3vw] p-[2%]">
                   <div className="text-[#626262] md:text-[1.2vw] text-[3vw]">
-                    Your Name
+                    Your User Name
                   </div>
                   <div className="text-[#222222E5] md:text-[1.2vw] text-[3vw]">
                     {username}

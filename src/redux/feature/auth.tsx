@@ -14,10 +14,12 @@ export const register = createAsyncThunk(
   "auth/register",
   async (body: IFormRegister, thunkAPI) => {
     try {
-      const response = await AuthService.registerUser(body);
+      const data = await AuthService.registerUser(body);
       thunkAPI.dispatch(setMessage("Register Success"));
+      const userData: UserDecode = jwt_decode(data.data.token);
+      console.log(userData);
       Swal.fire("Success", "Register Success", "success");
-      return response.data;
+      return { username: userData.username, uuid: userData.uuid };
     } catch (error) {
       const responseError = error.response.data;
       Swal.fire(
@@ -96,11 +98,17 @@ const authSlice = createSlice({
       state.finish = false;
       state.failed = false;
     });
-    builder.addCase(register.fulfilled, (state) => {
+    builder.addCase(register.fulfilled, (state, action) => {
       state.loading = false;
-      state.finish = false;
-      state.isLoggedIn = false;
+      state.finish = true;
+      state.isLoggedIn = true;
       state.failed = false;
+      if (action.payload.username) {
+        state.username = action.payload.username;
+      }
+      if (action.payload.uuid) {
+        state.uuid = action.payload.uuid;
+      }
     });
     builder.addCase(register.rejected, (state) => {
       state.loading = false;
