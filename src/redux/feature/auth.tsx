@@ -73,6 +73,7 @@ const initialState = user
   ? {
       isLoggedIn: true,
       uuid: decodeToken(user).uuid,
+      username: decodeToken(user).username,
       loading: false,
       finish: false,
       failed: false,
@@ -80,6 +81,7 @@ const initialState = user
   : {
       isLoggedIn: false,
       uuid: null,
+      username: "",
       loading: false,
       finish: false,
       failed: false,
@@ -99,6 +101,9 @@ const authSlice = createSlice({
       state.finish = true;
       state.isLoggedIn = true;
       state.failed = false;
+      if (action.payload.username) {
+        state.username = action.payload.username;
+      }
       if (action.payload.uuid) {
         state.uuid = action.payload.uuid;
       }
@@ -106,6 +111,7 @@ const authSlice = createSlice({
     builder.addCase(register.rejected, (state) => {
       state.loading = false;
       state.finish = true;
+      state.username = "";
       state.isLoggedIn = false;
       state.failed = true;
     });
