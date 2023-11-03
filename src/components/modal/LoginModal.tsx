@@ -85,12 +85,10 @@ const LoginModal = ({ showLogin, setShowLogin, setShowRegister }: any) => {
                 autoComplete="off"
                 {...register("username", {
                   required: "Username is required",
-                  // shouldUnregister: true,
+                  shouldUnregister: true,
                 })}
-                onFocus={(e) => setStateUsername(e.target.value)}
                 onChange={(e) => setStateUsername(e.target.value)}
                 type="text"
-                defaultValue={localStorage.getItem("username")!}
                 placeholder="Enter Your Username"
                 className="w-full rounded-[3.17px] h-[42.52px] bg-white text-black border-[#8d8d8d] border-[1.27px] px-[9.52px] focus:outline-none"
               />
@@ -118,15 +116,9 @@ const LoginModal = ({ showLogin, setShowLogin, setShowRegister }: any) => {
                       value: 20,
                       message: "Maximum 20 Characters required",
                     },
-                    // shouldUnregister: true,
+                    shouldUnregister: true,
                   })}
-                  defaultValue={localStorage.getItem("password")!}
-                  onFocus={(e) => {
-                    setStatePassword(e.target.value);
-                  }}
-                  onChange={(e) => {
-                    setStatePassword(e.target.value);
-                  }}
+                  onChange={(e) => setStatePassword(e.target.value)}
                 ></input>
                 <button
                   type="button"
