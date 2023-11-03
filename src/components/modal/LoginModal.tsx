@@ -14,7 +14,9 @@ const LoginModal = ({ showLogin, setShowLogin, setShowRegister }: any) => {
     formState: { errors },
     setValue,
   } = useForm<IFormLogin>();
-  const { loading, finish, failed } = useAppSelector((state) => state.auth);
+  const { loading, finish, failed, isLoggedIn } = useAppSelector(
+    (state) => state.auth
+  );
   const dispatch = useAppDispatch();
   const [showPassword, setShowPassword] = useState(false);
   const [stateUsername, setStateUsername] = useState<string>("");
@@ -22,7 +24,6 @@ const LoginModal = ({ showLogin, setShowLogin, setShowRegister }: any) => {
   const [disableButton, setDisableButton] = useState(true);
 
   useEffect(() => {
-    console.log(stateUsername);
     if (statePassword != "" && stateUsername != "") {
       console.log("masuk");
       setDisableButton(false);
@@ -46,7 +47,7 @@ const LoginModal = ({ showLogin, setShowLogin, setShowRegister }: any) => {
   }, [showLogin]);
 
   useEffect(() => {
-    if (finish && !failed) {
+    if (finish && !failed && isLoggedIn) {
       setShowLogin(false);
     }
   }, [finish]);

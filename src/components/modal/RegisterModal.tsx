@@ -17,7 +17,7 @@ const RegisterModal = ({
     handleSubmit,
     formState: { errors },
   } = useForm<IFormRegister>();
-  const { loading, finish, failed } = useAppSelector((state) => state.auth);
+  const { loading, finish, failed, isLoggedIn } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
   const [checked, setChecked] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -36,7 +36,7 @@ const RegisterModal = ({
   };
 
   useEffect(() => {
-    if (finish && !failed) {
+    if (finish && !failed && isLoggedIn) {
       setShowRegister(false);
     }
   }, [finish]);

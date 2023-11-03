@@ -7,6 +7,9 @@ const URL = "https://api.documentorai.com/";
 const registerUser = (data: IFormRegister) => {
   console.log(data);
   return axios.post(URL + "account/register", data).then((response) => {
+    if (response.data.data.token) {
+      localStorage.setItem("token", `Bearer ${response.data.data.token}`);
+    }
     return response.data;
   });
 };
