@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from "../../redux/feature/hooks";
 import { IFormDelete } from "../../interface/api/IFormInput";
 import userService from "../../axios/user.service";
 import FormChangePassword from "./FormChangePassword";
+import { ResponseGetAccount } from "../../interface/api/Response";
 // import { ResponseListBook } from "../../interface/api/Response";
 
 export const ProfileModal = () => {
@@ -13,7 +14,9 @@ export const ProfileModal = () => {
   const [showModal, setShowModal] = useState(false);
   const [changePassword, setChangePassword] = useState(false);
   // const [data, setData] = useState<ResponseListBook[]>([]);
-  const { username, uuid } = useAppSelector((state) => state.auth);
+  const { uuid, isLoggedIn } = useAppSelector((state) => state.auth);
+  const [username, setUsername] = useState("");
+  const [name, setName] = useState("");
 
   const logoutUser = () => {
     dispatch(logout());
@@ -33,13 +36,19 @@ export const ProfileModal = () => {
     }
   };
 
-  // useEffect(() => {
-  //   if (isLoggedIn) {
-  //     userService.getListBook(0, 3, (result: ResponseListBook[]) => {
-  //       setData(result);
-  //     });
-  //   }
-  // }, [isLoggedIn]);
+  useEffect(() => {
+    if (isLoggedIn) {
+      // userService.getListBook(0, 3, (result: ResponseListBook[]) => {
+      //   setData(result);
+      // });
+      if (uuid) {
+        userService.getAccount(uuid, (result: ResponseGetAccount) => {
+          setUsername(result.username)
+          setName(result.name)
+        });
+      }
+    }
+  }, [isLoggedIn]);
 
   useEffect(() => {
     if (showModal == false) {
@@ -84,7 +93,7 @@ export const ProfileModal = () => {
                     Your Name
                   </div>
                   <div className="text-[#222222E5] md:text-[1.2vw] text-[3vw]">
-                    {username}
+                    {name}
                   </div>
                   <div className="text-[#626262] md:text-[1.2vw] text-[3vw]">
                     Password

@@ -14,3 +14,8 @@ export interface ResponseListBook {
   updated_at: string;
   userUuid: string;
 }
+
+export interface ResponseGetAccount {
+  username: string;
+  name: string;
+}
