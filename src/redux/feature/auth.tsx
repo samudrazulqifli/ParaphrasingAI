@@ -17,7 +17,6 @@ export const register = createAsyncThunk(
       const data = await AuthService.registerUser(body);
       thunkAPI.dispatch(setMessage("Register Success"));
       const userData: UserDecode = jwt_decode(data.data.token);
-      console.log(userData);
       Swal.fire("Success", "Register Success", "success");
       return { username: userData.username, uuid: userData.uuid };
     } catch (error) {
@@ -45,7 +44,6 @@ export const login = createAsyncThunk(
     try {
       const data = await AuthService.loginUser(body);
       const userData: UserDecode = jwt_decode(data.data.token);
-      console.log(userData);
       Swal.fire("Success", "Login Success", "success");
       return { username: userData.username, uuid: userData.uuid };
     } catch (error) {
@@ -74,7 +72,6 @@ export const logout = createAsyncThunk("auth/logout", async () => {
 const initialState = user
   ? {
       isLoggedIn: true,
-      username: decodeToken(user).username,
       uuid: decodeToken(user).uuid,
       loading: false,
       finish: false,
@@ -82,11 +79,10 @@ const initialState = user
     }
   : {
       isLoggedIn: false,
-      username: null,
       uuid: null,
       loading: false,
       finish: false,
-      failed: false
+      failed: false,
     };
 
 const authSlice = createSlice({
@@ -103,9 +99,6 @@ const authSlice = createSlice({
       state.finish = true;
       state.isLoggedIn = true;
       state.failed = false;
-      if (action.payload.username) {
-        state.username = action.payload.username;
-      }
       if (action.payload.uuid) {
         state.uuid = action.payload.uuid;
       }
@@ -126,9 +119,6 @@ const authSlice = createSlice({
       state.loading = false;
       state.isLoggedIn = true;
       state.failed = false;
-      if (action.payload.username) {
-        state.username = action.payload.username;
-      }
       if (action.payload.uuid) {
         state.uuid = action.payload.uuid;
       }
@@ -137,13 +127,11 @@ const authSlice = createSlice({
       state.finish = true;
       state.loading = false;
       state.isLoggedIn = false;
-      state.username = null;
       state.uuid = null;
       state.failed = true;
     });
     builder.addCase(logout.fulfilled, (state) => {
       state.isLoggedIn = false;
-      state.username = null;
       state.uuid = null;
       state.failed = false;
     });

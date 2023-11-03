@@ -6,7 +6,6 @@ import Swal from "sweetalert2";
 const URL = "https://api.documentorai.com/";
 
 const changePassword = async (body: IFormPassword, cb: any) => {
-  console.log(body);
   try {
     const result = await axios({
       method: "PATCH",
@@ -33,6 +32,22 @@ const getListBook = async (skip: number, limit: number, cb: any) => {
     const result = await axios({
       method: "GET",
       url: URL + `book?skip=${skip}&limit=${limit}`,
+      headers: {
+        Authorization: localStorage.token,
+      },
+    });
+
+    cb(result.data.data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const getAccount = async (uuid: string, cb: any) => {
+  try {
+    const result = await axios({
+      method: "GET",
+      url: URL + `account/get/${uuid}`,
       headers: {
         Authorization: localStorage.token,
       },
@@ -83,6 +98,7 @@ const userService = {
   changePassword,
   deleteAccount,
   getListBook,
+  getAccount,
 };
 
 export default userService;

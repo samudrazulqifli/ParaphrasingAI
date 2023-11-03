@@ -77,7 +77,7 @@ const TextSummarize = () => {
       setStatus(false);
     });
   };
-  console.log(result);
+
   return (
     <>
       <div className="relative">
