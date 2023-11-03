@@ -44,6 +44,22 @@ const getListBook = async (skip: number, limit: number, cb: any) => {
   }
 };
 
+const getAccount = async (uuid: string, cb: any) => {
+  try {
+    const result = await axios({
+      method: "GET",
+      url: URL + `account/get/${uuid}`,
+      headers: {
+        Authorization: localStorage.token,
+      },
+    });
+
+    cb(result.data.data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const deleteAccount = async (body: IFormDelete, cb: any) => {
   try {
     Swal.fire({
@@ -83,6 +99,7 @@ const userService = {
   changePassword,
   deleteAccount,
   getListBook,
+  getAccount
 };
 
 export default userService;
