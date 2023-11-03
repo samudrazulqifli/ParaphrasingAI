@@ -13,34 +13,40 @@ const LoginModal = ({ showLogin, setShowLogin, setShowRegister }: any) => {
     handleSubmit,
     formState: { errors },
     setValue,
+    watch,
   } = useForm<IFormLogin>();
   const { loading, finish, failed, isLoggedIn } = useAppSelector(
     (state) => state.auth
   );
   const dispatch = useAppDispatch();
   const [showPassword, setShowPassword] = useState(false);
-  const [stateUsername, setStateUsername] = useState<string>("");
-  const [statePassword, setStatePassword] = useState<string>("");
+  const username = watch("username");
+  const password = watch("password");
   const [disableButton, setDisableButton] = useState(true);
 
   useEffect(() => {
-    if (statePassword != "" && stateUsername != "") {
-      console.log("masuk");
+    if (
+      username != undefined &&
+      password != undefined &&
+      username != "" &&
+      password != ""
+    ) {
       setDisableButton(false);
     } else {
       setDisableButton(true);
     }
-  }, [stateUsername, statePassword]);
+  }, [username, password]);
 
   useEffect(() => {
     if (showLogin == false) {
       document.body.style.overflow = "scroll";
     } else {
       document.body.style.overflow = "hidden";
-      if (localStorage.getItem("rememberme") == "true") {
+      if (localStorage.getItem("rememberme") != null) {
         setValue("username", localStorage.getItem("username") ?? "");
         setValue("password", localStorage.getItem("password") ?? "");
         setValue("rememberme", true);
+        setDisableButton(false);
       }
     }
     return () => {};
@@ -85,12 +91,9 @@ const LoginModal = ({ showLogin, setShowLogin, setShowRegister }: any) => {
                 autoComplete="off"
                 {...register("username", {
                   required: "Username is required",
-                  // shouldUnregister: true,
+                  shouldUnregister: true,
                 })}
-                onFocus={(e) => setStateUsername(e.target.value)}
-                onChange={(e) => setStateUsername(e.target.value)}
                 type="text"
-                defaultValue={localStorage.getItem("username")!}
                 placeholder="Enter Your Username"
                 className="w-full rounded-[3.17px] h-[42.52px] bg-white text-black border-[#8d8d8d] border-[1.27px] px-[9.52px] focus:outline-none"
               />
@@ -104,7 +107,7 @@ const LoginModal = ({ showLogin, setShowLogin, setShowRegister }: any) => {
               </div>
               <div className="relative">
                 <input
-                  autoComplete="new-password"
+                  autoComplete="off"
                   type={showPassword ? "text" : "password"}
                   placeholder="Enter Your Password"
                   className="w-full rounded-[3.17px] h-[42.52px] bg-white text-black border-[#8d8d8d] border-[1.27px] px-[9.52px] focus:outline-none"
@@ -118,15 +121,8 @@ const LoginModal = ({ showLogin, setShowLogin, setShowRegister }: any) => {
                       value: 20,
                       message: "Maximum 20 Characters required",
                     },
-                    // shouldUnregister: true,
+                    shouldUnregister: true,
                   })}
-                  defaultValue={localStorage.getItem("password")!}
-                  onFocus={(e) => {
-                    setStatePassword(e.target.value);
-                  }}
-                  onChange={(e) => {
-                    setStatePassword(e.target.value);
-                  }}
                 ></input>
                 <button
                   type="button"
