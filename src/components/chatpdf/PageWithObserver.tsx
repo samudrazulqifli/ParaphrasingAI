@@ -13,10 +13,10 @@ function PageWithObserver({
   zoom,
   ...otherProps
 }: any) {
-  const [page, setPage] = useState();
+  const [page, setPage] = useState<HTMLDivElement | null>(null);
 
   const onIntersectionChange = useCallback(
-    ([entry]) => {
+    ([entry]: IntersectionObserverEntry[]) => {
       setPageVisibility(pageNumber, entry.isIntersecting);
     },
     [pageNumber, setPageVisibility]

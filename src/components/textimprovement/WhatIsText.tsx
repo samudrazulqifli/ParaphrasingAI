@@ -1,4 +1,3 @@
-import React from "react";
 import imgLogo from "../../assets/images/img-improve.png";
 
 const WhatIsText = () => {

@@ -35,7 +35,7 @@ const ChatWeb = ({
 }: any) => {
   const ref = useRef<HTMLInputElement | null>(null);
   const messagesColumnRef = useRef<HTMLDivElement>(null);
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleClick = () => {
     ref.current?.click();
   };
   useEffect(() => {
