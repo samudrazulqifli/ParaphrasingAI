@@ -28,7 +28,7 @@ const PdfView = ({
             }
             onLoadSuccess={onDocumentLoadSuccess}
           >
-            {Array.from(new Array(numPages), (el, index) => (
+            {Array.from(new Array(numPages), (_, index) => (
               <PageWithObserver
                 key={`page_${index + 1}`}
                 pageNumber={index + 1}

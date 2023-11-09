@@ -28,7 +28,6 @@ const CardChat = () => {
   const [downloadPdf, setDownloadPdf] = useState(false);
   const [title, setTitle] = useState("");
   const [fromFile, setFromFile] = useState(true);
-  const ref = useRef<HTMLInputElement | null>(null);
   const [visiblePages, setVisiblePages] = useState({});
   const [loadingPdf, setLoadingPdf] = useState(false);
   const [loadingChat, setLoadingChat] = useState(false);
@@ -45,11 +44,6 @@ const CardChat = () => {
     },
     []
   );
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    ref.current?.click();
-  };
 
   const handleDragOver = (event: React.DragEvent<HTMLDivElement>): void => {
     event.preventDefault();

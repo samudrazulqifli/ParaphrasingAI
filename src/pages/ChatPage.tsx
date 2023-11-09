@@ -17,7 +17,7 @@ const ChatPage = () => {
   const ref = useRef<HTMLInputElement | null>(null);
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleClick = () => {
     ref.current?.click();
   };
 

@@ -1,7 +1,14 @@
 import ComponentReactLoading from "../loading/ComponentReactLoading";
 import imgSend from "../../assets/images/btn_send.png";
 import imgUpPdf from "../../assets/images/upload_pdf.png";
-import { JSXElementConstructor, Key, ReactElement, ReactNode, useEffect, useRef } from "react";
+import {
+  JSXElementConstructor,
+  Key,
+  ReactElement,
+  ReactNode,
+  useEffect,
+  useRef,
+} from "react";
 
 const ChatBodyMobile = ({
   loadingPdf,
@@ -16,7 +23,7 @@ const ChatBodyMobile = ({
   const ref = useRef<HTMLInputElement | null>(null);
   const messagesColumnRef = useRef<HTMLDivElement>(null);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleClick = () => {
     ref.current?.click();
   };
   useEffect(() => {
@@ -35,27 +42,42 @@ const ChatBodyMobile = ({
         className="flex overflow-auto scrollbar-hide flex-col gap-y-[12px] border-[0.5px] border-gray-500 w-[187px] h-[295px] pb-14 bg-white rounded-[6px] px-[12px] pt-[23px]"
       >
         {dataChat?.length !== 0
-          ? dataChat?.map((item: { from: string; message: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined; }, index: { toString: () => Key | null | undefined; }) => {
-              if (item.from == "client") {
-                return (
-                  <div
-                    key={index.toString()}
-                    className="bg-[#047ac0] rounded-[5px] self-end text-white text-[5.83px] py-[5px] px-[6px] max-w-[341px]"
-                  >
-                    {item.message}
-                  </div>
-                );
-              } else {
-                return (
-                  <div
-                    key={index.toString()}
-                    className="bg-[#F3F3F3] rounded-[5px] self-start text-black text-[5.83px] py-[5px] px-[6px] max-w-[341px]"
-                  >
-                    {item.message}
-                  </div>
-                );
+          ? dataChat?.map(
+              (
+                item: {
+                  from: string;
+                  message:
+                    | string
+                    | number
+                    | boolean
+                    | ReactElement<any, string | JSXElementConstructor<any>>
+                    | Iterable<ReactNode>
+                    | null
+                    | undefined;
+                },
+                index: { toString: () => Key | null | undefined }
+              ) => {
+                if (item.from == "client") {
+                  return (
+                    <div
+                      key={index.toString()}
+                      className="bg-[#047ac0] rounded-[5px] self-end text-white text-[5.83px] py-[5px] px-[6px] max-w-[341px]"
+                    >
+                      {item.message}
+                    </div>
+                  );
+                } else {
+                  return (
+                    <div
+                      key={index.toString()}
+                      className="bg-[#F3F3F3] rounded-[5px] self-start text-black text-[5.83px] py-[5px] px-[6px] max-w-[341px]"
+                    >
+                      {item.message}
+                    </div>
+                  );
+                }
               }
-            })
+            )
           : null}
       </div>
       <div className="bg-white absolute bottom-0 w-[184px] m-[2px] h-14 rounded-[6px]"></div>
